@@ -83,17 +83,27 @@ export async function loadVideos(limit = 3) {
     .slice(0, limit);
 }
 
+// YouTube titles carry promotion text and emoji; the card shows the part before the first "|".
+export function cleanVideoTitle(title) {
+  const head = title.split("|")[0].replace(/\(official[^)]*\)/gi, "");
+  return head.replace(/[\p{Extended_Pictographic}\uFE0F\u200D]/gu, "").replace(/\s+/g, " ").trim() || title.trim();
+}
+
 export function videoCard(video, lead) {
   const card = el("a", lead ? "video video-lead" : "video");
   card.href = video.url;
   card.target = "_blank";
   card.rel = "noopener noreferrer";
   const image = el("img");
-  image.src = video.thumbnail;
+  const id = new URL(video.url).searchParams.get("v");
+  // Prefer the 720p thumbnail; older uploads only have the small one.
+  image.addEventListener("error", () => { if (image.src !== video.thumbnail) image.src = video.thumbnail; }, { once: true });
+  image.src = `https://i.ytimg.com/vi/${id}/hq720.jpg`;
   image.alt = "";
   image.loading = "lazy";
   const text = el("span", "video-text");
-  text.append(el("small", "", video.artist || "ELDR ÆSTHETIC"), el("strong", "", video.title));
+  text.append(el("small", "", video.artist || "ELDR ÆSTHETIC"), el("strong", "", cleanVideoTitle(video.title)));
+  card.setAttribute("aria-label", `Watch ${video.title} on YouTube`);
   card.append(image, text);
   return card;
 }
