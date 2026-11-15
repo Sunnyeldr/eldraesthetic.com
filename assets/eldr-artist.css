@@ -1,0 +1,79 @@
+/* ELDR ÆSTHETIC — artist pages. Loaded after eldr.css. */
+.a-hero { position: relative; min-height: min(100svh, 940px); display: grid; align-items: end; padding: 140px var(--gutter) clamp(48px, 7vh, 88px); overflow: hidden; isolation: isolate; }
+.a-hero .now-body { max-width: min(720px, 58vw); }
+.a-hero h1 { font: 400 clamp(60px, 11vw, 168px)/1.02 var(--serif); letter-spacing: -0.02em; margin-top: 18px; }
+.a-epithet { display: flex; align-items: center; gap: 14px; font-size: 12px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--tone); }
+.a-epithet .rune { font-size: 30px; }
+.a-tagline { margin-top: 26px; max-width: 470px; font-size: 17px; color: #cfc7bb; }
+.a-watermark { position: absolute; right: calc(var(--gutter) - 6px); bottom: clamp(40px, 6vh, 80px); font-size: clamp(90px, 13vw, 190px); opacity: 0.5; pointer-events: none; }
+
+/* Latest release */
+.latest { display: grid; grid-template-columns: minmax(220px, 420px) 1fr; gap: clamp(28px, 5vw, 84px); align-items: end; padding: clamp(56px, 8vw, 112px) var(--gutter); border-block: 1px solid var(--line); background: var(--ash-2); }
+.latest-cover img { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--ash-3); transition: transform 0.6s ease; }
+.latest-cover:hover img { transform: scale(1.02); }
+.latest h2 { margin-top: 14px; font: 400 clamp(36px, 5.6vw, 84px)/1.03 var(--serif); letter-spacing: -0.012em; text-wrap: balance; }
+.latest-meta { margin: 18px 0 30px; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+/* Dossier */
+.dossier { display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 104px); padding: clamp(72px, 10vw, 144px) var(--gutter); align-items: start; }
+.dossier-figure { position: sticky; top: 32px; margin: 0; }
+.dossier-figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; }
+.dossier-figure figcaption { display: flex; justify-content: space-between; margin-top: 12px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.dossier-rune { display: grid; place-items: center; aspect-ratio: 4 / 5; border: 1px solid var(--line); background: radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--tone) 16%, transparent), transparent 62%); }
+.dossier-rune .rune { font-size: clamp(160px, 22vw, 320px); }
+.dossier-quote { margin-top: 14px; font: 400 clamp(30px, 4vw, 58px)/1.1 var(--serif); letter-spacing: -0.01em; text-wrap: balance; }
+.dossier-text { margin-top: 28px; display: grid; gap: 16px; max-width: 620px; color: #cfc7bb; font-size: 17px; }
+.dossier-text em { font-style: normal; color: var(--bone); }
+.facts { margin: clamp(40px, 5vw, 64px) 0 0; border-top: 1px solid var(--line); }
+.facts > div { display: grid; grid-template-columns: 150px 1fr; gap: 20px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.facts dt { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 0; font: 400 clamp(18px, 1.7vw, 23px)/1.3 var(--serif); }
+.facts dd .rune { font-size: 1.15em; margin-right: 8px; }
+.facts dd small { display: block; margin-top: 4px; font: 400 13px/1.5 var(--sans); color: var(--muted); }
+
+/* Listen & follow */
+.follow { padding: 0 var(--gutter) clamp(56px, 7vw, 96px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 80px); }
+.follow h3 { margin: 10px 0 20px; font: 400 clamp(24px, 2.6vw, 34px)/1.15 var(--serif); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 16px 0 14px; background: linear-gradient(180deg, #1d1918, #141110); border: 1px solid rgba(236, 230, 220, 0.1); border-bottom-color: rgba(200, 121, 74, 0.45); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; transition: border-color 0.25s, transform 0.25s, color 0.25s; }
+.chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--dot, var(--ember)); }
+.chip:hover { border-color: var(--ember); transform: translateY(-2px); }
+.chip[data-p="spotify"] { --dot: #1ed760; }
+.chip[data-p="apple"] { --dot: #fa586a; }
+.chip[data-p="amazon"] { --dot: #25d1da; }
+.chip[data-p="ytmusic"], .chip[data-p="youtube"] { --dot: #ff3d3d; }
+.chip[data-p="deezer"] { --dot: #a238ff; }
+.chip[data-p="tidal"] { --dot: #ece6dc; }
+.chip[data-p="tiktok"] { --dot: #25f4ee; }
+.chip[data-p="instagram"] { --dot: #e1306c; }
+.chip[data-p="facebook"] { --dot: #4a90ff; }
+
+/* Playlist band */
+.a-playlist { padding: clamp(56px, 8vw, 104px) var(--gutter); background: var(--ash-2); border-block: 1px solid var(--line); }
+.a-playlist .playlist { max-width: 860px; }
+
+/* Next artist */
+.next { position: relative; display: grid; align-items: end; min-height: clamp(320px, 46vw, 560px); margin-top: clamp(72px, 10vw, 136px); padding: clamp(28px, 5vw, 64px) var(--gutter); overflow: hidden; isolation: isolate; border-top: 1px solid var(--line); }
+.next img { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; filter: grayscale(1) brightness(0.55); transition: filter 0.7s ease, transform 1s ease; }
+.next:hover img { filter: brightness(0.75); transform: scale(1.02); }
+.next::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(12, 10, 9, 0.9), rgba(12, 10, 9, 0.1) 70%); }
+.next strong { display: block; margin-top: 10px; font: 400 clamp(44px, 8vw, 120px)/1 var(--serif); letter-spacing: -0.015em; }
+.next .rune { font-size: 28px; }
+
+[hidden] { display: none !important; }
+
+@media (max-width: 1000px) {
+  .dossier { grid-template-columns: 1fr; }
+  .dossier-figure { position: static; max-width: 520px; }
+  .dossier-rune { aspect-ratio: 16 / 9; }
+  .follow { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .a-hero { min-height: 0; padding: 0 0 44px; display: block; }
+  .a-hero .now-body { max-width: none; margin-top: -96px; position: relative; padding-inline: var(--gutter); }
+  .a-hero h1 { font-size: clamp(56px, 19vw, 96px); }
+  .a-watermark { display: none; }
+  .latest { grid-template-columns: 1fr; align-items: start; }
+  .latest-cover { max-width: 300px; }
+  .facts > div { grid-template-columns: 1fr; gap: 4px; }
+}
