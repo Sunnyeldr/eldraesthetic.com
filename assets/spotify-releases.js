@@ -349,3 +349,176 @@ async function start() {
 start().catch(() => {
   /* An enhancement cannot break the artist page. */
 });
+
+
+const labelRoot = document.querySelector("[data-label-spotify-feed]");
+const labelArtistIds = Object.keys(ARTISTS);
+const labelMaxReleases = 8;
+
+function labelType(item) {
+  return item.type === "single" ? "single" : "album";
+}
+
+function labelDisplayDate(item) {
+  return displayDate(item.releaseDate, item.releaseDatePrecision);
+}
+
+function renderLabelFeed(releases, { stale = false } = {}) {
+  if (!labelRoot) return;
+  const grid = labelRoot.querySelector("#label-release-grid");
+  const status = labelRoot.querySelector("#label-release-status");
+  const buttons = [...labelRoot.querySelectorAll("[data-label-filter]")];
+  if (!grid || !status) return;
+
+  const ordered = [...releases]
+    .sort((a, b) =>
+      b.releaseDate.localeCompare(a.releaseDate) ||
+      a.name.localeCompare(b.name) ||
+      a.id.localeCompare(b.id),
+    )
+    .slice(0, labelMaxReleases);
+
+  let active = labelRoot.dataset.activeFilter || "all";
+  if (!["all", "album", "single"].includes(active)) active = "all";
+
+  const draw = () => {
+    const visible = ordered.filter((item) =>
+      active === "all" ? true : labelType(item) === active,
+    );
+    grid.replaceChildren();
+    if (!visible.length) {
+      const empty = element("div", "discography-empty");
+      empty.append(
+        element("strong", "", "No releases in this category yet."),
+        element(
+          "span",
+          "",
+          stale
+            ? "Showing the last verified Spotify data."
+            : "New releases will appear here automatically.",
+        ),
+      );
+      grid.append(empty);
+    } else {
+      for (const item of visible) {
+        const card = element("article", "release-card reveal in-view");
+        card.dataset.category = labelType(item);
+        card.id = `label-release-${item.id}`;
+
+        const imageLink = directLink("", item.spotifyUrl);
+        imageLink.className = "release-image";
+        imageLink.setAttribute("aria-label", `Open ${item.name} on Spotify (new tab)`);
+        const img = element("img");
+        Object.assign(img, {
+          src: item.imageUrl,
+          alt: `Spotify cover for ${item.name}`,
+          loading: "lazy",
+          decoding: "async",
+          width: 640,
+          height: 640,
+        });
+        imageLink.append(img);
+
+        const artistNames = item.artists.map((artist) => artist.name).join(" × ");
+        const type = item.type === "ep" ? "EP" : item.type.toUpperCase();
+        const meta = element(
+          "p",
+          "release-type",
+          `${artistNames} / ${type} / ${labelDisplayDate(item)}`,
+        );
+        const title = element("h3", "", item.name);
+        const link = directLink("Open on Spotify", item.spotifyUrl);
+        link.className = "release-link";
+
+        card.append(imageLink, meta, title, link);
+        grid.append(card);
+      }
+    }
+    buttons.forEach((button) => {
+      const selected = button.dataset.labelFilter === active;
+      button.classList.toggle("is-active", selected);
+      button.setAttribute("aria-pressed", String(selected));
+    });
+    status.textContent = `${visible.length} releases shown.`;
+    grid.setAttribute("aria-busy", "false");
+    labelRoot.dataset.activeFilter = active;
+  };
+
+  buttons.forEach((button) => {
+    if (button.dataset.labelBound === "true") return;
+    button.dataset.labelBound = "true";
+    button.addEventListener("click", () => {
+      active = button.dataset.labelFilter || "all";
+      draw();
+    });
+  });
+  draw();
+}
+
+async function startLabelFeed() {
+  if (!labelRoot) return;
+  let workerUrl;
+  try {
+    const config = await fetchJson("data/spotify-config.json");
+    if (typeof config?.workerUrl !== "string") throw new Error("worker_missing");
+    workerUrl = new URL(config.workerUrl);
+    if (workerUrl.protocol !== "https:") throw new Error("worker_invalid");
+  } catch {
+    renderLabelFeed([]);
+    return;
+  }
+
+  let running = false;
+  let timer;
+  let nextDue = 0;
+  const lastGood = new Map();
+
+  async function updateLabel() {
+    if (running || document.hidden) return;
+    running = true;
+    let nextDelay = FRESH_MS;
+    await Promise.all(
+      labelArtistIds.map(async (artistId) => {
+        try {
+          const url = new URL(workerUrl);
+          url.searchParams.set("artist", artistId);
+          const catalog = await fetchJson(url.href, 28000);
+          if (
+            catalog?.success !== true ||
+            catalog.artistId !== artistId ||
+            !Array.isArray(catalog.releases)
+          ) throw new Error("catalog_invalid");
+          lastGood.set(artistId, catalog);
+          const delay = catalog.stale
+            ? Math.max(30000, (catalog.retryAfterSeconds || 30) * 1000)
+            : Math.max(30000, Date.parse(catalog.updatedAt) + FRESH_MS - Date.now());
+          nextDelay = Math.min(nextDelay, delay);
+        } catch {
+          /* Keep the last verified catalogue for this artist. */
+        }
+      }),
+    );
+
+    const merged = new Map();
+    let stale = false;
+    for (const [artistId, catalog] of lastGood) {
+      stale ||= catalog.stale === true;
+      for (const raw of catalog.releases || []) {
+        const item = normalizeRelease(raw, artistId);
+        if (item && !merged.has(item.id)) merged.set(item.id, item);
+      }
+    }
+    renderLabelFeed([...merged.values()], { stale });
+    running = false;
+    nextDue = Date.now() + nextDelay;
+    if (!document.hidden) timer = setTimeout(updateLabel, nextDelay);
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    clearTimeout(timer);
+    if (!document.hidden) timer = setTimeout(updateLabel, Math.max(0, nextDue - Date.now()));
+  });
+  window.addEventListener("pagehide", () => clearTimeout(timer));
+  await updateLabel();
+}
+startLabelFeed().catch(() => renderLabelFeed([]));
