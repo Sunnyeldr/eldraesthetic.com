@@ -408,307 +408,39 @@
         aria-labelledby="releases-title"
         class="releases-section section-pad shell"
         id="releases"
+        data-label-spotify-feed
       >
         <div class="section-kicker reveal">
           <span class="section-index">04 / THE MUSIC</span>
           <span class="small-rule"></span>
-          <span>THE SOUND OF OUR WORLD</span>
+          <span>LIVE FROM OUR ARTISTS</span>
         </div>
         <div class="section-head releases-heading reveal">
           <div>
-            <p class="overline">EXPLORE THE SOUND</p>
+            <p class="overline">LATEST RELEASES</p>
             <h2 class="display-heading" id="releases-title">
               Made to be
               <em>felt.</em>
             </h2>
+            <p class="section-aside">
+              The newest releases from SUNNY ELDR, SUNRIVA, Rynva and JARA NOX — updated automatically from Spotify.
+            </p>
           </div>
-          <div
-            aria-label="Filter music releases"
-            class="filter-bar"
-            role="group"
-          >
-            <button
-              aria-pressed="true"
-              class="filter-btn is-active"
-              data-filter="all"
-            >
-              All sounds
-            </button>
-            <button aria-pressed="false" class="filter-btn" data-filter="solo">
-              Solo
-            </button>
-            <button
-              aria-pressed="false"
-              class="filter-btn"
-              data-filter="collab"
-            >
-              Collaborations
-            </button>
+          <div aria-label="Filter music releases" class="filter-bar" role="group">
+            <button aria-pressed="true" class="label-filter-btn filter-btn is-active" data-label-filter="all">All</button>
+            <button aria-pressed="false" class="label-filter-btn filter-btn" data-label-filter="album">Albums &amp; EPs</button>
+            <button aria-pressed="false" class="label-filter-btn filter-btn" data-label-filter="single">Singles</button>
           </div>
         </div>
-        <p class="sr-only" id="release-status" role="status"></p>
-        <div class="release-grid" id="release-grid">
-          <article
-            class="release-card reveal"
-            id="release-blood-of-the-north"
-            tabindex="-1"
-            data-category="solo"
-          >
-            <a
-              aria-label="Open Sunny ELDR artist profile on Spotify (new tab)"
-              class="release-image"
-              href="https://open.spotify.com/artist/26RwT7kIoTnT8oT65MGS2P"
-              rel="noopener noreferrer"
-              target="_blank"
-             data-spotify-artist="26RwT7kIoTnT8oT65MGS2P" data-spotify-release="ELDRHEIM">
-              <img
-                alt="Official ELDRHEIM album cover, featuring Blood of the North"
-                loading="lazy"
-                src="assets/eldrheim-cover.webp"
-              />
-              <span class="release-play">
-                <svg
-                  class="icon"
-                  aria-hidden="true"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M6 18 18 6M6 6h12v12"></path>
-                </svg>
-              </span>
-            </a>
-            <p class="release-type">SUNNY ELDR / SINGLE</p>
-            <h3>Blood of the North</h3>
-            <a
-              class="release-link"
-              href="https://open.spotify.com/artist/26RwT7kIoTnT8oT65MGS2P"
-              rel="noopener noreferrer"
-              target="_blank"
-             data-spotify-artist="26RwT7kIoTnT8oT65MGS2P" data-spotify-release="ELDRHEIM">
-              Artist on Spotify
-              <svg
-                class="icon"
-                aria-hidden="true"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path d="M6 18 18 6M6 6h12v12"></path>
-              </svg>
-            </a>
-          </article>
-          <article
-            class="release-card reveal"
-            id="release-was-always-there"
-            tabindex="-1"
-            data-category="collab"
-          >
-            <a
-              aria-label="Open Was Always There on Spotify (opens in a new tab)"
-              class="release-image"
-              href="https://open.spotify.com/track/6IkYdvZhTWEjlQ3MUnFSdz"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <img
-                alt="Official Was Always There single artwork by Sunny ELDR featuring SUNRIVA"
-                loading="lazy"
-                src="assets/was-always-there-cover.webp"
-              />
-              <span class="release-play">
-                <svg
-                  class="icon"
-                  aria-hidden="true"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M6 18 18 6M6 6h12v12"></path>
-                </svg>
-              </span>
-            </a>
-            <p class="release-type">SUNNY ELDR × SUNRIVA</p>
-            <h3>Was Always There</h3>
-            <a
-              class="release-link"
-              href="https://open.spotify.com/track/6IkYdvZhTWEjlQ3MUnFSdz"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Open Spotify track
-              <svg
-                class="icon"
-                aria-hidden="true"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path d="M6 18 18 6M6 6h12v12"></path>
-              </svg>
-            </a>
-          </article>
-          <article
-            class="release-card reveal"
-            id="release-komdu-heim"
-            tabindex="-1"
-            data-category="solo"
-          >
-            <a
-              aria-label="Open SUNRIVA artist profile on Spotify (new tab)"
-              class="release-image"
-              href="https://open.spotify.com/artist/0EZ3VnaZOkGWYyYMxYdJzZ"
-              rel="noopener noreferrer"
-              target="_blank"
-             data-spotify-artist="0EZ3VnaZOkGWYyYMxYdJzZ" data-spotify-release="SHARDS">
-              <img
-                alt="Official SHARDS EP artwork, featuring Komdu Heim"
-                loading="lazy"
-                src="assets/shards-cover.webp"
-              />
-              <span class="release-play">
-                <svg
-                  class="icon"
-                  aria-hidden="true"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M6 18 18 6M6 6h12v12"></path>
-                </svg>
-              </span>
-            </a>
-            <p class="release-type">SUNRIVA / TRACK FROM SHARDS EP</p>
-            <h3>Komdu Heim</h3>
-            <a
-              class="release-link"
-              href="https://open.spotify.com/artist/0EZ3VnaZOkGWYyYMxYdJzZ"
-              rel="noopener noreferrer"
-              target="_blank"
-             data-spotify-artist="0EZ3VnaZOkGWYyYMxYdJzZ" data-spotify-release="SHARDS">
-              Artist on Spotify
-              <svg
-                class="icon"
-                aria-hidden="true"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path d="M6 18 18 6M6 6h12v12"></path>
-              </svg>
-            </a>
-          </article>
-          <article
-            class="release-card reveal"
-            id="release-ulfr-i-nott"
-            tabindex="-1"
-            data-category="solo"
-          >
-            <a
-              aria-label="Open Sunny ELDR artist profile on Spotify (new tab)"
-              class="release-image"
-              href="https://open.spotify.com/artist/26RwT7kIoTnT8oT65MGS2P"
-              rel="noopener noreferrer"
-              target="_blank"
-             data-spotify-artist="26RwT7kIoTnT8oT65MGS2P" data-spotify-release="ELDRHEIM">
-              <img
-                alt="Official ELDRHEIM album artwork, featuring Úlfr í nótt"
-                loading="lazy"
-                src="assets/eldrheim-cover.webp"
-              />
-              <span class="release-play">
-                <svg
-                  class="icon"
-                  aria-hidden="true"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M6 18 18 6M6 6h12v12"></path>
-                </svg>
-              </span>
-            </a>
-            <p class="release-type">SUNNY ELDR / SINGLE</p>
-            <h3>Úlfr í nótt</h3>
-            <a
-              class="release-link"
-              href="https://open.spotify.com/artist/26RwT7kIoTnT8oT65MGS2P"
-              rel="noopener noreferrer"
-              target="_blank"
-             data-spotify-artist="26RwT7kIoTnT8oT65MGS2P" data-spotify-release="ELDRHEIM">
-              Artist on Spotify
-              <svg
-                class="icon"
-                aria-hidden="true"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path d="M6 18 18 6M6 6h12v12"></path>
-              </svg>
-            </a>
-          </article>
-          <article
-            class="release-card reveal"
-            id="release-eg-man-thig"
-            tabindex="-1"
-            data-category="collab"
-          >
-            <a
-              aria-label="Open SUNRIVA artist profile on Spotify (new tab)"
-              class="release-image"
-              href="https://open.spotify.com/artist/0EZ3VnaZOkGWYyYMxYdJzZ"
-              rel="noopener noreferrer"
-              target="_blank"
-             data-spotify-artist="0EZ3VnaZOkGWYyYMxYdJzZ" data-spotify-release="SHARDS">
-              <img
-                alt="Official SHARDS EP artwork, featuring Ég man þig"
-                loading="lazy"
-                src="assets/shards-cover.webp"
-              />
-              <span class="release-play">
-                <svg
-                  class="icon"
-                  aria-hidden="true"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M6 18 18 6M6 6h12v12"></path>
-                </svg>
-              </span>
-            </a>
-            <p class="release-type">FROM SHARDS EP · FEATURED COLLABORATION</p>
-            <h3>Ég man þig</h3>
-            <a
-              class="release-link"
-              href="https://open.spotify.com/artist/0EZ3VnaZOkGWYyYMxYdJzZ"
-              rel="noopener noreferrer"
-              target="_blank"
-             data-spotify-artist="0EZ3VnaZOkGWYyYMxYdJzZ" data-spotify-release="SHARDS">
-              Artist on Spotify
-              <svg
-                class="icon"
-                aria-hidden="true"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path d="M6 18 18 6M6 6h12v12"></path>
-              </svg>
-            </a>
-          </article>
+        <p class="sr-only" id="label-release-status" role="status"></p>
+        <div class="release-grid" id="label-release-grid" aria-live="polite" aria-busy="true">
+          <div class="discography-loading" role="status">
+            <strong>Loading latest releases…</strong>
+            <span>Spotify catalogues are being combined across the ELDR ÆSTHETIC roster.</span>
+          </div>
         </div>
         <div class="catalog-end">
-          <span>FIVE SELECTED SOUNDS / MORE TO COME</span>
-          <a
-            class="text-link dark-link"
-            href="https://open.spotify.com/artist/26RwT7kIoTnT8oT65MGS2P"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            SUNNY ELDR on Spotify
-            <span>
-              <svg
-                class="icon"
-                aria-hidden="true"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path d="M6 18 18 6M6 6h12v12"></path>
-              </svg>
-            </span>
-          </a>
+          <span>AUTOMATIC SPOTIFY UPDATES / APPROX. EVERY 15 MINUTES</span>
         </div>
       </section>
       <section
@@ -1065,6 +797,6 @@
         <p class="search-hint">ESC TO CLOSE · ENTER TO OPEN A RESULT</p>
       </div>
     </dialog>
-    <script src="assets/site.js" defer></script>
+    <script src="assets/site.js" defer></script>\n    <script type="module" src="assets/spotify-releases.js"></script>
   </body>
 </html>
