@@ -2204,3 +2204,17 @@ svg {
     display: none;
   }
 }
+
+
+/* Hard size guard for platform logos */
+.artist-platform-link > img.platform-icon {
+  display: block !important;
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  max-width: 22px !important;
+  min-height: 22px !important;
+  max-height: 22px !important;
+  object-fit: contain !important;
+  flex: 0 0 22px !important;
+}
