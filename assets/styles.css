@@ -2634,3 +2634,34 @@ body{
   .artist-platform-links::-webkit-scrollbar{display:none}
   .artist-platform-link{flex:0 0 auto}
 }
+
+
+/* ELDR brand seal placement */
+.intro-brand-seal{
+  bottom:-18px;
+  left:11%;
+  width:clamp(170px,20vw,300px);
+  height:auto;
+  opacity:.075;
+  filter:grayscale(.15) contrast(1.08);
+  transform:rotate(-2deg);
+}
+.intro-brand-seal img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+.brand-symbol{
+  border-radius:3px;
+  box-shadow:
+    0 0 0 1px rgba(221,164,119,.10),
+    0 0 22px rgba(189,128,89,.08);
+}
+@media(max-width:700px){
+  .intro-brand-seal{
+    left:auto;
+    right:-12px;
+    width:150px;
+    opacity:.055;
+  }
+}
