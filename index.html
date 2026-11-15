@@ -382,6 +382,7 @@
         aria-labelledby="featured-title"
         class="featured-section section-pad"
         id="featured"
+        data-featured-release
       >
         <div class="shell">
           <div class="section-kicker reveal">
@@ -391,60 +392,28 @@
           </div>
           <div class="featured-layout">
             <div class="featured-image reveal">
-              <img
-                alt="Official ELDRHEIM album cover, featuring Blood of the North"
-                loading="lazy"
-                src="assets/eldrheim-cover.webp"
-              />
-              <div class="feature-image-label">FEATURED / ELDRHEIM ERA</div>
+              <img alt="Latest ELDR ÆSTHETIC release cover" loading="lazy" src="assets/eldrheim-cover.webp" data-featured-image />
+              <div class="feature-image-label" data-featured-label>FEATURED / LATEST RELEASE</div>
             </div>
             <div class="featured-copy reveal">
-              <p class="overline">FEATURED RELEASE • SUNNY ELDR</p>
-              <h2 class="feature-title" id="featured-title">
-                BLOOD
-                <br />
-                <em>OF THE</em>
-                <br />
-                NORTH
-              </h2>
-              <p>
-                Raw energy. Northern spirit. A song that carries the strength of
-                a world beyond time.
-              </p>
+              <p class="overline" data-featured-overline>FEATURED RELEASE • ELDR ÆSTHETIC</p>
+              <h2 class="feature-title" id="featured-title" data-featured-title>BLOOD OF THE NORTH</h2>
+              <p data-featured-copy>The newest ELDR ÆSTHETIC release, updated automatically from Spotify.</p>
               <div class="feature-divider"></div>
               <div class="feature-info">
                 <div>
                   <small>ARTIST</small>
-                  <strong>SUNNY ELDR</strong>
+                  <strong data-featured-artist>SUNNY ELDR</strong>
                 </div>
                 <div>
                   <small>RELEASE</small>
-                  <strong>BLOOD OF THE NORTH</strong>
+                  <strong data-featured-name>BLOOD OF THE NORTH</strong>
                 </div>
               </div>
               <div class="feature-links">
-                <a
-                  class="button button-solid"
-                  href="https://open.spotify.com/artist/26RwT7kIoTnT8oT65MGS2P"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                 data-spotify-artist="26RwT7kIoTnT8oT65MGS2P" data-spotify-release="ELDRHEIM">
-                  Artist on Spotify
-                  <span>
-                    <svg
-                      class="icon"
-                      aria-hidden="true"
-                      focusable="false"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M6 18 18 6M6 6h12v12"></path>
-                    </svg>
-                  </span>
-                </a>
+                <a class="button button-solid" href="https://open.spotify.com/artist/26RwT7kIoTnT8oT65MGS2P" rel="noopener noreferrer" target="_blank" data-featured-link>Open on Spotify</a>
               </div>
-              <p class="fineprint">
-                The link opens Sunny ELDR's official Spotify artist profile.
-              </p>
+              <p class="fineprint" data-featured-fineprint>Automatically follows the newest verified ELDR release.</p>
             </div>
           </div>
         </div>
@@ -522,36 +491,17 @@
               target="_blank"
             >
               <img
-                alt="Abstract concept illustration of a cinematic concert stage"
+                alt="YouTube thumbnail for Was Always There by SUNNY ELDR and SUNRIVA"
                 loading="lazy"
-                src="assets/concept-06.svg"
+                src="https://i.ytimg.com/vi/FT0faOloSmI/maxresdefault.jpg"
               />
               <div class="visual-inner">
                 <span class="visual-tag">01 / STORY FILM</span>
-                <span aria-hidden="true" class="visual-center-arrow">
-                  <svg
-                    class="icon"
-                    aria-hidden="true"
-                    focusable="false"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M6 18 18 6M6 6h12v12"></path>
-                  </svg>
-                </span>
+                
                 <div>
                   <p>SUNNY ELDR × SUNRIVA</p>
                   <h3>Was Always There.</h3>
-                  <span class="visual-more">
-                    Watch on YouTube
-                    <svg
-                      class="icon"
-                      aria-hidden="true"
-                      focusable="false"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M6 18 18 6M6 6h12v12"></path>
-                    </svg>
-                  </span>
+                  <span class="visual-more">Watch on YouTube</span>
                 </div>
               </div>
             </a>
@@ -563,43 +513,22 @@
               target="_blank"
             >
               <img
-                alt="Abstract concept illustration of a live music performance"
+                alt="YouTube thumbnail for Ravenfire live performance by SUNNY ELDR"
                 loading="lazy"
-                src="assets/concept-07.svg"
+                src="https://i.ytimg.com/vi/7f_4RgzWOIg/maxresdefault.jpg"
               />
               <div class="visual-inner">
                 <span class="visual-tag">02 / LIVE PERFORMANCE</span>
-                <span aria-hidden="true" class="visual-center-arrow">
-                  <svg
-                    class="icon"
-                    aria-hidden="true"
-                    focusable="false"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M6 18 18 6M6 6h12v12"></path>
-                  </svg>
-                </span>
+                
                 <div>
                   <p>SUNNY ELDR / LIVE</p>
                   <h3>Ravenfire.</h3>
-                  <span class="visual-more">
-                    Watch on YouTube
-                    <svg
-                      class="icon"
-                      aria-hidden="true"
-                      focusable="false"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M6 18 18 6M6 6h12v12"></path>
-                    </svg>
-                  </span>
+                  <span class="visual-more">Watch on YouTube</span>
                 </div>
               </div>
             </a>
           </div>
-          <p class="placeholder-note">
-            Both links open the original YouTube uploads. The artwork shown here is concept art, not a frame from the videos.
-          </p>
+          <p class="placeholder-note">Both cards use the original YouTube uploads and their real video thumbnails.</p>
         </div>
       </section>
       <section
