@@ -1,0 +1,170 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 800 800"
+  role="img"
+  aria-label="Concept artwork: ÚLFR Í NÓTT"
+>
+  <defs>
+    <radialGradient id="a" cx="52%" cy="42%" r="75%">
+      <stop stop-color="#959e9e" stop-opacity=".57" />
+      <stop offset=".42" stop-color="#151c1c" />
+      <stop offset="1" stop-color="#090d11" />
+    </radialGradient>
+    <linearGradient id="c" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#d2bc98" stop-opacity=".72" />
+      <stop offset="1" stop-color="#d2bc98" stop-opacity=".05" />
+    </linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="32" /></filter>
+    <filter id="grain">
+      <feTurbulence
+        baseFrequency=".55"
+        numOctaves="3"
+        seed="8"
+        type="fractalNoise"
+      />
+      <feColorMatrix type="saturate" values="0" />
+      <feComponentTransfer>
+        <feFuncA type="linear" slope=".1" />
+      </feComponentTransfer>
+    </filter>
+  </defs>
+  <rect width="800" height="800" fill="url(#a)" />
+  <ellipse
+    cx="407"
+    cy="360"
+    rx="216"
+    ry="258"
+    fill="none"
+    stroke="#959e9e"
+    stroke-width="31"
+    opacity=".27"
+    filter="url(#blur)"
+  />
+  <circle
+    cx="407"
+    cy="351"
+    r="240"
+    fill="none"
+    stroke="url(#c)"
+    stroke-width="1.8"
+    opacity=".74"
+  />
+  <circle
+    cx="407"
+    cy="351"
+    r="201"
+    fill="none"
+    stroke="#d2bc98"
+    stroke-width=".6"
+    stroke-dasharray="3 21"
+    opacity=".4"
+  />
+  <path
+    d="m400 75 184 330-120-59 35 211-91-90-90 93 35-214-120 59Z"
+    fill="none"
+    stroke="#959e9e"
+    stroke-width="2.2"
+    opacity=".55"
+  />
+  <path d="M0 517Q265 412 800 530L800 800H0Z" fill="#080b0d" opacity=".25" />
+  <circle cx="235" cy="180" r="1.5" fill="#d2bc98" opacity="0.16" />
+  <circle cx="295" cy="257" r="1" fill="#d2bc98" opacity="0.22" />
+  <circle cx="237" cy="546" r="1" fill="#d2bc98" opacity="0.16" />
+  <circle cx="320" cy="255" r="1" fill="#d2bc98" opacity="0.31" />
+  <circle cx="170" cy="387" r="1.5" fill="#d2bc98" opacity="0.24" />
+  <circle cx="228" cy="295" r="0.5" fill="#d2bc98" opacity="0.08" />
+  <circle cx="424" cy="644" r="1.5" fill="#d2bc98" opacity="0.07" />
+  <circle cx="743" cy="560" r="0.5" fill="#d2bc98" opacity="0.25" />
+  <circle cx="321" cy="61" r="1" fill="#d2bc98" opacity="0.34" />
+  <circle cx="275" cy="470" r="1.5" fill="#d2bc98" opacity="0.12" />
+  <circle cx="636" cy="594" r="1" fill="#d2bc98" opacity="0.29" />
+  <circle cx="664" cy="365" r="1.5" fill="#d2bc98" opacity="0.04" />
+  <circle cx="538" cy="636" r="1.5" fill="#d2bc98" opacity="0.05" />
+  <circle cx="750" cy="701" r="0.5" fill="#d2bc98" opacity="0.07" />
+  <circle cx="712" cy="502" r="0.5" fill="#d2bc98" opacity="0.14" />
+  <circle cx="541" cy="642" r="0.5" fill="#d2bc98" opacity="0.32" />
+  <circle cx="256" cy="657" r="1" fill="#d2bc98" opacity="0.19" />
+  <circle cx="397" cy="728" r="1.5" fill="#d2bc98" opacity="0.16" />
+  <circle cx="553" cy="206" r="1" fill="#d2bc98" opacity="0.05" />
+  <circle cx="130" cy="310" r="1.5" fill="#d2bc98" opacity="0.03" />
+  <circle cx="410" cy="263" r="1.5" fill="#d2bc98" opacity="0.14" />
+  <circle cx="642" cy="600" r="1.5" fill="#d2bc98" opacity="0.27" />
+  <circle cx="56" cy="191" r="1.5" fill="#d2bc98" opacity="0.30" />
+  <circle cx="139" cy="544" r="1" fill="#d2bc98" opacity="0.29" />
+  <circle cx="235" cy="449" r="1" fill="#d2bc98" opacity="0.05" />
+  <circle cx="456" cy="424" r="0.5" fill="#d2bc98" opacity="0.12" />
+  <circle cx="675" cy="363" r="0.5" fill="#d2bc98" opacity="0.15" />
+  <circle cx="604" cy="73" r="1.5" fill="#d2bc98" opacity="0.15" />
+  <circle cx="216" cy="685" r="1.5" fill="#d2bc98" opacity="0.28" />
+  <circle cx="486" cy="60" r="1.5" fill="#d2bc98" opacity="0.19" />
+  <circle cx="519" cy="616" r="0.5" fill="#d2bc98" opacity="0.00" />
+  <circle cx="671" cy="318" r="1" fill="#d2bc98" opacity="0.26" />
+  <circle cx="541" cy="680" r="1.5" fill="#d2bc98" opacity="0.17" />
+  <circle cx="475" cy="209" r="0.5" fill="#d2bc98" opacity="0.06" />
+  <circle cx="230" cy="432" r="1.5" fill="#d2bc98" opacity="0.22" />
+  <circle cx="557" cy="114" r="0.5" fill="#d2bc98" opacity="0.33" />
+  <circle cx="603" cy="237" r="1.5" fill="#d2bc98" opacity="0.05" />
+  <circle cx="266" cy="323" r="0.5" fill="#d2bc98" opacity="0.06" />
+  <circle cx="636" cy="291" r="0.5" fill="#d2bc98" opacity="0.32" />
+  <circle cx="158" cy="656" r="1" fill="#d2bc98" opacity="0.02" />
+  <circle cx="386" cy="145" r="1.5" fill="#d2bc98" opacity="0.09" />
+  <circle cx="405" cy="229" r="1" fill="#d2bc98" opacity="0.24" />
+  <circle cx="575" cy="474" r="1.5" fill="#d2bc98" opacity="0.18" />
+  <circle cx="61" cy="334" r="1" fill="#d2bc98" opacity="0.28" />
+  <circle cx="96" cy="633" r="1" fill="#d2bc98" opacity="0.14" />
+  <circle cx="141" cy="275" r="1" fill="#d2bc98" opacity="0.06" />
+  <circle cx="189" cy="718" r="1" fill="#d2bc98" opacity="0.03" />
+  <circle cx="385" cy="321" r="1.5" fill="#d2bc98" opacity="0.27" />
+  <circle cx="592" cy="641" r="0.5" fill="#d2bc98" opacity="0.08" />
+  <circle cx="127" cy="533" r="1" fill="#d2bc98" opacity="0.06" />
+  <circle cx="145" cy="280" r="1" fill="#d2bc98" opacity="0.30" />
+  <circle cx="704" cy="557" r="1.5" fill="#d2bc98" opacity="0.27" />
+  <circle cx="569" cy="444" r="1" fill="#d2bc98" opacity="0.24" />
+  <circle cx="516" cy="76" r="1.5" fill="#d2bc98" opacity="0.23" />
+  <circle cx="244" cy="727" r="0.5" fill="#d2bc98" opacity="0.01" />
+  <circle cx="456" cy="428" r="1.5" fill="#d2bc98" opacity="0.02" />
+  <circle cx="63" cy="342" r="0.5" fill="#d2bc98" opacity="0.09" />
+  <circle cx="193" cy="715" r="1" fill="#d2bc98" opacity="0.01" />
+  <circle cx="182" cy="290" r="1.5" fill="#d2bc98" opacity="0.25" />
+  <circle cx="332" cy="72" r="1.5" fill="#d2bc98" opacity="0.15" />
+  <circle cx="574" cy="225" r="1" fill="#d2bc98" opacity="0.15" />
+  <circle cx="561" cy="682" r="0.5" fill="#d2bc98" opacity="0.21" />
+  <circle cx="536" cy="117" r="1.5" fill="#d2bc98" opacity="0.21" />
+  <circle cx="408" cy="573" r="0.5" fill="#d2bc98" opacity="0.21" />
+  <circle cx="349" cy="348" r="1.5" fill="#d2bc98" opacity="0.32" />
+  <circle cx="64" cy="249" r="1.5" fill="#d2bc98" opacity="0.22" />
+  <circle cx="582" cy="637" r="0.5" fill="#d2bc98" opacity="0.01" />
+  <circle cx="354" cy="296" r="0.5" fill="#d2bc98" opacity="0.14" />
+  <circle cx="614" cy="235" r="0.5" fill="#d2bc98" opacity="0.16" />
+  <circle cx="690" cy="310" r="1" fill="#d2bc98" opacity="0.03" />
+  <rect width="800" height="800" filter="url(#grain)" />
+  <g
+    font-family="Arial,Helvetica,sans-serif"
+    fill="#f4f1e9"
+    text-anchor="middle"
+  >
+    <text x="400" y="72" font-size="17" letter-spacing="9" font-weight="bold">
+      ELDR ÆSTHETIC
+    </text>
+    <text x="400" y="585" font-size="76" font-weight="800" letter-spacing="-4">
+      ÚLFR
+    </text>
+    <text x="400" y="659" font-size="76" font-weight="800" letter-spacing="-4">
+      Í NÓTT
+    </text>
+    <text x="400" y="724" font-size="21" letter-spacing="7">SUNNY ELDR</text>
+  </g>
+  <g stroke="#d2bc98" opacity=".7">
+    <path d="M55 54h74M671 54h74M55 746h74M671 746h74" />
+  </g>
+  <text
+    x="59"
+    y="784"
+    font-family="Arial,sans-serif"
+    font-size="12"
+    fill="#d2bc98"
+    letter-spacing="4"
+  >
+    NO. 004 / SHADOW
+  </text>
+</svg>

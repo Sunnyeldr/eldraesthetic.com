@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+  <defs>
+    <radialGradient id="bg">
+      <stop stop-color="#82513a" />
+      <stop offset=".5" stop-color="#282327" />
+      <stop offset="1" stop-color="#0b0e13" />
+    </radialGradient>
+    <linearGradient id="beam" x1=".5" x2=".2" y1="0" y2="1">
+      <stop stop-color="#f6c6a3" stop-opacity=".55" />
+      <stop offset="1" stop-color="#7d685f" stop-opacity="0" />
+    </linearGradient>
+    <filter id="fog"><feGaussianBlur stdDeviation="40" /></filter>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)" />
+  <ellipse
+    cx="600"
+    cy="485"
+    rx="480"
+    ry="150"
+    fill="#b47c63"
+    opacity=".25"
+    filter="url(#fog)"
+  />
+  <path d="M280 10 600 640 680 640 460 10Z" fill="url(#beam)" opacity=".45" />
+  <path d="M900 10 560 640 630 640 1070 10Z" fill="url(#beam)" opacity=".7" />
+  <path d="M590 0 540 590H680L650 0Z" fill="url(#beam)" opacity=".4" />
+  <path
+    d="M0 590q90-45 190-3 80-55 185-5 90-45 200 0 70-75 168-9 70-39 164-2 130-45 293 12v117H0Z"
+    fill="#080a0d"
+  />
+  <g fill="#101114">
+    <circle cx="60" cy="586" r="56" />
+    <circle cx="205" cy="582" r="70" />
+    <circle cx="400" cy="571" r="53" />
+    <circle cx="600" cy="592" r="83" />
+    <circle cx="822" cy="569" r="58" />
+    <circle cx="1050" cy="577" r="72" />
+  </g>
+  <path d="M558 587 579 421h54l21 166Z" fill="#0a0d0f" />
+  <circle cx="605" cy="403" r="36" fill="#0b0d10" />
+  <path
+    d="M625 474 707 410"
+    stroke="#0b0d10"
+    stroke-width="25"
+    stroke-linecap="round"
+  />
+  <path d="M706 390v101" stroke="#0b0d10" stroke-width="8" />
+  <circle cx="707" cy="387" r="12" fill="#0b0d10" />
+  <path d="M0 615h1200" stroke="#a77955" opacity=".45" />
+</svg>

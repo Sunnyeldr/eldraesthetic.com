@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 830">
+  <defs>
+    <linearGradient id="fabric" x1="0" x2="1" y1="0" y2="1">
+      <stop stop-color="#35393b" />
+      <stop offset=".36" stop-color="#191c1f" />
+      <stop offset=".7" stop-color="#101416" />
+      <stop offset="1" stop-color="#313436" />
+    </linearGradient>
+    <filter id="shadow"><feGaussianBlur stdDeviation="27" /></filter>
+    <radialGradient id="glow">
+      <stop stop-color="#83593f" />
+      <stop offset="1" stop-color="#292623" />
+    </radialGradient>
+  </defs>
+  <rect width="800" height="830" fill="url(#glow)" />
+  <ellipse
+    cx="410"
+    cy="718"
+    rx="280"
+    ry="60"
+    fill="#080b0e"
+    opacity=".55"
+    filter="url(#shadow)"
+  />
+  <path
+    d="M280 178 187 210 100 377 194 431 254 341 259 726 551 726 554 340 615 432 710 375 615 213 522 177 481 146 314 146Z"
+    fill="url(#fabric)"
+    stroke="#555657"
+    stroke-width="3"
+  />
+  <path
+    d="M316 147q95 124 167 0 14 67-28 102H355q-56-43-39-102Z"
+    fill="#121518"
+    stroke="#424748"
+    stroke-width="3"
+  />
+  <path d="M355 250q34 20 100 0" stroke="#55595a" fill="none" opacity=".5" />
+  <path
+    d="M327 511h155l26 114H301Z"
+    fill="none"
+    stroke="#383d3e"
+    stroke-width="3"
+  />
+  <path d="M259 697h291" stroke="#787776" opacity=".5" />
+  <path d="M192 412 127 372M619 413l64-41" stroke="#585a5b" stroke-width="3" />
+  <path
+    d="M376 164q-14 42-14 75m81-75q14 42 14 75"
+    stroke="#62615e"
+    stroke-width="2"
+  />
+  <g text-anchor="middle" fill="#c9b6a4" font-family="Arial,sans-serif">
+    <text x="404" y="390" font-size="24" font-weight="bold" letter-spacing="5">
+      ELDR
+    </text>
+    <text x="404" y="415" font-size="14" letter-spacing="4">ÆSTHETIC</text>
+    <text x="403" y="455" font-size="9" letter-spacing="3">
+      FORGED IN SOUND
+    </text>
+  </g>
+  <path
+    d="M382 347 406 323l24 24-24 24Z"
+    stroke="#b99572"
+    stroke-width="1.5"
+    fill="none"
+  />
+  <text
+    x="44"
+    y="67"
+    fill="#cdb9a5"
+    font-size="12"
+    font-family="Arial,sans-serif"
+    letter-spacing="6"
+  >
+    CONCEPT / 001
+  </text>
+</svg>
