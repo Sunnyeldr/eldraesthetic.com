@@ -2218,3 +2218,16 @@ svg {
   object-fit: contain !important;
   flex: 0 0 22px !important;
 }
+
+
+/* Platform icon reliability */
+.artist-platform-link > img.platform-icon {
+  display: block !important;
+  width: 22px !important;
+  height: 22px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.artist-platform-link > span {
+  display: inline-block;
+}
