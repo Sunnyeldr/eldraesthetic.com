@@ -2257,3 +2257,30 @@ svg {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Current full-video placeholder */
+.visual-video-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .7rem;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(212,163,122,.16), transparent 34%),
+    linear-gradient(145deg, #11171b 0%, #090b0d 72%);
+  text-align: center;
+}
+.visual-video-placeholder span {
+  font-size: .72rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  opacity: .65;
+}
+.visual-video-placeholder strong {
+  max-width: 80%;
+  font-size: clamp(1.5rem,3vw,3rem);
+  font-weight: 600;
+}
