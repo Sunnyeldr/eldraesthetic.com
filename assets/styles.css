@@ -2284,3 +2284,22 @@ svg {
   font-size: clamp(1.5rem,3vw,3rem);
   font-weight: 600;
 }
+
+
+/* Artist rune markers */
+.artist-rune,
+.artist-visit-rune {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--copper, #d4a37a);
+  line-height: 1;
+  font-weight: 400;
+}
+.artist-rune {
+  font-size: clamp(1.45rem, 2vw, 2rem);
+}
+.artist-visit-rune {
+  margin-left: .65rem;
+  font-size: 1.3rem;
+  display: inline-block;
+  transform: translateY(.05em);
+}
