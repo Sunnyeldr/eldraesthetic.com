@@ -363,6 +363,43 @@ function labelDisplayDate(item) {
   return displayDate(item.releaseDate, item.releaseDatePrecision);
 }
 
+
+function updateFeaturedRelease(item) {
+  const root = document.querySelector("[data-featured-release]");
+  if (!root || !item) return;
+
+  const artistNames = item.artists.map((artist) => artist.name).join(" × ");
+  const type = item.type === "ep" ? "EP" : item.type.toUpperCase();
+  const date = labelDisplayDate(item);
+
+  const image = root.querySelector("[data-featured-image]");
+  const label = root.querySelector("[data-featured-label]");
+  const overline = root.querySelector("[data-featured-overline]");
+  const title = root.querySelector("[data-featured-title]");
+  const artist = root.querySelector("[data-featured-artist]");
+  const name = root.querySelector("[data-featured-name]");
+  const copy = root.querySelector("[data-featured-copy]");
+  const link = root.querySelector("[data-featured-link]");
+  const fineprint = root.querySelector("[data-featured-fineprint]");
+
+  if (image) {
+    image.src = item.imageUrl;
+    image.alt = `Spotify cover for ${item.name} by ${artistNames}`;
+  }
+  if (label) label.textContent = `FEATURED / ${type} / ${date}`;
+  if (overline) overline.textContent = `FEATURED RELEASE • ${artistNames}`;
+  if (title) title.textContent = item.name;
+  if (artist) artist.textContent = artistNames;
+  if (name) name.textContent = item.name;
+  if (copy) copy.textContent = `The newest verified ELDR ÆSTHETIC release on Spotify — ${type.toLowerCase()}, released ${date}.`;
+  if (link) {
+    link.href = item.spotifyUrl;
+    link.textContent = "Open on Spotify";
+    link.setAttribute("aria-label", `Open ${item.name} by ${artistNames} on Spotify (new tab)`);
+  }
+  if (fineprint) fineprint.textContent = "Automatically updated from the ELDR Spotify catalogue.";
+}
+
 function renderLabelFeed(releases, { stale = false } = {}) {
   if (!labelRoot) return;
   const grid = labelRoot.querySelector("#label-release-grid");
@@ -377,6 +414,8 @@ function renderLabelFeed(releases, { stale = false } = {}) {
       a.id.localeCompare(b.id),
     )
     .slice(0, labelMaxReleases);
+
+  updateFeaturedRelease(ordered[0]);
 
   let active = labelRoot.dataset.activeFilter || "all";
   if (!["all", "album", "single"].includes(active)) active = "all";
