@@ -2091,3 +2091,34 @@ svg {
     height: 352px;
   }
 }
+
+
+/* Artist Spotify playlist */
+.artist-playlist-section {
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.artist-playlist-feature {
+  display: grid;
+  grid-template-columns: minmax(0,.9fr) minmax(340px,1.1fr);
+  gap: clamp(2rem,6vw,5rem);
+  align-items: center;
+}
+.artist-playlist-copy p:not(.overline) {
+  max-width: 44rem;
+  margin: 1.25rem 0 2rem;
+}
+.artist-playlist-player {
+  min-width: 0;
+}
+.artist-playlist-player iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  background: #121212;
+}
+@media (max-width: 820px) {
+  .artist-playlist-feature {
+    grid-template-columns: 1fr;
+  }
+}
