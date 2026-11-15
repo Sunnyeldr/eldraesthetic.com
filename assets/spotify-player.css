@@ -291,3 +291,47 @@
 .spotify-player-remove:hover { border-color: #fff; color: #fff; }
 .spotify-player-remove:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 .spotify-player-remove[hidden] { display: none; }
+
+
+/* Compact artist release cards */
+.spotify-catalog-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(10px, 1.4vw, 18px);
+}
+.spotify-catalog-info {
+  padding: 11px 12px 12px;
+}
+.spotify-catalog-info h5,
+.spotify-catalog-info strong {
+  font-size: clamp(13px, 1.15vw, 17px);
+  line-height: 1.28;
+}
+.spotify-catalog-meta,
+.spotify-catalog-credits {
+  font-size: 10px;
+  line-height: 1.5;
+}
+.spotify-catalog-info > a {
+  min-height: 34px;
+  font-size: 10px;
+}
+@media (min-width: 1500px) {
+  .spotify-catalog-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+@media (max-width: 900px) {
+  .spotify-catalog-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 650px) {
+  .spotify-catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 380px) {
+  .spotify-catalog-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
