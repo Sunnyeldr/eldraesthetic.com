@@ -46,8 +46,11 @@ loadCatalogue()
   .catch(() => {
     // Keep the static hero and the Spotify link when the catalogue cannot be read.
   });
-loadVideos()
-  .then((videos) => {
+// The homepage video row leaves out JARA NOX's channel (owner's decision); her videos stay on her own page.
+const HOME_VIDEO_EXCLUDED = new Set(["jara"]);
+loadVideos(12)
+  .then((all) => {
+    const videos = all.filter((video) => !HOME_VIDEO_EXCLUDED.has(video.artistKey) && !/jara[\s_]*nox/i.test(video.artist || "")).slice(0, 3);
     if (videos.length) $("[data-videos]").replaceChildren(...videos.map((video, index) => videoCard(video, index === 0)));
   })
   .catch(() => {
