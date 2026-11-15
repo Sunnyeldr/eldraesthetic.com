@@ -2057,3 +2057,37 @@ svg {
   .artist-card,.artist-content {min-height:0;aspect-ratio:9 / 16;}
   .artist-card h3 {font-size:clamp(42px,13vw,60px);}
 }
+
+
+/* Official ELDR Spotify playlist */
+.playlist-section {
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.playlist-feature {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(340px, 1.1fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+}
+.playlist-copy p:not(.overline) {
+  max-width: 46rem;
+  margin: 1.25rem 0 2rem;
+}
+.playlist-player {
+  min-width: 0;
+}
+.playlist-player iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  background: #121212;
+}
+@media (max-width: 820px) {
+  .playlist-feature {
+    grid-template-columns: 1fr;
+  }
+  .playlist-player iframe {
+    height: 352px;
+  }
+}
