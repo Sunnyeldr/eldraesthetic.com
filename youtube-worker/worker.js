@@ -1,6 +1,7 @@
 addEventListener("fetch", event => event.respondWith(handle(event.request)));
 const CHANNELS = [
   { handle: "sunny-eldr", artist: "SUNNY ELDR" },
+  { handle: "sunriva-music", artist: "SUNRIVA" },
   { handle: "lokynvoi", artist: "JARA NOX" }
 ];
 const headers = {
