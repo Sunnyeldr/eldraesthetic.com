@@ -48,7 +48,7 @@ if (artist) {
     });
   loadVideos(12)
     .then((videos) => {
-      const own = videos.filter((video) => typeof video.artist === "string" && video.artist.toLowerCase().includes(artist.name.toLowerCase())).slice(0, 2);
+      const own = videos.filter((video) => video.artistKey === artist.key || (typeof video.artist === "string" && video.artist.toLowerCase().includes(artist.name.toLowerCase()))).slice(0, 2);
       if (!own.length) return;
       $("[data-videos]").replaceChildren(...own.map((video, index) => videoCard(video, index === 0)));
       $("#videos").hidden = false;

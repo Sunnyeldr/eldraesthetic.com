@@ -1,0 +1,42 @@
+/* ELDR ÆSTHETIC — brings the merch, legal and 404 pages into the new design.
+   Loaded after styles.css and the page stylesheet; it re-tunes their variables and headings. */
+:root {
+  --black: #0c0a09;
+  --black2: #131010;
+  --surface: #1b1716;
+  --line: rgba(236, 230, 220, 0.13);
+  --muted: #958c80;
+  --white: #ece6dc;
+  --copper: #c8794a;
+  --copper-light: #dc9a70;
+  --font-display: "DM Sans", system-ui, sans-serif;
+}
+body, .legal-page { background: #0c0a09; color: #ece6dc; }
+.site-header.scrolled, .site-header:has(.mobile-nav:not([hidden])), .legal-header { background: rgba(12, 10, 9, 0.94); }
+
+/* Brand: same wordmark as the homepage. */
+.brand-type, .legal-brand { font: 600 14px/1 "DM Sans", system-ui, sans-serif; letter-spacing: 0.2em; }
+.brand-type span, .legal-brand em { font: 300 14px/1 "DM Sans", system-ui, sans-serif; font-style: normal; letter-spacing: 0.2em; }
+.brand-type small { display: none; }
+
+/* Headings: serif, regular weight, like the homepage. */
+.merch-hero h1, .merch-product-copy h3, .merch-story h2, .legal-heading h1, .display-heading {
+  font-family: "Prata", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.04;
+}
+.merch-hero h1 { font-size: clamp(56px, 8.4vw, 128px); }
+.merch-product-copy h3 { font-size: clamp(34px, 4.2vw, 60px); }
+.merch-story h2 { font-size: clamp(40px, 5.6vw, 84px); }
+.merch-hero h1 em, .merch-story h2 em, .display-heading em { font-size: 1em; font-style: normal; color: #c8794a; }
+.legal-heading h1 { font-size: clamp(48px, 7.4vw, 104px); }
+.merch-hero-rune { display: none; }
+
+/* Small labels and links: tracked capitals in the sans face. */
+.desktop-nav a, .mobile-nav a, .header-cta, .legal-back, .legal-footer a, .legal-kicker { font-weight: 500; letter-spacing: 0.18em; }
+.legal-panel { background: #131010; border-color: rgba(236, 230, 220, 0.13); border-top-color: #c8794a; }
+.display-heading { font-size: clamp(36px, 4.8vw, 68px); }
+.site-footer, .legal-footer { background: #0c0a09; }
+.footer-brand a { font: 600 15px/1 "DM Sans", system-ui, sans-serif; letter-spacing: 0.34em; }
+.footer-brand a em { font: 300 15px/1 "DM Sans", system-ui, sans-serif; font-style: normal; }

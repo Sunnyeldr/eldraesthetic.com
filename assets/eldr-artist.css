@@ -71,7 +71,7 @@
 @media (max-width: 720px) {
   .a-hero { min-height: 0; padding: 0 0 44px; display: block; }
   .a-hero .now-body { max-width: none; margin-top: -96px; position: relative; padding-inline: var(--gutter); }
-  .a-hero h1 { font-size: clamp(56px, 19vw, 96px); }
+  .a-hero h1 { font-size: clamp(56px, 19vw, 96px); line-height: 1.1; }
   .a-watermark { display: none; }
   .latest { grid-template-columns: 1fr; align-items: start; }
   .latest-cover { max-width: 300px; }
