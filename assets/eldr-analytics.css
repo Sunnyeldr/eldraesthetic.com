@@ -1,0 +1,76 @@
+/* Privacy controls: quiet Dark Luxury styling, readable at 320px and keyboard friendly. */
+.eldr-analytics-settings {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  opacity: .85;
+}
+.eldr-analytics-settings:hover { opacity: 1; }
+.eldr-analytics-settings:focus-visible,
+.eldr-consent-panel a:focus-visible,
+.eldr-consent-panel button:focus-visible {
+  outline: 2px solid #e9ad75;
+  outline-offset: 4px;
+}
+.eldr-consent-panel {
+  box-sizing: border-box;
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 10000;
+  width: min(520px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  padding: clamp(20px, 5vw, 28px);
+  color: #f3eee6;
+  background: #111211;
+  border: 1px solid rgba(214, 159, 106, .55);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .65);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.eldr-consent-panel[hidden] { display: none; }
+.eldr-consent-panel h2 {
+  color: #f6eee3;
+  font-family: inherit;
+  font-size: clamp(19px, 4vw, 24px);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+.eldr-consent-panel p { color: #e0d6ca; margin: 0 0 12px; }
+.eldr-consent-panel a { color: #f6c799; text-decoration: underline; text-underline-offset: 3px; }
+.eldr-consent-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+.eldr-consent-button {
+  flex: 1 1 0;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #ae927d;
+  border-radius: 2px;
+  background: transparent;
+  color: #f6eee3;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.eldr-consent-button--accent {
+  border-color: #e0a66e;
+  background: #b77d4a;
+  color: #100e0c;
+}
+.eldr-consent-button:hover { border-color: #f8d2ab; }
+@media (max-width: 380px) {
+  .eldr-consent-actions { flex-direction: column; }
+}
