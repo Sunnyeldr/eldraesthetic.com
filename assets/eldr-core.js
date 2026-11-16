@@ -96,9 +96,30 @@ export function videoCard(video, lead) {
   card.rel = "noopener noreferrer";
   const image = el("img");
   const id = new URL(video.url).searchParams.get("v");
-  // Prefer the 720p thumbnail; older uploads only have the small one.
-  image.addEventListener("error", () => { if (image.src !== video.thumbnail) image.src = video.thumbnail; }, { once: true });
-  image.src = `https://i.ytimg.com/vi/${id}/hq720.jpg`;
+  // YouTube may return a 120x90 grey placeholder with HTTP 200 for missing sizes.
+  // Check actual dimensions, not just network errors, and try progressively safer sources.
+  const candidates = [
+    `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
+    `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+    `https://i.ytimg.com/vi/${id}/mqdefault.jpg`,
+    video.thumbnail,
+  ].filter((url, index, all) => url && all.indexOf(url) === index);
+  let candidateIndex = 0;
+  const nextThumbnail = () => {
+    candidateIndex += 1;
+    if (candidateIndex < candidates.length) image.src = candidates[candidateIndex];
+    else {
+      // Never leave YouTube's grey missing-thumbnail placeholder visible.
+      image.removeAttribute("src");
+      image.style.visibility = "hidden";
+      card.classList.add("video-thumbnail-unavailable");
+    }
+  };
+  image.addEventListener("error", nextThumbnail);
+  image.addEventListener("load", () => {
+    if (image.naturalWidth <= 120 || image.naturalHeight <= 90) nextThumbnail();
+  });
+  image.src = candidates[0];
   image.alt = "";
   image.loading = "lazy";
   const text = el("span", "video-text");
