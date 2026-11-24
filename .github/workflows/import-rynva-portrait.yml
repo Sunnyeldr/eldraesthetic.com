@@ -1,0 +1,35 @@
+name: Import RYNVA portrait
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/import-rynva-portrait.yml']
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Import and verify approved photograph
+        run: |
+          curl --fail --location --retry 2 'https://d2ol7oe51mr4n9.cloudfront.net/user_3FOKCt5dRl2FwUMqsVyqnirHTZU/8f19782b-08b6-4625-8386-e49640562934.png' -o /tmp/rynva-original.png
+          echo '4ce94b37d5ffada641e00b8111cb58f598a1037124654edee69619ec1bb7641d  /tmp/rynva-original.png' | sha256sum -c -
+          python3 -m pip install --quiet Pillow
+          python3 - <<'PY'
+          from PIL import Image
+          with Image.open('/tmp/rynva-original.png') as im:
+              im.load()
+              assert im.size == (1024,1536)
+              im.convert('RGB').save('assets/rynva-profile-20261124.webp', quality=90, method=6)
+          with Image.open('assets/rynva-profile-20261124.webp') as im:
+              im.load()
+              assert im.format == 'WEBP' and im.size == (1024,1536)
+          PY
+      - name: Save verified image and remove temporary importer
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/rynva-profile-20261124.webp
+          git rm .github/workflows/import-rynva-portrait.yml
+          git commit -m 'Add verified RYNVA profile portrait'
+          git push origin HEAD:main
