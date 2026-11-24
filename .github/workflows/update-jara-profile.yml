@@ -1,0 +1,44 @@
+name: Update JARA NOX profile portrait
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/update-jara-profile.yml']
+permissions:
+  contents: write
+jobs:
+  portrait:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare verified lossless portrait and update only dossier
+        run: |
+          curl --fail --location --retry 2 'https://d2ol7oe51mr4n9.cloudfront.net/user_3FOKCt5dRl2FwUMqsVyqnirHTZU/1699c126-2b76-4f91-a8c1-835db0888131.png' -o /tmp/jara.png
+          echo '87a17915fc35010bdc04d3f850f7e768471aeb7c0a2b2aacbb1da68be5992085  /tmp/jara.png' | sha256sum -c -
+          python3 -m pip install --quiet Pillow
+          python3 - <<'PY'
+          from PIL import Image, ImageChops
+          from pathlib import Path
+          with Image.open('/tmp/jara.png') as im:
+              im.load()
+              assert im.size == (1122,1402)
+              crop=im.convert('RGB').crop((1,1,1121,1401))
+              crop.save('assets/jara-nox-profile-20261124.webp',lossless=True,method=6)
+          with Image.open('assets/jara-nox-profile-20261124.webp') as im:
+              im.load()
+              assert im.size == (1120,1400)
+              assert ImageChops.difference(crop,im.convert('RGB')).getbbox() is None
+          p=Path('jara-nox.html')
+          s=p.read_text()
+          old='<img src="assets/jara-nox-portrait.webp" alt="JARA NOX, loose waves, smiling into the camera" loading="lazy" />'
+          new='<img src="assets/jara-nox-profile-20261124.webp" alt="JARA NOX, seated portrait in black with gold earrings" loading="lazy" />'
+          assert s.count(old)==1
+          p.write_text(s.replace(old,new))
+          PY
+      - name: Save image and profile together
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/jara-nox-profile-20261124.webp jara-nox.html
+          git rm .github/workflows/update-jara-profile.yml
+          git commit -m 'Replace JARA NOX dossier portrait with verified lossless image'
+          git push origin HEAD:main
