@@ -1,0 +1,45 @@
+name: Update SUNRIVA homepage portrait
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/update-sunriva-card-20261124.yml']
+permissions:
+  contents: write
+jobs:
+  portrait:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify original and prepare lossless portrait
+        run: |
+          curl --fail --location --retry 2 'https://d2ol7oe51mr4n9.cloudfront.net/user_3FOKCt5dRl2FwUMqsVyqnirHTZU/a1679f51-e182-4127-b5be-1f829daf7d1a.png' -o /tmp/sunriva.png
+          echo '5f3926bf340943e5be77878a8f0684effeecba1e073b355a2b57b31a631105eb  /tmp/sunriva.png' | sha256sum -c -
+          python3 -m pip install --quiet Pillow
+          python3 - <<'PY'
+          from PIL import Image, ImageChops
+          from pathlib import Path
+          target = 'assets/sunriva-card-20261124.webp'
+          with Image.open('/tmp/sunriva.png') as im:
+              im.load()
+              assert im.size == (1024,1536)
+              original = im.convert('RGB')
+              original.save(target,lossless=True,method=6)
+          with Image.open(target) as im:
+              im.load()
+              assert im.format == 'WEBP' and im.size == (1024,1536)
+              assert ImageChops.difference(original, im.convert('RGB')).getbbox() is None
+          p = Path('index.html')
+          s = p.read_text()
+          old = '<a class="voice" href="sunriva.html" data-artist="sunriva">\n            <img src="assets/sunriva-roster-closeup-v2.avif"'
+          new = '<a class="voice" href="sunriva.html" data-artist="sunriva">\n            <img src="assets/sunriva-card-20261124.webp"'
+          assert s.count(old) == 1
+          p.write_text(s.replace(old,new))
+          PY
+      - name: Commit verified card and remove temporary importer
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/sunriva-card-20261124.webp index.html
+          git rm .github/workflows/update-sunriva-card-20261124.yml
+          git commit -m 'Replace SUNRIVA homepage card with approved lossless portrait'
+          git push origin HEAD:main
