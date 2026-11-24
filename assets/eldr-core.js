@@ -20,23 +20,66 @@ export const formatDate = (iso) => {
   const date = new Date(`${iso}T00:00:00Z`);
   return Number.isNaN(date.getTime()) ? "" : date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 };
-export const typeLabel = (release) => (release.type === "album" ? (release.totalTracks <= 7 ? "EP" : "Album") : "Single");
+export const typeLabel = (release) =>
+  release.type === "album"
+    ? "Album"
+    : release.type === "ep"
+      ? "EP"
+      : release.type === "track"
+        ? "Collaboration"
+        : "Single";
 
 export function cleanRelease(release, ownerId) {
   if (!release || typeof release.id !== "string" || typeof release.name !== "string") return null;
   if (typeof release.spotifyUrl !== "string" || !release.spotifyUrl.startsWith("https://open.spotify.com/")) return null;
   if (!/^\d{4}-\d{2}-\d{2}$/.test(release.releaseDate || "")) return null;
-  const ids = Array.isArray(release.artists) ? release.artists.map((artist) => artist.id).filter((id) => ARTISTS[id]) : [];
+
+  const artists = Array.isArray(release.artists)
+    ? release.artists
+        .filter(
+          (artist) =>
+            artist &&
+            typeof artist.id === "string" &&
+            typeof artist.name === "string" &&
+            artist.name.trim(),
+        )
+        .map((artist) => ({
+          id: artist.id,
+          name: ARTISTS[artist.id]?.name || artist.name.trim(),
+        }))
+    : [];
+  if (!artists.some((artist) => artist.id === ownerId) && ARTISTS[ownerId])
+    artists.unshift({ id: ownerId, name: ARTISTS[ownerId].name });
+
+  const ids = artists.map((artist) => artist.id).filter((id) => ARTISTS[id]);
   if (!ids.includes(ownerId)) ids.unshift(ownerId);
+  const allowedTypes = new Set(["album", "ep", "single", "track"]);
+  const totalTracks = Number(release.totalTracks) || 1;
+  let type = allowedTypes.has(release.type) ? release.type : "single";
+  // Older cached Spotify responses flattened EPs to "single". Classify those
+  // safely in the browser too so the public filters stay correct during a
+  // Spotify cooldown or a staged Worker rollout.
+  if (
+    type === "single" &&
+    (release.name.trim().toUpperCase() === "SHARDS" ||
+      (totalTracks >= 4 && totalTracks <= 6))
+  )
+    type = "ep";
+
   return {
     id: release.id,
     name: release.name,
-    type: release.type === "album" ? "album" : "single",
-    totalTracks: Number(release.totalTracks) || 1,
+    type,
+    totalTracks,
     date: release.releaseDate,
     url: release.spotifyUrl,
-    cover: typeof release.imageUrl === "string" && release.imageUrl.startsWith("https://i.scdn.co/image/") ? release.imageUrl : null,
+    cover:
+      typeof release.imageUrl === "string" &&
+      release.imageUrl.startsWith("https://i.scdn.co/image/")
+        ? release.imageUrl
+        : null,
     artistIds: [...new Set(ids)],
+    artists,
   };
 }
 
@@ -96,30 +139,9 @@ export function videoCard(video, lead) {
   card.rel = "noopener noreferrer";
   const image = el("img");
   const id = new URL(video.url).searchParams.get("v");
-  // YouTube may return a 120x90 grey placeholder with HTTP 200 for missing sizes.
-  // Check actual dimensions, not just network errors, and try progressively safer sources.
-  const candidates = [
-    `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
-    `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
-    `https://i.ytimg.com/vi/${id}/mqdefault.jpg`,
-    video.thumbnail,
-  ].filter((url, index, all) => url && all.indexOf(url) === index);
-  let candidateIndex = 0;
-  const nextThumbnail = () => {
-    candidateIndex += 1;
-    if (candidateIndex < candidates.length) image.src = candidates[candidateIndex];
-    else {
-      // Never leave YouTube's grey missing-thumbnail placeholder visible.
-      image.removeAttribute("src");
-      image.style.visibility = "hidden";
-      card.classList.add("video-thumbnail-unavailable");
-    }
-  };
-  image.addEventListener("error", nextThumbnail);
-  image.addEventListener("load", () => {
-    if (image.naturalWidth <= 120 || image.naturalHeight <= 90) nextThumbnail();
-  });
-  image.src = candidates[0];
+  // Prefer the 720p thumbnail; older uploads only have the small one.
+  image.addEventListener("error", () => { if (image.src !== video.thumbnail) image.src = video.thumbnail; }, { once: true });
+  image.src = `https://i.ytimg.com/vi/${id}/hq720.jpg`;
   image.alt = "";
   image.loading = "lazy";
   const text = el("span", "video-text");
@@ -131,9 +153,12 @@ export function videoCard(video, lead) {
 
 export function releaseRow(release, leadId) {
   const item = el("li", "release");
-  const ids = leadId && release.artistIds.includes(leadId) ? [leadId, ...release.artistIds.filter((id) => id !== leadId)] : release.artistIds;
-  const artist = ARTISTS[ids[0]];
-  item.dataset.artist = artist.key;
+  const ids =
+    leadId && release.artistIds.includes(leadId)
+      ? [leadId, ...release.artistIds.filter((id) => id !== leadId)]
+      : release.artistIds;
+  const artist = ARTISTS[ids[0]] || ARTISTS[leadId];
+  item.dataset.artist = artist?.key || "";
   const link = el("a");
   link.href = release.url;
   link.target = "_blank";
@@ -144,11 +169,41 @@ export function releaseRow(release, leadId) {
   cover.width = 64;
   cover.height = 64;
   if (release.cover) cover.src = release.cover;
+
+  let credits =
+    Array.isArray(release.artists) && release.artists.length
+      ? [...release.artists]
+      : ids.map((id) => ({ id, name: ARTISTS[id]?.name || id }));
+  if (leadId) {
+    const lead =
+      credits.find((credit) => credit.id === leadId) ||
+      (ARTISTS[leadId] ? { id: leadId, name: ARTISTS[leadId].name } : null);
+    credits = [
+      ...(lead ? [lead] : []),
+      ...credits.filter((credit) => credit.id !== leadId),
+    ];
+  }
+
   const who = el("span", "release-artist");
-  const rune = el("span", "rune", artist.rune);
-  rune.setAttribute("aria-hidden", "true");
-  who.append(rune, el("span", "", ids.map((id) => ARTISTS[id].name).join(" × ")));
-  link.append(cover, el("span", "release-title", release.name), who, el("span", "release-type", typeLabel(release)), el("span", "release-date", formatDate(release.date)));
+  if (artist) {
+    const rune = el("span", "rune", artist.rune);
+    rune.setAttribute("aria-hidden", "true");
+    who.append(rune);
+  }
+  who.append(
+    el(
+      "span",
+      "",
+      credits.map((credit) => credit.name).filter(Boolean).join(" × "),
+    ),
+  );
+  link.append(
+    cover,
+    el("span", "release-title", release.name),
+    who,
+    el("span", "release-type", typeLabel(release)),
+    el("span", "release-date", formatDate(release.date)),
+  );
   item.append(link);
   return item;
 }
@@ -157,7 +212,12 @@ export function releaseRow(release, leadId) {
 export function setupList(releases, { pageSize = 8, leadId, filters = {} } = {}) {
   const list = $("[data-releases]");
   const more = $("[data-more]");
-  const tests = { all: () => true, album: (release) => release.type === "album", single: (release) => release.type === "single", ...filters };
+  const tests = {
+    all: () => true,
+    album: (release) => release.type === "album" || release.type === "ep",
+    single: (release) => release.type === "single",
+    ...filters,
+  };
   let filter = "all";
   let shown = pageSize;
   const render = () => {

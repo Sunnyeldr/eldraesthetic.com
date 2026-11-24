@@ -47,19 +47,23 @@ export function publishedDate(value, precision, now = new Date()) {
   return date.toISOString().slice(0, 10) <= now.toISOString().slice(0, 10);
 }
 
-export function releaseType(albumType, title, artists) {
+export function releaseType(albumType, title, artists, totalTracks = 1) {
   if (!["album", "single", "ep"].includes(albumType)) return null;
-  // Track count alone cannot distinguish a multi-track single from an EP.
-  const shards =
-    title.trim().toUpperCase() === "SHARDS" &&
-    ["0EZ3VnaZOkGWYyYMxYdJzZ", "0Um7pcFDku2VNShSlfxy1B"].every((id) =>
-      artists.some((artist) => artist.id === id),
-    );
-  if (shards) return "ep";
+  // Spotify's Web API exposes EPs as singles in some catalogue responses.
+  // Keep explicit EP markers, the known SHARDS EP, and the common 4-6 track
+  // EP shape separate from true one-to-three-track singles.
   if (albumType === "album") return "album";
-  return albumType === "ep" || /(?:\bEP|\(EP\))$/i.test(title.trim())
-    ? "ep"
-    : "single";
+  if (
+    albumType === "ep" ||
+    /(?:\bEP|\(EP\))$/i.test(title.trim()) ||
+    title.trim().toUpperCase() === "SHARDS" ||
+    (albumType === "single" &&
+      Number.isSafeInteger(totalTracks) &&
+      totalTracks >= 4 &&
+      totalTracks <= 6)
+  )
+    return "ep";
+  return "single";
 }
 
 export function normalizeRelease(item, artistId, now = new Date()) {
@@ -104,7 +108,17 @@ export function normalizeRelease(item, artistId, now = new Date()) {
   const imageUrl = coverUrl(
     item.imageUrl || images.find((image) => coverUrl(image?.url))?.url,
   );
-  const type = releaseType(item.album_type || item.type, item.name, artists);
+  const totalTracks =
+    Number.isSafeInteger(item.totalTracks ?? item.total_tracks) &&
+    (item.totalTracks ?? item.total_tracks) > 0
+      ? (item.totalTracks ?? item.total_tracks)
+      : null;
+  const type = releaseType(
+    item.album_type || item.type,
+    item.name,
+    artists,
+    totalTracks,
+  );
   if (!imageUrl || !type) return null;
   return {
     id: item.id,
@@ -112,14 +126,76 @@ export function normalizeRelease(item, artistId, now = new Date()) {
     type,
     releaseDate,
     releaseDatePrecision: precision,
-    totalTracks:
-      Number.isSafeInteger(item.totalTracks ?? item.total_tracks) &&
-      (item.totalTracks ?? item.total_tracks) > 0
-        ? (item.totalTracks ?? item.total_tracks)
-        : null,
+    totalTracks,
     imageUrl,
     spotifyUrl: `https://open.spotify.com/album/${item.id}`,
     artists,
+  };
+}
+
+export function normalizeTrackAppearance(
+  track,
+  album,
+  artistId,
+  now = new Date(),
+) {
+  if (
+    !Object.hasOwn(ARTISTS, artistId) ||
+    !ID_PATTERN.test(track?.id || "") ||
+    typeof track.name !== "string" ||
+    !track.name.trim() ||
+    !Array.isArray(track.artists) ||
+    !track.artists.some((artist) => artist?.id === artistId)
+  )
+    return null;
+  const artists = track.artists
+    .filter(
+      (artist) =>
+        ID_PATTERN.test(artist?.id || "") &&
+        typeof artist.name === "string" &&
+        artist.name.trim(),
+    )
+    .map((artist) => ({
+      id: artist.id,
+      name: artist.name.trim(),
+      spotifyUrl: `https://open.spotify.com/artist/${artist.id}`,
+    }));
+  if (!artists.some((artist) => artist.id === artistId)) return null;
+
+  const releaseDate = album?.releaseDate || album?.release_date;
+  const precision =
+    album?.releaseDatePrecision ||
+    album?.release_date_precision ||
+    (releaseDate?.length === 4
+      ? "year"
+      : releaseDate?.length === 7
+        ? "month"
+        : "day");
+  if (!publishedDate(releaseDate, precision, now)) return null;
+
+  const images = Array.isArray(album?.images)
+    ? [...album.images].sort((a, b) => (b?.width || 0) - (a?.width || 0))
+    : [];
+  const imageUrl = coverUrl(
+    album?.imageUrl || images.find((image) => coverUrl(image?.url))?.url,
+  );
+  if (!imageUrl) return null;
+
+  return {
+    id: track.id,
+    name: track.name.trim(),
+    type: "track",
+    releaseDate,
+    releaseDatePrecision: precision,
+    totalTracks: 1,
+    imageUrl,
+    spotifyUrl: `https://open.spotify.com/track/${track.id}`,
+    artists,
+    sourceAlbumId: ID_PATTERN.test(album?.id || "") ? album.id : null,
+    sourceAlbumName:
+      typeof album?.name === "string" && album.name.trim()
+        ? album.name.trim()
+        : null,
   };
 }
 

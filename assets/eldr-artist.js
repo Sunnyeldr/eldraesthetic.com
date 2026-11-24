@@ -9,7 +9,14 @@ function showLatest(release) {
   $("[data-latest-title]").textContent = release.name;
   const parts = [typeLabel(release), formatDate(release.date)];
   if (release.totalTracks > 1) parts.push(`${release.totalTracks} tracks`);
-  const others = release.artistIds.filter((id) => id !== artistId).map((id) => ARTISTS[id].name);
+  const others =
+    Array.isArray(release.artists) && release.artists.length
+      ? release.artists
+          .filter((credit) => credit.id !== artistId)
+          .map((credit) => credit.name)
+      : release.artistIds
+          .filter((id) => id !== artistId)
+          .map((id) => ARTISTS[id].name);
   if (others.length) parts.push(`with ${others.join(" & ")}`);
   $("[data-latest-meta]").textContent = parts.join(" · ");
   const link = $("[data-latest-link]");
@@ -41,7 +48,15 @@ if (artist) {
       if (!releases.length) return;
       showLatest(releases[0]);
       showFacts(releases);
-      setupList(releases, { pageSize: 8, leadId: artistId, filters: { collab: (release) => release.artistIds.length > 1 } });
+      setupList(releases, {
+        pageSize: 8,
+        leadId: artistId,
+        filters: {
+          collab: (release) =>
+            release.type === "track" ||
+            (Array.isArray(release.artists) && release.artists.length > 1),
+        },
+      });
     })
     .catch(() => {
       // Keep the static page and the Spotify link when the catalogue cannot be read.

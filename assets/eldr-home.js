@@ -7,7 +7,10 @@ function showNow(release) {
   section.dataset.artist = artist.key;
   $("[data-now-label]").textContent = `New ${typeLabel(release).toLowerCase()} · ${formatDate(release.date)}`;
   $("[data-now-rune]").textContent = artist.rune;
-  $("[data-now-artist]").textContent = release.artistIds.map((id) => ARTISTS[id].name).join(" × ");
+  $("[data-now-artist]").textContent =
+    Array.isArray(release.artists) && release.artists.length
+      ? release.artists.map((artist) => artist.name).join(" × ")
+      : release.artistIds.map((id) => ARTISTS[id].name).join(" × ");
   $("[data-now-title]").textContent = release.name;
   $("[data-now-meta]").textContent = release.totalTracks > 1 ? `${release.totalTracks} tracks · out now on all streaming platforms` : "Out now on all streaming platforms";
   const listen = $("[data-now-listen]");
