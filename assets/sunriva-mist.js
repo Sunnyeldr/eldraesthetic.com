@@ -25,6 +25,7 @@ function setupCountdown(items){
   const next=items.filter(r=>r.name&&Number.isFinite(releaseTime(r))&&releaseTime(r)>Date.now()).sort((a,b)=>releaseTime(a)-releaseTime(b))[0];
   if(!next){root.hidden=true;return;}
   $("[data-next-title]").textContent=next.name;
+  const credits=$("[data-next-artists]");if(credits){credits.textContent=next.artists||"";credits.hidden=!next.artists;}
   $("[data-next-date]").textContent=new Date(releaseTime(next)).toLocaleDateString(document.documentElement.lang||"en",{day:"numeric",month:"long",year:"numeric"});
   const presave=$("[data-presave]");
   const url=next.presave||next.url;
