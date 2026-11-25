@@ -41,3 +41,21 @@ loadVideos(60).then(videos=>{
   const root=$("[data-videos]");root.replaceChildren(lead);
   if(cards.length){const stack=el("div","stack");stack.append(...cards);root.append(stack);}
 }).catch(()=>{});
+
+/* Explicit activation: no Spotify iframe is created until the visitor clicks. */
+const playlistLoad=document.querySelector("[data-sr-player-load]");
+if(playlistLoad){
+  playlistLoad.hidden=false;
+  playlistLoad.addEventListener("click",()=>{
+    const frame=document.createElement("iframe");
+    frame.title="Best of SUNRIVA — Spotify";
+    frame.src="https://open.spotify.com/embed/playlist/27QDkBCLpMStvufPMqthw4";
+    frame.allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture";
+    frame.allowFullscreen=true;
+    const slot=document.querySelector("[data-sr-player-frame]");
+    slot.replaceChildren(frame);
+    slot.hidden=false;
+    document.querySelector("[data-sr-player-prompt]").hidden=true;
+    frame.focus({preventScroll:true});
+  },{once:true});
+}

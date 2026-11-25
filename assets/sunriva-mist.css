@@ -48,3 +48,15 @@ button.btn{cursor:pointer;font-family:inherit}.cover img{width:100%;height:100%;
 .video-image{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:18px;background:#19272e}.video-image img{width:100%;height:100%;display:block;object-fit:cover}.video-image .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#e5eeebdd}.stack .video-image{aspect-ratio:16/7}.videos:has(>.video:only-child){grid-template-columns:1fr}.videos:has(>.video:only-child)>.video{max-width:760px}.video-image img{transition:transform .45s ease}.video:hover img{transform:scale(1.025)}
 .footer .foot-legal{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:10px}
 @media(max-width:650px){.video-image{border-radius:14px}.stack .video-image{aspect-ratio:16/9}}
+
+/* Nordic Mist — consent-based official playlist */
+.sr-playlist{margin-top:36px;padding:clamp(22px,4vw,42px);border-radius:28px;background:radial-gradient(ellipse at 0% 0%,#24404780,transparent 75%),#131c22;scroll-margin-top:24px}
+.sr-playlist h2{font-size:clamp(1.85rem,4vw,3.15rem);margin:12px 0 16px}
+.sr-playlist-intro{color:var(--muted);max-width:650px;font-size:.98rem}
+.sr-playlist-direct{display:inline-block;margin:18px 0 22px}
+.sr-player-shell{border-radius:20px;background:#0b1116b5;overflow:hidden}
+.sr-player-prompt{min-height:352px;padding:32px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px}
+.sr-player-prompt p{max-width:430px;color:var(--muted);font-size:.92rem}
+.sr-player-privacy{font-size:.72rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.sr-player-shell iframe{display:block;border:0;width:100%;height:352px;border-radius:20px}
+@media(max-width:650px){.sr-playlist{margin-top:26px;border-radius:22px;padding:22px 17px}.sr-playlist-intro{font-size:.88rem}.sr-player-prompt{min-height:320px;padding:25px 18px}.sr-player-prompt p{font-size:.85rem}}
