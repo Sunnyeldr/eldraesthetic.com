@@ -1,0 +1,117 @@
+name: Shared artist release countdown
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/eldr-countdown-update.yml']
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install shared countdown
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,json
+          p=Path('data/sunriva-upcoming.json')
+          data=json.loads(p.read_text())
+          for x in data:
+              if x.get('name')=='Two North':
+                  x['artistIds']=['0EZ3VnaZOkGWYyYMxYdJzZ','26RwT7kIoTnT8oT65MGS2P']
+              else:
+                  x['artistIds']=['0EZ3VnaZOkGWYyYMxYdJzZ']
+          Path('data/eldr-upcoming.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+          section="<section class=\"sr-next\" data-next hidden aria-labelledby=\"sr-next-title\"><p class=\"eyebrow\">Coming soon</p><img data-next-cover hidden alt=\"\" width=\"140\" height=\"140\"/><h2 id=\"sr-next-title\" data-next-title></h2><p class=\"meta\" data-next-date></p><p class=\"meta\" data-next-artists hidden></p><div class=\"sr-countdown\" role=\"timer\" aria-label=\"Release countdown\"><div><strong data-days>00</strong><span>Days</span></div><div><strong data-hours>00</strong><span>Hours</span></div><div><strong data-minutes>00</strong><span>Minutes</span></div><div><strong data-seconds>00</strong><span>Seconds</span></div></div><a class=\"btn primary btn-solid\" data-presave hidden target=\"_blank\" rel=\"noopener noreferrer\">Pre-save / Pre-add</a></section>"
+          for name in ['sunriva','sunny-eldr','rynva','jara-nox']:
+              p=Path(name+'.html')
+              s=p.read_text()
+              if name=='sunriva':
+                  s,n=re.subn(r'<section class="sr-next"[^>]*>.*?</section>',section,s,count=1,flags=re.S)
+                  assert n==1
+                  s=s.replace('sunriva-mist.js?v=11','sunriva-mist.js?v=12')
+                  # Restore attribute order expected by existing accessibility audit
+                  s=s.replace('<link href="https://eldraesthetic.com/sunriva.html" rel="canonical"/>','<link rel="canonical" href="https://eldraesthetic.com/sunriva.html"/>')
+                  s=s.replace('<meta content="https://eldraesthetic.com/assets/sunriva-mist-desktop.webp" property="og:image"/>','<meta property="og:image" content="https://eldraesthetic.com/assets/sunriva-mist-desktop.webp"/>')
+              else:
+                  marker='<section class="latest" data-latest-release'
+                  assert marker in s
+                  s=s.replace(marker,section+'\n      '+marker,1).replace('src="assets/eldr-artist.js"','src="assets/eldr-artist.js?v=countdown-1"')
+              s=s.replace('</head>','<link rel="stylesheet" href="assets/eldr-countdown.css?v=1"/></head>')
+              assert s.count('data-next hidden')==1 and '↗' not in section
+              p.write_text(s)
+          p=Path('assets/sunriva-mist.js')
+          s=p.read_text()
+          start=s.index('let countdownTimer;')
+          end=s.index('  const published=releases.filter',start)
+          s=s[:start]+'''import {releaseTime,updateUpcoming} from "./eldr-countdown.js?v=1";
+          loadCatalogue([id]).then(async releases=>{
+            updateUpcoming(releases);
+          '''+s[end:]
+          p.write_text(s)
+          p=Path('assets/eldr-artist.js')
+          s=p.read_text()
+          s='import {releaseTime,updateUpcoming} from "./eldr-countdown.js?v=1";\n'+s
+          marker='.then((releases) => {'
+          assert marker in s
+          s=s.replace(marker,marker+'\n      updateUpcoming(releases);\n      releases=releases.filter(r=>releaseTime(r)<=Date.now());',1)
+          p.write_text(s)
+          PY
+          cat > assets/eldr-countdown.js <<'JS'
+          
+          import {loadCatalogue} from "./eldr-core.js";
+          export const releaseTime=r=>Date.parse(r.releaseAt||r.date+"T00:00:00");
+          const id=document.body.dataset.artistId;
+          const root=document.querySelector("[data-next]");
+          const q=s=>root.querySelector(s);
+          let entries=[], timer;
+          const validUrl=(value)=>{try{const u=new URL(value);return u.protocol==="https:"&&((u.hostname==="open.spotify.com"&&/^\/(prerelease|album)\/[A-Za-z0-9]+$/.test(u.pathname))||(u.hostname==="distrokid.com"&&u.pathname.startsWith("/hyperfollow/"))||(u.hostname==="music.apple.com"&&u.pathname.includes("/album/")))?u.href:null;}catch{return null;}};
+          function render(){
+           clearInterval(timer);
+           const now=Date.now();
+           const next=entries.filter(r=>r&&typeof r.name==="string"&&r.name.trim()&&Number.isFinite(releaseTime(r))&&releaseTime(r)>now).sort((a,b)=>releaseTime(a)-releaseTime(b))[0];
+           if(!next){root.hidden=true;return;}
+           q("[data-next-title]").textContent=next.name;
+           const credits=q("[data-next-artists]");
+           credits.textContent=Array.isArray(next.artists)?next.artists.map(a=>a.name).filter(Boolean).join(" × "):(next.artists||"");
+           credits.hidden=!credits.textContent;
+           q("[data-next-date]").textContent=new Date(releaseTime(next)).toLocaleDateString(document.documentElement.lang||"en",{day:"numeric",month:"long",year:"numeric"});
+           const cover=q("[data-next-cover]");
+           if(cover){cover.hidden=!(typeof next.cover==="string"&&/^https:\/\/i\.scdn\.co\/image\/[A-Za-z0-9]+$/.test(next.cover));if(!cover.hidden)cover.src=next.cover;}
+           const btn=q("[data-presave]"),url=validUrl(next.presave||next.url);
+           btn.hidden=!url;
+           if(url){btn.href=url;btn.textContent=next.presave?"Pre-save / Pre-add":"View release";}
+           root.hidden=false;
+           function tick(){const n=Math.max(0,Math.ceil((releaseTime(next)-Date.now())/1000));if(!n){render();return;}for(const [k,v] of Object.entries({days:Math.floor(n/86400),hours:Math.floor(n/3600)%24,minutes:Math.floor(n/60)%60,seconds:n%60}))q("[data-"+k+"]").textContent=String(v).padStart(2,"0");}
+           tick();timer=setInterval(tick,1000);
+          }
+          const schedule=()=>fetch("data/eldr-upcoming.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("schedule");return r.json();}).then(v=>{if(!Array.isArray(v))throw Error("schedule");return v.filter(r=>Array.isArray(r.artistIds)&&r.artistIds.includes(id));});
+          let planned=[],catalogue=[];
+          function combine(){const byName=new Map();for(const r of [...catalogue,...planned]){if(!r||typeof r.name!=="string")continue;const key=r.name.trim().toLowerCase()+"|"+(r.date||"");byName.set(key,r);}entries=[...byName.values()];render();}
+          export async function updateUpcoming(releases){if(Array.isArray(releases)&&releases.length)catalogue=releases.filter(r=>r.type==="album"||r.type==="ep");try{planned=await schedule();}catch{}combine();}
+          if(root){updateUpcoming([]);setInterval(()=>{if(document.visibilityState==="visible")loadCatalogue([id]).then(updateUpcoming).catch(()=>{});},15*60*1000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")loadCatalogue([id]).then(updateUpcoming).catch(()=>{});});}
+          JS
+          cat > assets/eldr-countdown.css <<'CSS'
+          
+          /* Shared countdown; keep each artist's existing palette */
+          [data-next][hidden],[data-next] [hidden]{display:none!important}
+          body:not([data-artist="sunriva"]) .sr-next{margin:36px var(--gutter);padding:clamp(20px,4vw,42px);background:var(--ash-2,#17191b);border-radius:24px;color:var(--bone,#f2f4f2)}
+          .sr-next h2{margin:8px 0 12px;font-size:clamp(1.9rem,5vw,3.4rem);line-height:1.12}
+          .sr-next .meta{color:var(--muted)}
+          .sr-next [data-next-cover]{width:min(140px,34%);aspect-ratio:1;object-fit:cover;float:right;margin:0 0 12px 16px;border-radius:13px}
+          .sr-countdown{clear:both;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:22px 0;max-width:520px}
+          .sr-countdown div{text-align:center;padding:12px 3px;background:#0003;border-radius:14px}
+          .sr-countdown strong{display:block;font:clamp(1.6rem,5vw,3rem) Georgia,serif;font-variant-numeric:tabular-nums}
+          .sr-countdown span{font-size:.7rem;color:var(--muted)}
+          CSS
+          for file in assets/eldr-countdown.js assets/eldr-artist.js assets/sunriva-mist.js; do node --input-type=module --check < "$file"; done
+          python3 -m json.tool data/eldr-upcoming.json >/dev/null
+      - name: Commit shared countdown
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sunny-eldr.html sunriva.html rynva.html jara-nox.html assets/eldr-countdown.js assets/eldr-countdown.css assets/eldr-artist.js assets/sunriva-mist.js data/eldr-upcoming.json
+          git rm .github/workflows/eldr-countdown-update.yml
+          git commit -m 'Share automatic release countdown across artist pages'
+          git push origin HEAD:main
