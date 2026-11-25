@@ -1,8 +1,14 @@
 name: Install ELDR Apple Music release sync
 on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 */2 * * *'
   push:
     branches: [main]
     paths: ['.github/workflows/install-apple-sync.yml']
+concurrency:
+  group: eldr-apple-sync
+  cancel-in-progress: false
 permissions:
   contents: write
 jobs:
@@ -12,6 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install automatic release matching and tests
+        if: github.event_name == 'push'
         run: |
           mkdir -p scripts tests data .github/workflows
           cat > assets/eldr-apple.js <<'JS'
@@ -131,42 +138,13 @@ jobs:
           test("no artist-profile fallback",()=>assert.equal(matchApple(release,[{...row,url:"https://music.apple.com/de/artist/sunriva/6785632733"}]),null));
           test("shared release requires both credits",()=>assert.equal(matchApple({...release,artists:[{name:"SUNRIVA"},{name:"Sunny ELDR"}]},[row]),null));
           JS
-          cat > .github/workflows/apple-sync.yml <<'YAML'
-          name: Refresh ELDR Apple Music catalogue
-          on:
-            schedule:
-              - cron: '23 */2 * * *'
-            workflow_dispatch:
-          permissions:
-            contents: write
-          concurrency:
-            group: eldr-apple-sync
-            cancel-in-progress: false
-          jobs:
-            sync:
-              runs-on: ubuntu-latest
-              timeout-minutes: 12
-              steps:
-                - uses: actions/checkout@v4
-                - name: Refresh cached Apple catalogue
-                  run: python3 scripts/sync-apple-catalogue.py
-                - name: Publish only changed data
-                  run: |
-                    git config user.name 'github-actions[bot]'
-                    git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-                    git add data/eldr-apple-catalogue.json
-                    if git diff --cached --quiet; then echo 'Apple catalogue unchanged'; exit 0; fi
-                    git commit -m 'Refresh Apple Music release links'
-                    git pull --rebase origin main
-                    git push origin HEAD:main
-          YAML
           python3 - <<'PY'
           from pathlib import Path
           import re
           for name in ["sunriva-mist","rynva-north"]:
            p=Path("assets",name+".js");s=p.read_text()
            s=re.sub(r'^const appleArtist=.*\nconst appleLinks=.*\n','import {attachAppleLinks} from "./eldr-apple.js?v=1";\n',s,count=1,flags=re.M)
-           old='row.replaceChildren(external(el("a","btn primary","Spotify"),r.url),external(el("a","btn secondary",appleLinks[r.id]?"Apple Music":"Apple Music · Artist"),appleLinks[r.id]||appleArtist));'
+           old='row.replaceChildren(external(el("a","btn primary","Spotify"),r.url));\n  if(appleLinks[r.id])row.append(external(el("a","btn secondary","Apple Music"),appleLinks[r.id]));'
            assert old in s
            s=s.replace(old,'row.replaceChildren(external(el("a","btn primary","Spotify"),r.url));\n  if(r.appleUrl)row.append(external(el("a","btn secondary","Apple Music"),r.appleUrl));')
            old='const published=releases.filter(r=>releaseTime(r)<=Date.now());'
@@ -201,7 +179,8 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/eldr-apple.js assets/eldr-apple.css assets/eldr-core.js assets/eldr-artist.js assets/rynva-north.js assets/sunriva-mist.js sunny-eldr.html sunriva.html rynva.html jara-nox.html scripts/sync-apple-catalogue.py tests/apple-matching.test.mjs data/eldr-apple-catalogue.json .github/workflows/apple-sync.yml
-          git rm .github/workflows/install-apple-sync.yml
+          git add assets/eldr-apple.js assets/eldr-apple.css assets/eldr-core.js assets/eldr-artist.js assets/rynva-north.js assets/sunriva-mist.js sunny-eldr.html sunriva.html rynva.html jara-nox.html scripts/sync-apple-catalogue.py tests/apple-matching.test.mjs data/eldr-apple-catalogue.json
+          if git diff --cached --quiet; then echo 'Apple catalogue unchanged'; exit 0; fi
           git commit -m 'Automatically match Apple Music release URLs across all artist pages'
+          git pull --rebase origin main
           git push origin HEAD:main
