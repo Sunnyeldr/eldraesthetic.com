@@ -34,7 +34,7 @@ def convert(row,market,entity,apple_id,artist):
     date=str(row.get("releaseDate",""))[:10]
     if not name or not re.fullmatch(r"\d{4}-\d{2}-\d{2}",date): return None
     if not track and not isinstance(row.get("trackCount"),int): return None
-    return dict(kind="track" if track else "album",name=name,artist=row["artistName"],date=date,tracks=row.get("trackCount"),market=market,url=f"https://music.apple.com/{market}/album/{cid}"+(f"?i={tid}" if track else ""))
+    return dict(kind="track" if track else "album",name=name,artist=row["artistName"],date=date,tracks=row.get("trackCount"),market=market,url=f"https://music.apple.com/{market}/album/{cid}"+(f"?i={tid}" if track else ""),artwork=row.get("artworkUrl100"))
 def main():
     output=dict(previous); successes=0; failures=0
     for sid,(aid,artist) in ARTISTS.items():
@@ -57,6 +57,42 @@ def main():
                 time.sleep(3.1)
         output[sid]=sorted({x["url"]:x for x in combined}.values(),key=lambda x:(x["kind"],x["date"],x["name"],x["market"],x["url"]))
     OUT.parent.mkdir(exist_ok=True)
+    # Expand known multi-track collections in paced batches, newest first.
+    cache_path=Path("data/eldr-apple-album-tracks.json")
+    try: cache=json.loads(cache_path.read_text())
+    except (OSError,ValueError): cache={}
+    collections={}
+    for sid,rows in output.items():
+        for row in rows:
+            if row.get("kind")=="album" and int(row.get("tracks") or 0)>1:
+                cid=row["url"].split("/")[-1]
+                if cid.isdigit(): collections.setdefault(cid,{"date":row["date"],"count":row["tracks"]})
+    pending=sorted(collections,key=lambda cid:(collections[cid]["date"],cid),reverse=True)
+    requests=0
+    for cid in pending:
+        if requests>=8: break
+        if cid in cache and cache[cid].get("count")==collections[cid]["count"] and cache[cid].get("complete"): continue
+        requests+=1
+        try:
+            query=urllib.parse.urlencode(dict(id=cid,entity="song",limit=200,country="de"))
+            req=urllib.request.Request("https://itunes.apple.com/lookup?"+query,headers={"Accept":"application/json","User-Agent":"ELDR Aesthetic catalogue sync/1.0"})
+            with urllib.request.urlopen(req,timeout=18) as resp: raw=json.load(resp).get("results",[])
+            songs=[r for r in raw if r.get("wrapperType")=="track" and r.get("kind")=="song" and str(r.get("collectionId"))==cid]
+            if len({r.get("trackId") for r in songs})!=collections[cid]["count"]: raise ValueError("incomplete tracklist")
+            additions={}
+            for sid,(aid,artist) in ARTISTS.items():
+                additions[sid]=[x for r in songs if (x:=convert(r,"de","song",aid,artist))]
+            cache[cid]={"count":collections[cid]["count"],"complete":True,"rows":additions}
+            print(f"Expanded album {cid}: {len(songs)} tracks",flush=True)
+        except Exception as exc:
+            print(f"Album {cid}: {type(exc).__name__}: {exc}; retry next run",flush=True)
+        time.sleep(3.1)
+    for cid,entry in cache.items():
+        if cid not in collections: continue
+        for sid,rows in entry.get("rows",{}).items():
+            if sid in output:
+                output[sid]=sorted({x["url"]:x for x in [*rows,*output[sid]]}.values(),key=lambda x:(x["kind"],x["date"],x["name"],x["market"],x["url"]))
+    cache_path.write_text(json.dumps(cache,ensure_ascii=False,indent=2,sort_keys=True)+"\n")
     OUT.write_text(json.dumps(output,ensure_ascii=False,indent=2,sort_keys=True)+"\n")
     print(f"Apple lookup results: {successes} successful; {failures} failed",flush=True)
     if not successes: raise SystemExit(1)

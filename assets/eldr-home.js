@@ -1,5 +1,5 @@
 // ELDR ÆSTHETIC — homepage: the newest release takes over the hero.
-import { ARTISTS, $, formatDate, typeLabel, loadCatalogue, loadVideos, videoCard, setupList, setupPlaylist } from "./eldr-core.js";
+import { ARTISTS, $, formatDate, typeLabel, watchCatalogue, latestRelease, isPublished, loadVideos, videoCard, setupList, setupPlaylist } from "./eldr-core.js?v=union-1";
 
 function showNow(release) {
   const artist = ARTISTS[release.artistIds[0]];
@@ -12,9 +12,12 @@ function showNow(release) {
       ? release.artists.map((artist) => artist.name).join(" × ")
       : release.artistIds.map((id) => ARTISTS[id].name).join(" × ");
   $("[data-now-title]").textContent = release.name;
-  $("[data-now-meta]").textContent = release.totalTracks > 1 ? `${release.totalTracks} tracks · out now on all streaming platforms` : "Out now on all streaming platforms";
+  $("[data-now-meta]").textContent = `${release.totalTracks>1?release.totalTracks+" tracks · ":""}Available on ${release.spotifyUrl&&release.appleUrl?"Spotify and Apple Music":release.spotifyUrl?"Spotify":"Apple Music"}`;
   const listen = $("[data-now-listen]");
   listen.href = release.url;
+  listen.textContent=release.spotifyUrl?"Listen on Spotify":"Listen on Apple Music";
+  section.querySelectorAll(".apple-release-link").forEach(a=>a.remove());
+  if(release.spotifyUrl&&release.appleUrl){const a=document.createElement("a");a.className="btn apple-release-link";a.href=release.appleUrl;a.target="_blank";a.rel="noopener noreferrer";a.textContent="Apple Music";listen.after(a)}
   const profile = $("[data-now-profile]");
   profile.href = artist.page;
   profile.textContent = `${artist.name} profile`;
@@ -24,30 +27,27 @@ function showNow(release) {
   if (release.cover) {
     const link = $("[data-now-cover-link]");
     link.href = release.url;
-    link.setAttribute("aria-label", `Open ${release.name} on Spotify`);
+    link.setAttribute("aria-label", `Open ${release.name} on ${release.spotifyUrl?"Spotify":"Apple Music"}`);
     $("[data-now-cover]").src = release.cover;
     link.hidden = false;
-  }
+  }else{$("[data-now-cover-link]").hidden=true;}
 }
 
 function showLatestPerArtist(releases) {
   for (const [id, artist] of Object.entries(ARTISTS)) {
-    const latest = releases.find((release) => release.artistIds.includes(id));
+    const latest=latestRelease(releases.filter(r=>r.artistIds.includes(id)),id);
     const slot = $(`[data-latest="${artist.key}"]`);
     if (latest && slot) slot.textContent = `Latest: ${latest.name} · ${formatDate(latest.date)}`;
   }
 }
 
 setupPlaylist();
-loadCatalogue()
-  .then((releases) => {
+watchCatalogue(Object.keys(ARTISTS),(all) => {
+    const releases=all.filter(isPublished);
     if (!releases.length) return;
-    showNow(releases[0]);
+    showNow(latestRelease(releases));
     showLatestPerArtist(releases);
     setupList(releases);
-  })
-  .catch(() => {
-    // Keep the static hero and the Spotify link when the catalogue cannot be read.
   });
 // The homepage video row leaves out JARA NOX's channel (owner's decision); her videos stay on her own page.
 const HOME_VIDEO_EXCLUDED = new Set(["jara"]);

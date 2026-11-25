@@ -1,3 +1,4 @@
+import {mergeCatalogues} from "./eldr-catalogue-merge.js?v=1";
 // ELDR ÆSTHETIC — shared catalogue helpers for the homepage and the artist pages. Reads the existing live feeds; it does not change them.
 export const SPOTIFY_WORKER = "https://eldr-aesthetic-music.sash-kelch.workers.dev/";
 export const YOUTUBE_FEED = "https://eldr-youtube-live.sash-kelch.workers.dev/latest";
@@ -26,7 +27,7 @@ export const typeLabel = (release) =>
     : release.type === "ep"
       ? "EP"
       : release.type === "track"
-        ? "Collaboration"
+        ? (release.artists?.length>1?"Collaboration":"Song")
         : "Single";
 
 export function cleanRelease(release, ownerId) {
@@ -71,6 +72,7 @@ export function cleanRelease(release, ownerId) {
     name: release.name,
     type,
     totalTracks,
+    sourceAlbumId: release.sourceAlbumId || null,
     date: release.releaseDate,
     url: release.spotifyUrl,
     cover:
@@ -83,28 +85,52 @@ export function cleanRelease(release, ownerId) {
   };
 }
 
+let appleCache={},applePending=null;
+async function appleSnapshot(){
+ if(applePending)return applePending;
+ applePending=(async()=>{
+  for(const url of ["https://raw.githubusercontent.com/Sunnyeldr/eldraesthetic.com/main/data/eldr-apple-catalogue.json","data/eldr-apple-catalogue.json"]){
+   try{const response=await fetch(url,{cache:"no-cache",signal:AbortSignal.timeout(6500)});if(!response.ok)continue;const data=await response.json();if(Object.keys(ARTISTS).every(id=>Array.isArray(data[id]))){appleCache=data;return data}}catch{}
+  }
+  return appleCache;
+ })().finally(()=>{applePending=null});return applePending;
+}
+const spotifyCache=new Map(),inFlight=new Map();
 export async function loadCatalogue(ids = Object.keys(ARTISTS)) {
+ const k=[...ids].sort().join(",");if(inFlight.has(k))return inFlight.get(k);
+ const task=loadCombined(ids).finally(()=>inFlight.delete(k));inFlight.set(k,task);return task;
+}
+async function loadCombined(ids){
+  const applePromise=appleSnapshot();
   const results = await Promise.allSettled(
     ids.map(async (id) => {
       const url = new URL(SPOTIFY_WORKER);
       url.searchParams.set("artist", id);
-      const response = await fetch(url, { headers: { Accept: "application/json" } });
+      const response = await fetch(url, { headers: { Accept: "application/json" }, signal:AbortSignal.timeout(10000) });
       if (!response.ok) throw new Error("catalogue_unavailable");
       const data = await response.json();
       if (data?.success !== true || data.artistId !== id || !Array.isArray(data.releases)) throw new Error("catalogue_invalid");
-      return data.releases.map((release) => cleanRelease(release, id)).filter(Boolean);
+      const rows=data.releases.map((release) => cleanRelease(release, id)).filter(Boolean);if(rows.length)spotifyCache.set(id,rows);return rows;
     }),
   );
   const byId = new Map();
-  for (const result of results) {
-    if (result.status !== "fulfilled") continue;
-    for (const release of result.value) {
+  for (const [i,result] of results.entries()) {
+    const rows=result.status==="fulfilled"&&result.value.length?result.value:spotifyCache.get(ids[i])||[];
+    for (const release of rows) {
       const known = byId.get(release.id);
       if (known) known.artistIds = [...new Set([...known.artistIds, ...release.artistIds])];
       else byId.set(release.id, release);
     }
   }
-  return [...byId.values()].sort((a, b) => b.date.localeCompare(a.date) || a.name.localeCompare(b.name));
+  return mergeCatalogues([...byId.values()],await applePromise,ids,ARTISTS);
+}
+export const isPublished=r=>Date.parse(r.date+"T00:00:00")<=Date.now();
+export const latestRelease=(rows,id)=>rows.find(r=>id?!r.parentArtistIds?.includes(id):!r.albumTrack)||rows[0];
+export function watchCatalogue(ids,render){
+ let busy=false,fingerprint="";
+ async function refresh(){if(busy)return;busy=true;try{const rows=await loadCatalogue(ids);if(!rows.length)return;const fp=JSON.stringify(rows)+"|"+new Date().toDateString();if(fp!==fingerprint){await render(rows);fingerprint=fp}}catch(error){console.warn("ELDR catalogue refresh",error)}finally{busy=false}}
+ refresh();setInterval(()=>{if(document.visibilityState==="visible")refresh()},15*60*1000);
+ document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")refresh()});
 }
 
 
@@ -161,6 +187,7 @@ export function releaseRow(release, leadId) {
   item.dataset.artist = artist?.key || "";
   const link = el("a");
   link.href = release.url;
+  link.setAttribute("aria-label","Listen to "+release.name+" on "+(release.spotifyUrl?"Spotify":"Apple Music"));
   link.target = "_blank";
   link.rel = "noopener noreferrer";
   const cover = el("img");
@@ -205,18 +232,24 @@ export function releaseRow(release, leadId) {
     el("span", "release-date", formatDate(release.date)),
   );
   item.append(link);
-  if(release.appleUrl){const apple=el("a","apple-release-link","Apple Music");apple.href=release.appleUrl;apple.target="_blank";apple.rel="noopener noreferrer";apple.setAttribute("aria-label","Listen to "+release.name+" on Apple Music");item.append(apple);}
+  if(release.appleUrl&&!release.spotifyUrl)item.append(el("span","apple-release-link","Apple Music"));
+  if(release.appleUrl&&release.spotifyUrl){const apple=el("a","apple-release-link","Apple Music");apple.href=release.appleUrl;apple.target="_blank";apple.rel="noopener noreferrer";apple.setAttribute("aria-label","Listen to "+release.name+" on Apple Music");item.append(apple);}
   return item;
 }
 
 // Filterable, paged release list. `filters` maps a filter name to a predicate.
+const listControllers=new WeakMap();
 export function setupList(releases, { pageSize = 8, leadId, filters = {} } = {}) {
   const list = $("[data-releases]");
   const more = $("[data-more]");
+  if(!list||!more)return;
+  const existing=listControllers.get(list);if(existing){existing.update(releases);return;}
   const tests = {
     all: () => true,
     album: (release) => release.type === "album" || release.type === "ep",
     single: (release) => release.type === "single",
+    song: (release) => release.type === "track"||release.type === "single",
+    collab: (release) => release.artists?.length>1,
     ...filters,
   };
   let filter = "all";
@@ -239,6 +272,7 @@ export function setupList(releases, { pageSize = 8, leadId, filters = {} } = {})
     shown += pageSize;
     render();
   });
+  listControllers.set(list,{update(next){releases=next;render()}});
   render();
 }
 

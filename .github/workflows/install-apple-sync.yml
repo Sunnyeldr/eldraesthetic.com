@@ -1,186 +1,36 @@
-name: Install ELDR Apple Music release sync
+name: Refresh ELDR Apple Music catalogue
 on:
   workflow_dispatch:
   schedule:
-    - cron: '23 */2 * * *'
+    - cron: '17,47 * * * *'
   push:
     branches: [main]
-    paths: ['.github/workflows/install-apple-sync.yml']
+    paths: ['.github/workflows/install-apple-sync.yml', 'scripts/sync-apple-catalogue.py']
 concurrency:
   group: eldr-apple-sync
   cancel-in-progress: false
 permissions:
   contents: write
 jobs:
-  install:
+  sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: Install automatic release matching and tests
-        if: github.event_name == 'push'
+      - name: Check catalogue code
         run: |
-          mkdir -p scripts tests data .github/workflows
-          cat > assets/eldr-apple.js <<'JS'
-          // Apple catalogue is generated server-side; page visitors never call iTunes directly.
-          const cataloguePromise=fetch("data/eldr-apple-catalogue.json",{cache:"no-cache",signal:AbortSignal.timeout(6000)}).then(r=>r.ok?r.json():{}).catch(()=>({}));
-          export const normalizeTitle=v=>String(v||"").normalize("NFKC").toLowerCase().replace(/\s*[-–—]\s*(?:single|ep)\s*$/i,"").replace(/\s+/g," ").trim();
-          const normalizeName=v=>String(v||"").normalize("NFKC").toLowerCase().replace(/[^\p{L}\p{N}]+/gu," ").trim();
-          const dateDiff=(a,b)=>Math.abs(Date.parse(a)-Date.parse(b))/86400000;
-          const validUrl=u=>typeof u==="string"&&/^https:\/\/music\.apple\.com\/(de|us)\/album\/(?:[^/?#]+\/)?\d+(?:\?i=\d+)?$/.test(u);
-          function hasCredit(row,release){
-            const names=(release.artists||[]).map(a=>normalizeName(a.name)).filter(Boolean);
-            const text=" "+normalizeName(row.artist)+" ";
-            return names.length>0&&names.every(n=>text.includes(" "+n+" "));
-          }
-          export function matchApple(release,rows){
-            if(!release||!Array.isArray(rows))return null;
-            const track=release.type==="track";
-            const matches=rows.filter(x=>x&&x.kind===(track?"track":"album")&&normalizeTitle(x.name)===normalizeTitle(release.name)&&hasCredit(x,release)&&dateDiff(x.date,release.date)<=2&&(track||Number(x.tracks)===Number(release.totalTracks))&&validUrl(x.url));
-            // A DE or US storefront may contain the same collection. Never choose between distinct ambiguous IDs.
-            for(const market of ["de","us"]){
-              const found=matches.filter(x=>x.market===market);
-              const unique=[...new Set(found.map(x=>x.url))];
-              if(unique.length===1)return unique[0];
-              if(unique.length>1)return null;
-            }
-            return null;
-          }
-          const verifiedFallback={"5jnjFEgF8qZx4dMdC1riys":"https://music.apple.com/us/album/unbound-ep/6826632617"};
-          export async function attachAppleLinks(releases,artistId){
-            const data=await cataloguePromise;
-            const rows=Array.isArray(data[artistId])?data[artistId]:[];
-            return releases.map(r=>({...r,appleUrl:matchApple(r,rows)||verifiedFallback[r.id]||null}));
-          }
-          JS
-          cat > assets/eldr-apple.css <<'CSS'
-          /* Release-specific direct Apple Music links, not artist-profile fallback. */
-          .catalogue .release .apple-release-link,.release .apple-release-link{display:inline-block!important;width:auto!important;font-size:.72rem;letter-spacing:.03em;margin:2px 0 8px;padding:6px 12px!important;border-radius:999px;text-decoration:none;color:inherit;background:color-mix(in srgb,currentColor 9%,transparent);border:0}
-          .latest .apple-release-link{display:inline-flex;margin-left:8px}
-          CSS
-          cat > scripts/sync-apple-catalogue.py <<'PY'
-          """Refresh Apple catalogue through the documented public iTunes Lookup API."""
-          import json, time, urllib.parse, urllib.request, urllib.error
-          from pathlib import Path
-          ARTISTS={
-          "26RwT7kIoTnT8oT65MGS2P":(1895655133,"Sunny ELDR"),
-          "0EZ3VnaZOkGWYyYMxYdJzZ":(6785632733,"SUNRIVA"),
-          "0Um7pcFDku2VNShSlfxy1B":(6800234336,"RYNVA"),
-          "0kLRThHL6uSbmGwEarlsKy":(6801616769,"JARA NOX"),
-          }
-          OUT=Path("data/eldr-apple-catalogue.json")
-          try: previous=json.loads(OUT.read_text())
-          except (OSError,ValueError): previous={}
-          def fetch(apple_id,market,entity):
-              query=urllib.parse.urlencode(dict(id=apple_id,entity=entity,limit=200,country=market))
-              req=urllib.request.Request("https://itunes.apple.com/lookup?"+query,headers={"Accept":"application/json","User-Agent":"ELDR Aesthetic catalogue sync/1.0"})
-              with urllib.request.urlopen(req,timeout=18) as resp: result=json.load(resp)
-              rows=result.get("results")
-              if not isinstance(rows,list): raise ValueError("invalid Apple response")
-              # A real artist response is required; a transient empty response never clears good data.
-              if not any(r.get("wrapperType")=="artist" and r.get("artistId")==apple_id for r in rows):
-                  raise ValueError("artist ID missing")
-              return rows
-          def convert(row,market,entity,apple_id,artist):
-              track=entity=="song"
-              if row.get("wrapperType")!=("track" if track else "collection"): return None
-              if track and row.get("kind")!="song": return None
-              # Lookup is scoped by ID, but validate the owner name as well for compilations.
-              import re, unicodedata
-              norm=lambda s:" ".join(re.findall(r"[^\W_]+",unicodedata.normalize("NFKC",str(s)).casefold()))
-              if " "+norm(artist)+" " not in " "+norm(row.get("artistName",""))+" ": return None
-              cid=row.get("collectionId");tid=row.get("trackId")
-              if not isinstance(cid,int) or (track and not isinstance(tid,int)): return None
-              name=row.get("trackName" if track else "collectionName")
-              date=str(row.get("releaseDate",""))[:10]
-              if not name or not re.fullmatch(r"\d{4}-\d{2}-\d{2}",date): return None
-              if not track and not isinstance(row.get("trackCount"),int): return None
-              return dict(kind="track" if track else "album",name=name,artist=row["artistName"],date=date,tracks=row.get("trackCount"),market=market,url=f"https://music.apple.com/{market}/album/{cid}"+(f"?i={tid}" if track else ""))
-          def main():
-              output=dict(previous); successes=0; failures=0
-              for sid,(aid,artist) in ARTISTS.items():
-                  prior=previous.get(sid,[])
-                  combined=[]
-                  for market in ("de","us"):
-                      for entity in ("album","song"):
-                          kind="track" if entity=="song" else "album"
-                          try:
-                              raw=fetch(aid,market,entity)
-                              fresh=[x for r in raw if (x:=convert(r,market,entity,aid,artist))]
-                              if not fresh and any(x.get("market")==market and x.get("kind")==kind for x in prior):
-                                  raise ValueError("unexpected empty catalogue")
-                              combined.extend(fresh);successes+=1
-                              print(f"{artist} {market} {kind}: {len(fresh)}",flush=True)
-                          except Exception as exc:
-                              failures+=1
-                              combined.extend(x for x in prior if x.get("market")==market and x.get("kind")==kind)
-                              print(f"{artist} {market} {kind}: {type(exc).__name__}: {exc}; keeping cache",flush=True)
-                          time.sleep(3.1)
-                  output[sid]=sorted({x["url"]:x for x in combined}.values(),key=lambda x:(x["kind"],x["date"],x["name"],x["market"],x["url"]))
-              OUT.parent.mkdir(exist_ok=True)
-              OUT.write_text(json.dumps(output,ensure_ascii=False,indent=2,sort_keys=True)+"\n")
-              print(f"Apple lookup results: {successes} successful; {failures} failed",flush=True)
-              if not successes: raise SystemExit(1)
-          if __name__=="__main__":main()
-          PY
-          cat > tests/apple-matching.test.mjs <<'JS'
-          import test from "node:test";
-          import assert from "node:assert/strict";
-          import fs from "node:fs";
-          const source=fs.readFileSync(new URL("../assets/eldr-apple.js",import.meta.url),"utf8").replace(/^const cataloguePromise=.*$/m,"const cataloguePromise=Promise.resolve({});");
-          const {matchApple}=await import("data:text/javascript;base64,"+Buffer.from(source).toString("base64"));
-          const release={name:"UNBOUND",date:"2026-10-24",type:"ep",totalTracks:6,artists:[{name:"SUNRIVA"}]};
-          const row={kind:"album",name:"UNBOUND - EP",date:"2026-10-24",tracks:6,artist:"SUNRIVA",market:"de",url:"https://music.apple.com/de/album/6826632617"};
-          test("direct matching album",()=>assert.equal(matchApple(release,[row]),row.url));
-          test("reject unrelated artist, date, tracks and title",()=>{for(const x of [{artist:"OTHER"},{date:"2025-10-24"},{tracks:1},{name:"Different"}])assert.equal(matchApple(release,[{...row,...x}]),null)});
-          test("reject ambiguous albums",()=>assert.equal(matchApple(release,[row,{...row,url:"https://music.apple.com/de/album/111"}]),null));
-          test("prefer Germany if both markets match",()=>assert.equal(matchApple(release,[{...row,market:"us",url:"https://music.apple.com/us/album/6826632617"},row]),row.url));
-          test("no artist-profile fallback",()=>assert.equal(matchApple(release,[{...row,url:"https://music.apple.com/de/artist/sunriva/6785632733"}]),null));
-          test("shared release requires both credits",()=>assert.equal(matchApple({...release,artists:[{name:"SUNRIVA"},{name:"Sunny ELDR"}]},[row]),null));
-          JS
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-          for name in ["sunriva-mist","rynva-north"]:
-           p=Path("assets",name+".js");s=p.read_text()
-           s=re.sub(r'^const appleArtist=.*\nconst appleLinks=.*\n','import {attachAppleLinks} from "./eldr-apple.js?v=1";\n',s,count=1,flags=re.M)
-           old='row.replaceChildren(external(el("a","btn primary","Spotify"),r.url));\n  if(appleLinks[r.id])row.append(external(el("a","btn secondary","Apple Music"),appleLinks[r.id]));'
-           assert old in s
-           s=s.replace(old,'row.replaceChildren(external(el("a","btn primary","Spotify"),r.url));\n  if(r.appleUrl)row.append(external(el("a","btn secondary","Apple Music"),r.appleUrl));')
-           old='const published=releases.filter(r=>releaseTime(r)<=Date.now());'
-           assert old in s
-           s=s.replace(old,'const published=await attachAppleLinks(releases.filter(r=>releaseTime(r)<=Date.now()),id);')
-           p.write_text(s)
-          p=Path("assets/eldr-artist.js");s=p.read_text()
-          s='import {attachAppleLinks} from "./eldr-apple.js?v=1";\n'+s
-          s=s.replace('.then((releases) => {','.then(async (releases) => {',1).replace('releases=releases.filter(r=>releaseTime(r)<=Date.now());','releases=await attachAppleLinks(releases.filter(r=>releaseTime(r)<=Date.now()),artistId);',1)
-          s=s.replace('link.href = release.url;','link.href = release.url;\n  if(release.appleUrl){const apple=document.createElement("a");apple.className="btn apple-release-link";apple.textContent="Apple Music";apple.href=release.appleUrl;apple.target="_blank";apple.rel="noopener noreferrer";link.after(apple);}',1)
-          p.write_text(s)
-          p=Path("assets/eldr-core.js");s=p.read_text()
-          old='  item.append(link);\n  return item;'
-          assert old in s
-          s=s.replace(old,'  item.append(link);\n  if(release.appleUrl){const apple=el("a","apple-release-link","Apple Music");apple.href=release.appleUrl;apple.target="_blank";apple.rel="noopener noreferrer";apple.setAttribute("aria-label","Listen to "+release.name+" on Apple Music");item.append(apple);}\n  return item;',1)
-          p.write_text(s)
-          for name,script in [("sunriva","sunriva-mist"),("rynva","rynva-north"),("sunny-eldr","eldr-artist"),("jara-nox","eldr-artist")]:
-           p=Path(name+".html");s=p.read_text()
-           s,n=re.subn(r'assets/'+re.escape(script)+r'\.js(?:\?v=[^"\s]+)?', 'assets/'+script+'.js?v=apple-1',s,count=1)
-           assert n==1
-           s=s.replace("</head>",'<link rel="stylesheet" href="assets/eldr-apple.css?v=1"/>\n</head>',1)
-           p.write_text(s)
-          # Cache bust imports of changed shared code on the four artist pages, not the homepage.
-          for name in ["sunriva-mist","rynva-north","eldr-artist"]:
-           p=Path("assets",name+".js");s=p.read_text().replace('"./eldr-core.js"','"./eldr-core.js?v=apple-1"');p.write_text(s)
-          PY
-          for f in assets/eldr-apple.js assets/eldr-core.js assets/eldr-artist.js assets/sunriva-mist.js assets/rynva-north.js; do node --input-type=module --check < "$f"; done
-          node --test tests/apple-matching.test.mjs
-      - name: Populate real Apple catalogue
+          set -e
+          for f in assets/eldr-core.js assets/eldr-catalogue-merge.js assets/eldr-countdown.js assets/eldr-artist.js assets/eldr-home.js assets/rynva-north.js assets/sunriva-mist.js assets/jara-midnight.js; do node --input-type=module --check < "$f"; done
+          node --test tests/catalogue-union.test.mjs
+          python3 -m py_compile scripts/sync-apple-catalogue.py
+      - name: Refresh release and track catalogue
         run: python3 scripts/sync-apple-catalogue.py
-      - name: Commit artist links and scheduled sync
+      - name: Save verified catalogue
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/eldr-apple.js assets/eldr-apple.css assets/eldr-core.js assets/eldr-artist.js assets/rynva-north.js assets/sunriva-mist.js sunny-eldr.html sunriva.html rynva.html jara-nox.html scripts/sync-apple-catalogue.py tests/apple-matching.test.mjs data/eldr-apple-catalogue.json
-          if git diff --cached --quiet; then echo 'Apple catalogue unchanged'; exit 0; fi
-          git commit -m 'Automatically match Apple Music release URLs across all artist pages'
+          git add data/eldr-apple-catalogue.json data/eldr-apple-album-tracks.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Refresh verified Apple Music catalogue and album tracks'
           git pull --rebase origin main
           git push origin HEAD:main

@@ -1,7 +1,6 @@
-import {attachAppleLinks} from "./eldr-apple.js?v=1";
-import {releaseTime,updateUpcoming} from "./eldr-countdown.js?v=1";
+import {releaseTime,updateUpcoming} from "./eldr-countdown.js?v=union-1";
 // ELDR ÆSTHETIC — artist page: latest release, live facts, discography and videos for one artist.
-import { ARTISTS, $, formatDate, typeLabel, loadCatalogue, loadVideos, videoCard, setupList, setupPlaylist } from "./eldr-core.js?v=apple-1";
+import { ARTISTS, $, formatDate, typeLabel, watchCatalogue, latestRelease, loadVideos, videoCard, setupList, setupPlaylist } from "./eldr-core.js?v=union-1";
 
 const artistId = document.body.dataset.artistId;
 const artist = ARTISTS[artistId];
@@ -23,11 +22,13 @@ function showLatest(release) {
   $("[data-latest-meta]").textContent = parts.join(" · ");
   const link = $("[data-latest-link]");
   link.href = release.url;
-  if(release.appleUrl){const apple=document.createElement("a");apple.className="btn apple-release-link";apple.textContent="Apple Music";apple.href=release.appleUrl;apple.target="_blank";apple.rel="noopener noreferrer";link.after(apple);}
+  link.textContent=release.spotifyUrl?"Open on Spotify":"Open on Apple Music";
+  section.querySelectorAll(".apple-release-link").forEach(a=>a.remove());
+  if(release.appleUrl&&release.spotifyUrl){const apple=document.createElement("a");apple.className="btn apple-release-link";apple.textContent="Apple Music";apple.href=release.appleUrl;apple.target="_blank";apple.rel="noopener noreferrer";link.after(apple);}
   const coverLink = $("[data-latest-cover-link]");
   coverLink.href = release.url;
-  coverLink.setAttribute("aria-label", `Open ${release.name} on Spotify`);
-  if (release.cover) $("[data-latest-cover]").src = release.cover;
+  coverLink.setAttribute("aria-label", `Open ${release.name} on ${release.spotifyUrl?"Spotify":"Apple Music"}`);
+  const img=$("[data-latest-cover]");if(release.cover){img.src=release.cover;img.hidden=false}else{img.removeAttribute("src");img.hidden=true}
   section.hidden = false;
 }
 
@@ -41,30 +42,25 @@ function showFacts(releases) {
     }
   };
   set("first", `${first.name} · ${formatDate(first.date)}`);
-  set("releases", `${releases.length} release${releases.length === 1 ? "" : "s"} on Spotify`);
+  set("releases", `${releases.length} releases and songs`);
 }
 
 setupPlaylist();
 if (artist) {
-  loadCatalogue([artistId])
-    .then(async (releases) => {
+  watchCatalogue([artistId],async (releases) => {
       updateUpcoming(releases);
-      releases=await attachAppleLinks(releases.filter(r=>releaseTime(r)<=Date.now()),artistId);
+      releases=releases.filter(r=>releaseTime(r)<=Date.now());
       if (!releases.length) return;
-      showLatest(releases[0]);
+      showLatest(latestRelease(releases,artistId));
       showFacts(releases);
       setupList(releases, {
         pageSize: 8,
         leadId: artistId,
         filters: {
           collab: (release) =>
-            release.type === "track" ||
-            (Array.isArray(release.artists) && release.artists.length > 1),
+            Array.isArray(release.artists) && release.artists.length > 1,
         },
       });
-    })
-    .catch(() => {
-      // Keep the static page and the Spotify link when the catalogue cannot be read.
     });
   loadVideos(12)
     .then((videos) => {

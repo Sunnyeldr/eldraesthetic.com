@@ -1,5 +1,5 @@
 
-import {loadCatalogue} from "./eldr-core.js";
+// Artist catalogue watch supplies merged releases.
 export const releaseTime=r=>Date.parse(r.releaseAt||r.date+"T00:00:00");
 const id=document.body.dataset.artistId;
 const root=document.querySelector("[data-next]");
@@ -17,7 +17,7 @@ function render(){
  credits.hidden=!credits.textContent;
  q("[data-next-date]").textContent=new Date(releaseTime(next)).toLocaleDateString(document.documentElement.lang||"en",{day:"numeric",month:"long",year:"numeric"});
  const cover=q("[data-next-cover]");
- if(cover){cover.hidden=!(typeof next.cover==="string"&&/^https:\/\/i\.scdn\.co\/image\/[A-Za-z0-9]+$/.test(next.cover));if(!cover.hidden)cover.src=next.cover;}
+ if(cover){cover.hidden=!(typeof next.cover==="string"&&/^https:\/\/(?:i\.scdn\.co\/image\/|(?:is\d+-ssl|is\d+|a\d+)\.mzstatic\.com\/)/.test(next.cover));if(!cover.hidden)cover.src=next.cover;}
  const btn=q("[data-presave]"),url=validUrl(next.presave||next.url);
  btn.hidden=!url;
  if(url){btn.href=url;btn.textContent=next.presave?"Pre-save / Pre-add":"View release";}
@@ -29,4 +29,4 @@ const schedule=()=>fetch("data/eldr-upcoming.json",{cache:"no-store"}).then(r=>{
 let planned=[],catalogue=[];
 function combine(){const byName=new Map();for(const r of [...catalogue,...planned]){if(!r||typeof r.name!=="string")continue;const key=r.name.trim().toLowerCase()+"|"+(r.date||"");byName.set(key,r);}entries=[...byName.values()];render();}
 export async function updateUpcoming(releases){if(Array.isArray(releases)&&releases.length)catalogue=releases.filter(r=>r.type==="album"||r.type==="ep");try{planned=await schedule();}catch{}combine();}
-if(root){updateUpcoming([]);setInterval(()=>{if(document.visibilityState==="visible")loadCatalogue([id]).then(updateUpcoming).catch(()=>{});},15*60*1000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")loadCatalogue([id]).then(updateUpcoming).catch(()=>{});});}
+if(root){updateUpcoming([]);setInterval(()=>{if(document.visibilityState==="visible")updateUpcoming([]);},15*60*1000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")updateUpcoming([]);});}

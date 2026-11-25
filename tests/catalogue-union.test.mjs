@@ -1,0 +1,12 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import fs from "node:fs";
+const src=fs.readFileSync(new URL("../assets/eldr-catalogue-merge.js",import.meta.url),"utf8");
+const {mergeCatalogues}=await import("data:text/javascript;base64,"+Buffer.from(src).toString("base64"));
+const registry={"26RwT7kIoTnT8oT65MGS2P":{"name":"Sunny ELDR"},"0EZ3VnaZOkGWYyYMxYdJzZ":{"name":"SUNRIVA"},"0Um7pcFDku2VNShSlfxy1B":{"name":"RYNVA"},"0kLRThHL6uSbmGwEarlsKy":{"name":"JARA NOX"}},ids=Object.keys(registry),[sunny,sr,ry,ja]=ids;
+const snapshot=JSON.parse(fs.readFileSync(new URL("../data/eldr-apple-catalogue.json",import.meta.url),"utf8"));
+const run=id=>mergeCatalogues([],snapshot,[id],registry);
+test("source snapshot has verified credited rows",()=>{for(const id of ids){const r=run(id);assert.ok(r.length>0);assert.equal(new Set(r.map(x=>x.id)).size,r.length);assert.ok(r.every(x=>x.artistIds.includes(id)&&x.spotifyUrl===null&&x.appleUrl.startsWith("https://music.apple.com/")))}});
+test("single track and markets deduplicate",()=>{const r={kind:"album",name:"Example - Single",artist:"Sunny ELDR",date:"2026-11-25",tracks:1,url:"https://music.apple.com/de/album/123"};const data={[sunny]:[r,{...r,url:"https://music.apple.com/us/album/123"},{...r,kind:"track",name:"Example",url:"https://music.apple.com/de/album/123?i=456"}]};assert.equal(mergeCatalogues([],data,[sunny],registry).length,1)});
+test("unique exact-credit match uses both links",()=>{const r={kind:"album",name:"Example - Single",artist:"Sunny ELDR",date:"2026-11-25",tracks:1,url:"https://music.apple.com/de/album/123"},s={id:"spotify-example",name:"Example",type:"single",date:r.date,totalTracks:1,artistIds:[sunny],artists:[{id:sunny,name:"Sunny ELDR"}],url:"https://open.spotify.com/album/123"};const m=mergeCatalogues([s],{[sunny]:[r]},[sunny],registry);assert.equal(m.length,1);assert.equal(m[0].spotifyUrl,s.url);assert.equal(m[0].appleUrl,r.url)});
+test("collab belongs to each explicitly credited artist only",()=>{const r={kind:"track",name:"Example",artist:"Rynva & Jara_nox",date:"2026-11-25",tracks:10,url:"https://music.apple.com/de/album/123?i=456"};const data={[ry]:[r]};assert.equal(mergeCatalogues([],data,[ja],registry).length,1);assert.equal(mergeCatalogues([],data,[sunny],registry).length,0)});

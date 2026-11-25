@@ -1,11 +1,11 @@
-import { $, el, loadCatalogue, loadVideos, setupList, formatDate, typeLabel, cleanVideoTitle } from "./eldr-core.js?v=apple-1";
+import { $, el, watchCatalogue, latestRelease, loadVideos, setupList, formatDate, typeLabel, cleanVideoTitle } from "./eldr-core.js?v=union-1";
 const id = document.body.dataset.artistId;
 const external = (a,url) => { a.href=url; a.target="_blank"; a.rel="noopener noreferrer"; return a; };
-import {attachAppleLinks} from "./eldr-apple.js?v=1";
 function serviceLinks(r,existing){
   const row=existing||el("div","sr-service-row");
-  row.replaceChildren(external(el("a","btn primary","Spotify"),r.url));
-  if(r.appleUrl)row.append(external(el("a","btn secondary","Apple Music"),r.appleUrl));
+  row.replaceChildren();
+  if(r.spotifyUrl)row.append(external(el("a","btn primary","Spotify"),r.spotifyUrl));
+  if(r.appleUrl)row.append(external(el("a",r.spotifyUrl?"btn secondary":"btn primary","Apple Music"),r.appleUrl));
   return row;
 }
 function releaseCard(r) {
@@ -17,25 +17,26 @@ function releaseCard(r) {
   item.append(a,el("h3","",r.name),el("p","meta",[typeLabel(r),formatDate(r.date)].filter(Boolean).join(" · ")),serviceLinks(r));
   return item;
 }
-import {releaseTime,updateUpcoming} from "./eldr-countdown.js?v=1";
-loadCatalogue([id]).then(async releases=>{
+import {releaseTime,updateUpcoming} from "./eldr-countdown.js?v=union-1";
+watchCatalogue([id],async releases=>{
   updateUpcoming(releases);
-  const published=await attachAppleLinks(releases.filter(r=>releaseTime(r)<=Date.now()),id);
+  const published=releases.filter(r=>releaseTime(r)<=Date.now());
   if(!published.length)return;
-  const r=published[0];
+  const r=latestRelease(published,id);
   $("[data-latest-title]").textContent=r.name;
   $("[data-latest-meta]").textContent=[typeLabel(r),formatDate(r.date),r.totalTracks>1?r.totalTracks+" tracks":""].filter(Boolean).join(" · ");
   serviceLinks(r,$("[data-latest-services]"));
   external($("[data-latest-cover-link]"),r.url).setAttribute("aria-label","Listen to "+r.name);
   const img=$("[data-latest-cover]");
-  if(r.cover){img.src=r.cover;img.hidden=false;}else img.hidden=true;
+  if(r.cover){img.src=r.cover;img.hidden=false;}else{img.removeAttribute("src");img.hidden=true;}
   $("[data-latest-release]").hidden=false;
   const album=published.find(x=>x.type==="album"||x.type==="ep");
   const albumBox=$("[data-album-highlight]");
-  if(album&&album.id!==r.id){albumBox.replaceChildren(el("p","eyebrow","Latest album / EP"),releaseCard(album));albumBox.hidden=false;}
-  $("[data-recent]").replaceChildren(...published.slice(1,5).filter(x=>!album||album.id===r.id||x.id!==album.id).map(releaseCard));
-  setupList(published,{pageSize:8,leadId:id,filters:{collab:r=>r.type==="track"||r.artists.length>1}});
-}).catch(()=>{});
+  albumBox.hidden=!album||album.id===r.id;
+  if(!albumBox.hidden)albumBox.replaceChildren(el("p","eyebrow","Latest album / EP"),releaseCard(album));
+  $("[data-recent]").replaceChildren(...published.filter(x=>!x.albumTrack&&x.id!==r.id&&(albumBox.hidden||x.id!==album.id)).slice(0,4).map(releaseCard));
+  setupList(published,{pageSize:8,leadId:id,filters:{collab:r=>r.artists.length>1}});
+});
 function videoCard(v){
   const a=external(el("a","video"),v.url);
   const frame=el("div","video-image");
