@@ -1,0 +1,152 @@
+name: Publish approved SUNRIVA Nordic Mist V7
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-sunriva-v7.yml']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Import exact approved design
+        run: |
+          curl --fail --location --retry 2 'https://d2ol7oe51mr4n9.cloudfront.net/user_3FOKCt5dRl2FwUMqsVyqnirHTZU/b301e91c-0600-45ea-97cf-a26fed31e8ee.html' -o /tmp/sunriva-v7.html
+          echo 'bc5e6ac2ea2ee6f6dabf48a16bbfa81b2eb24716c20f291f76c8f95228663791  /tmp/sunriva-v7.html' | sha256sum -c -
+          python3 -m pip install --quiet beautifulsoup4 Pillow
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64, re
+          from bs4 import BeautifulSoup
+          from PIL import Image
+          from io import BytesIO
+          p=Path("sunriva.html")
+          old=BeautifulSoup(p.read_text(),"html.parser")
+          s=BeautifulSoup(Path("/tmp/sunriva-v7.html").read_text(),"html.parser")
+          def asset(node,attr,name):
+              data=node[attr]
+              assert data.startswith("data:image/webp;base64,")
+              raw=base64.b64decode(data.split(",",1)[1],validate=True)
+              with Image.open(BytesIO(raw)) as im:
+                  im.load()
+                  assert im.format=="WEBP" and min(im.size)>=700
+                  print(name,im.size,len(raw))
+              Path("assets",name).write_bytes(raw)
+              node[attr]="assets/"+name
+          asset(s.select_one("picture source"),"srcset","sunriva-mist-mobile.webp")
+          asset(s.select_one(".hero-art"),"src","sunriva-mist-desktop.webp")
+          asset(s.select_one(".profile img"),"src","sunriva-mist-profile.webp")
+          # Preserve existing SEO and consent functionality, use approved styling exclusively.
+          css=s.style.get_text()
+          css += """
+          [hidden]{display:none!important}
+          .skip{position:absolute;top:10px;left:10px;z-index:10;transform:translateY(-200%);background:#e4eeee;color:#0b1116;padding:10px}.skip:focus{transform:none}
+          button.btn{cursor:pointer;font-family:inherit}.cover img{width:100%;height:100%;aspect-ratio:1;object-fit:cover;display:block}
+          .cover{display:block;background:#19272e}.featured .cover{width:100%}.release .cover{display:block}
+          .releases{padding:0;list-style:none}.release{min-width:0}.release h3{overflow-wrap:anywhere}
+          .catalogue{list-style:none;padding:0;margin:16px 0}.catalogue .release a{display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px 0}.catalogue img{width:58px;height:58px;border-radius:9px;object-fit:cover;background:#19272e}.catalogue .release-artist,.catalogue .release-date{display:none}.catalogue .release-type{color:var(--muted);font-size:.72rem}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.filters button{border:0;background:#19272e;color:var(--text);border-radius:999px;padding:9px 12px;cursor:pointer}.filters button[aria-pressed=true]{background:#e4eeee;color:#0b1116}
+          .video-image{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:18px;background:#19272e}.video-image img{width:100%;height:100%;display:block;object-fit:cover}.video-image .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#e5eeebdd}.stack .video-image{aspect-ratio:16/7}.videos:has(>.video:only-child){grid-template-columns:1fr}.videos:has(>.video:only-child)>.video{max-width:760px}.video-image img{transition:transform .45s ease}.video:hover img{transform:scale(1.025)}
+          .footer .foot-legal{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:10px}
+          @media(max-width:650px){.video-image{border-radius:14px}.stack .video-image{aspect-ratio:16/9}}
+          """
+          Path("assets/sunriva-mist.css").write_text(css)
+          s.head.clear()
+          for tag in old.head.find_all(recursive=False):
+              if tag.name=="link" and tag.get("rel")==["stylesheet"]: continue
+              if tag.name=="meta" and tag.get("property")=="og:image": tag["content"]="https://eldraesthetic.com/assets/sunriva-mist-desktop.webp"
+              s.head.append(tag.extract())
+          for href in ["assets/sunriva-mist.css?v=7","assets/eldr-analytics.css"]:
+              s.head.append(s.new_tag("link",rel="stylesheet",href=href))
+          s.body["data-artist"]="sunriva"
+          s.body["data-artist-id"]=old.body["data-artist-id"]
+          s.select_one(".preview").decompose()
+          s.body.insert(0,BeautifulSoup('<a class="skip" href="#main">Skip to content</a>',"html.parser"))
+          s.main["id"]="main"
+          s.select_one("#about")["id"]="dossier"
+          s.select_one('nav a[href="#about"]')["href"]="#dossier"
+          s.select_one(".profile").insert_before(BeautifulSoup('<span id="about" hidden></span>',"html.parser"))
+          # Replace only the demo catalogue and videos; retain the original verified URLs.
+          def replace(selector,html):
+              s.select_one(selector).replace_with(BeautifulSoup(html,"html.parser"))
+          replace(".featured",'''<article class="featured" data-latest-release hidden><a class="cover" data-latest-cover-link target="_blank" rel="noopener noreferrer"><img data-latest-cover alt="" width="420" height="420"></a><div><p class="eyebrow">Latest release</p><h3 data-latest-title></h3><p data-latest-meta></p><a class="btn primary" data-latest-link target="_blank" rel="noopener noreferrer">▶ &nbsp; Listen now</a></div></article>''')
+          replace(".releases",'''<div class="releases" data-recent><p class="meta">Discover SUNRIVA’s latest music on <a class="textlink" href="https://open.spotify.com/artist/0EZ3VnaZOkGWYyYMxYdJzZ" target="_blank" rel="noopener noreferrer">Spotify</a>.</p></div>''')
+          replace("details",'''<details><summary>View all releases</summary><div class="filters" role="group" aria-label="Filter releases"><button type="button" data-filter="all" aria-pressed="true">All</button><button type="button" data-filter="album" aria-pressed="false">Albums &amp; EPs</button><button type="button" data-filter="single" aria-pressed="false">Singles</button><button type="button" data-filter="collab" aria-pressed="false">Collaborations</button></div><ol class="catalogue" data-releases><li>Open SUNRIVA on Spotify to browse the full catalogue.</li></ol><button class="btn secondary" type="button" data-more hidden>Show more releases</button></details>''')
+          replace(".videos",'''<div class="videos" data-videos><a class="video" href="https://www.youtube.com/watch?v=FT0faOloSmI" target="_blank" rel="noopener noreferrer"><div class="video-image"><img src="assets/video-was-always-there.jpg" alt="" loading="lazy"><span class="play" aria-hidden="true">▶</span></div><h3>Was Always There</h3><p>Sunny ELDR × SUNRIVA · Official video</p></a></div>''')
+          s.footer.clear()
+          s.footer.append(BeautifulSoup('SUNRIVA · <a href="index.html">ELDR ÆSTHETIC</a><div class="foot-legal"><span>© 2026 ELDR ÆSTHETIC</span><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>',"html.parser"))
+          for a in s.select('a[href^="https://"]'):
+              a["target"]="_blank"
+              a["rel"]="noopener noreferrer"
+          # keep label navigation in same tab
+          s.select_one(".nav-back")["href"]="index.html"
+          for k in ("target","rel"): s.select_one(".nav-back").attrs.pop(k,None)
+          motion=s.script.get_text()
+          Path("assets/sunriva-mist-motion.js").write_text(motion)
+          s.script.decompose()
+          for src,typ in [("assets/sunriva-mist.js?v=7","module"),("assets/sunriva-mist-motion.js?v=7",None),("assets/eldr-analytics.js",None)]:
+              t=s.new_tag("script",src=src)
+              if typ: t["type"]=typ
+              else: t["defer"]=""
+              s.body.append(t)
+          # Restore case-sensitive SVG spelling after HTML parser serialization.
+          out=str(s).replace('viewbox=', 'viewBox=')
+          assert "ARTWORK PLACEHOLDER" not in out and "Concept · not live" not in out and "↗" not in out and "data:image" not in out
+          assert len(s.select("[data-latest-release]"))==1
+          p.write_text(out)
+          PY
+          cat > assets/sunriva-mist.js <<'JS'
+          import { $, el, loadCatalogue, loadVideos, setupList, formatDate, typeLabel, cleanVideoTitle } from "./eldr-core.js";
+          const id = document.body.dataset.artistId;
+          const external = (a,url) => { a.href=url; a.target="_blank"; a.rel="noopener noreferrer"; return a; };
+          function releaseCard(r) {
+            const item=el("article","release");
+            const a=external(el("a","cover"),r.url);
+            a.setAttribute("aria-label","Listen to "+r.name);
+            if(r.cover){const img=el("img");img.src=r.cover;img.alt="";img.loading="lazy";a.append(img);}
+            else a.append(el("span","sig","ᛚ"));
+            const title=el("h3","",r.name);
+            const meta=el("p","meta",[typeLabel(r),formatDate(r.date)].filter(Boolean).join(" · "));
+            item.append(a,title,meta,external(el("a","listen","Listen now"),r.url));
+            return item;
+          }
+          loadCatalogue([id]).then(releases=>{
+            if(!releases.length)return;
+            const r=releases[0];
+            $("[data-latest-title]").textContent=r.name;
+            $("[data-latest-meta]").textContent=[typeLabel(r),formatDate(r.date),r.totalTracks>1?r.totalTracks+" tracks":""].filter(Boolean).join(" · ");
+            external($("[data-latest-link]"),r.url);
+            external($("[data-latest-cover-link]"),r.url).setAttribute("aria-label","Listen to "+r.name);
+            const img=$("[data-latest-cover]");
+            if(r.cover)img.src=r.cover;else img.hidden=true;
+            $("[data-latest-release]").hidden=false;
+            $("[data-recent]").replaceChildren(...releases.slice(1,5).map(releaseCard));
+            setupList(releases,{pageSize:8,leadId:id,filters:{collab:r=>r.type==="track"||r.artists.length>1}});
+          }).catch(()=>{});
+          function videoCard(v){
+            const a=external(el("a","video"),v.url);
+            const frame=el("div","video-image");
+            const img=el("img");img.src=v.thumbnail;img.alt="";img.loading="lazy";
+            const play=el("span","play","▶");play.setAttribute("aria-hidden","true");
+            frame.append(img,play);
+            a.append(frame,el("h3","",cleanVideoTitle(v.title)),el("p","",v.artist||"SUNRIVA"));
+            return a;
+          }
+          loadVideos(60).then(videos=>{
+            const own=videos.filter(v=>v.artistKey==="sunriva"||(typeof v.artist==="string"&&v.artist.toLowerCase().includes("sunriva"))).slice(0,3);
+            if(!own.length)return;
+            const cards=own.map(videoCard),lead=cards.shift();
+            const root=$("[data-videos]");root.replaceChildren(lead);
+            if(cards.length){const stack=el("div","stack");stack.append(...cards);root.append(stack);}
+          }).catch(()=>{});
+          JS
+          node --input-type=module --check < assets/sunriva-mist.js
+          node --check assets/sunriva-mist-motion.js
+      - name: Commit artist-only update
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sunriva.html assets/sunriva-mist*
+          git rm .github/workflows/publish-sunriva-v7.yml
+          git commit -m 'Publish approved SUNRIVA Nordic Mist artist page'
+          git push origin HEAD:main
