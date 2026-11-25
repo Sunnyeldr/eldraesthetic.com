@@ -1,3 +1,4 @@
+import {releaseTime,updateUpcoming} from "./eldr-countdown.js?v=1";
 // ELDR ÆSTHETIC — artist page: latest release, live facts, discography and videos for one artist.
 import { ARTISTS, $, formatDate, typeLabel, loadCatalogue, loadVideos, videoCard, setupList, setupPlaylist } from "./eldr-core.js";
 
@@ -45,6 +46,8 @@ setupPlaylist();
 if (artist) {
   loadCatalogue([artistId])
     .then((releases) => {
+      updateUpcoming(releases);
+      releases=releases.filter(r=>releaseTime(r)<=Date.now());
       if (!releases.length) return;
       showLatest(releases[0]);
       showFacts(releases);

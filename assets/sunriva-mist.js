@@ -17,33 +17,9 @@ function releaseCard(r) {
   item.append(a,el("h3","",r.name),el("p","meta",[typeLabel(r),formatDate(r.date)].filter(Boolean).join(" · ")),serviceLinks(r));
   return item;
 }
-let countdownTimer;
-const releaseTime=r=>Date.parse(r.releaseAt||r.date+"T00:00:00");
-function setupCountdown(items){
-  clearInterval(countdownTimer);
-  const root=$("[data-next]");
-  const next=items.filter(r=>r.name&&Number.isFinite(releaseTime(r))&&releaseTime(r)>Date.now()).sort((a,b)=>releaseTime(a)-releaseTime(b))[0];
-  if(!next){root.hidden=true;return;}
-  $("[data-next-title]").textContent=next.name;
-  const credits=$("[data-next-artists]");if(credits){credits.textContent=next.artists||"";credits.hidden=!next.artists;}
-  $("[data-next-date]").textContent=new Date(releaseTime(next)).toLocaleDateString(document.documentElement.lang||"en",{day:"numeric",month:"long",year:"numeric"});
-  const presave=$("[data-presave]");
-  const url=next.presave||next.url;
-  presave.hidden=!(typeof url==="string"&&/^https:\/\/(distrokid\.com\/hyperfollow\/|open\.spotify\.com\/|music\.apple\.com\/)/.test(url));
-  if(!presave.hidden)external(presave,url);
-  root.hidden=false;
-  function tick(){
-    const n=Math.max(0,Math.ceil((releaseTime(next)-Date.now())/1000));
-    if(n<=0){clearInterval(countdownTimer);root.hidden=true;return;}
-    for(const [k,v] of Object.entries({days:Math.floor(n/86400),hours:Math.floor(n/3600)%24,minutes:Math.floor(n/60)%60,seconds:n%60}))$("[data-"+k+"]").textContent=String(v).padStart(2,"0");
-  }
-  tick();countdownTimer=setInterval(tick,1000);
-}
-const schedule=fetch("data/sunriva-upcoming.json",{cache:"no-store"}).then(r=>r.ok?r.json():[]).then(v=>Array.isArray(v)?v:[]).catch(()=>[]);
-schedule.then(setupCountdown);
+import {releaseTime,updateUpcoming} from "./eldr-countdown.js?v=1";
 loadCatalogue([id]).then(async releases=>{
-  const upcoming=releases.filter(r=>releaseTime(r)>Date.now());
-  setupCountdown([...(await schedule),...upcoming]);
+  updateUpcoming(releases);
   const published=releases.filter(r=>releaseTime(r)<=Date.now());
   if(!published.length)return;
   const r=published[0];

@@ -1,0 +1,11 @@
+
+/* Shared countdown; keep each artist's existing palette */
+[data-next][hidden],[data-next] [hidden]{display:none!important}
+body:not([data-artist="sunriva"]) .sr-next{margin:36px var(--gutter);padding:clamp(20px,4vw,42px);background:var(--ash-2,#17191b);border-radius:24px;color:var(--bone,#f2f4f2)}
+.sr-next h2{margin:8px 0 12px;font-size:clamp(1.9rem,5vw,3.4rem);line-height:1.12}
+.sr-next .meta{color:var(--muted)}
+.sr-next [data-next-cover]{width:min(140px,34%);aspect-ratio:1;object-fit:cover;float:right;margin:0 0 12px 16px;border-radius:13px}
+.sr-countdown{clear:both;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:22px 0;max-width:520px}
+.sr-countdown div{text-align:center;padding:12px 3px;background:#0003;border-radius:14px}
+.sr-countdown strong{display:block;font:clamp(1.6rem,5vw,3rem) Georgia,serif;font-variant-numeric:tabular-nums}
+.sr-countdown span{font-size:.7rem;color:var(--muted)}
