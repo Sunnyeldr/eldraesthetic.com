@@ -1,6 +1,7 @@
+import {attachAppleLinks} from "./eldr-apple.js?v=1";
 import {releaseTime,updateUpcoming} from "./eldr-countdown.js?v=1";
 // ELDR ÆSTHETIC — artist page: latest release, live facts, discography and videos for one artist.
-import { ARTISTS, $, formatDate, typeLabel, loadCatalogue, loadVideos, videoCard, setupList, setupPlaylist } from "./eldr-core.js";
+import { ARTISTS, $, formatDate, typeLabel, loadCatalogue, loadVideos, videoCard, setupList, setupPlaylist } from "./eldr-core.js?v=apple-1";
 
 const artistId = document.body.dataset.artistId;
 const artist = ARTISTS[artistId];
@@ -22,6 +23,7 @@ function showLatest(release) {
   $("[data-latest-meta]").textContent = parts.join(" · ");
   const link = $("[data-latest-link]");
   link.href = release.url;
+  if(release.appleUrl){const apple=document.createElement("a");apple.className="btn apple-release-link";apple.textContent="Apple Music";apple.href=release.appleUrl;apple.target="_blank";apple.rel="noopener noreferrer";link.after(apple);}
   const coverLink = $("[data-latest-cover-link]");
   coverLink.href = release.url;
   coverLink.setAttribute("aria-label", `Open ${release.name} on Spotify`);
@@ -45,9 +47,9 @@ function showFacts(releases) {
 setupPlaylist();
 if (artist) {
   loadCatalogue([artistId])
-    .then((releases) => {
+    .then(async (releases) => {
       updateUpcoming(releases);
-      releases=releases.filter(r=>releaseTime(r)<=Date.now());
+      releases=await attachAppleLinks(releases.filter(r=>releaseTime(r)<=Date.now()),artistId);
       if (!releases.length) return;
       showLatest(releases[0]);
       showFacts(releases);

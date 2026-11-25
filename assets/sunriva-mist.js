@@ -1,12 +1,11 @@
-import { $, el, loadCatalogue, loadVideos, setupList, formatDate, typeLabel, cleanVideoTitle } from "./eldr-core.js";
+import { $, el, loadCatalogue, loadVideos, setupList, formatDate, typeLabel, cleanVideoTitle } from "./eldr-core.js?v=apple-1";
 const id = document.body.dataset.artistId;
 const external = (a,url) => { a.href=url; a.target="_blank"; a.rel="noopener noreferrer"; return a; };
-const appleArtist="https://music.apple.com/us/artist/sunriva/6785632733";
-const appleLinks={"5jnjFEgF8qZx4dMdC1riys":"https://music.apple.com/us/album/unbound-ep/6826632617","1a2LtG9n4eM7jx8mt2mimq":"https://music.apple.com/us/album/cold-laugh-single/6824188205","5RXHwe6GUE18oZZ5LnPjio":"https://music.apple.com/us/album/shards-ep/6817139865","4ENmUu3syMwsm0IZZly0G3":"https://music.apple.com/us/album/break-the-north-single/6814123106","4xCP7ykfCkz6Lo3gpNbFj3":"https://music.apple.com/us/album/cold-between-us-single/6786009610"};
+import {attachAppleLinks} from "./eldr-apple.js?v=1";
 function serviceLinks(r,existing){
   const row=existing||el("div","sr-service-row");
   row.replaceChildren(external(el("a","btn primary","Spotify"),r.url));
-  if(appleLinks[r.id])row.append(external(el("a","btn secondary","Apple Music"),appleLinks[r.id]));
+  if(r.appleUrl)row.append(external(el("a","btn secondary","Apple Music"),r.appleUrl));
   return row;
 }
 function releaseCard(r) {
@@ -21,7 +20,7 @@ function releaseCard(r) {
 import {releaseTime,updateUpcoming} from "./eldr-countdown.js?v=1";
 loadCatalogue([id]).then(async releases=>{
   updateUpcoming(releases);
-  const published=releases.filter(r=>releaseTime(r)<=Date.now());
+  const published=await attachAppleLinks(releases.filter(r=>releaseTime(r)<=Date.now()),id);
   if(!published.length)return;
   const r=published[0];
   $("[data-latest-title]").textContent=r.name;

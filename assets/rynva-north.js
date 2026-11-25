@@ -1,12 +1,11 @@
-import { $, el, loadCatalogue, loadVideos, setupList, formatDate, typeLabel, cleanVideoTitle } from "./eldr-core.js";
+import { $, el, loadCatalogue, loadVideos, setupList, formatDate, typeLabel, cleanVideoTitle } from "./eldr-core.js?v=apple-1";
 const id = document.body.dataset.artistId;
 const external = (a,url) => { a.href=url; a.target="_blank"; a.rel="noopener noreferrer"; return a; };
-const appleArtist="https://music.apple.com/us/artist/rynva/6800234336";
-const appleLinks={};
+import {attachAppleLinks} from "./eldr-apple.js?v=1";
 function serviceLinks(r,existing){
   const row=existing||el("div","sr-service-row");
   row.replaceChildren(external(el("a","btn primary","Spotify"),r.url));
-  if(appleLinks[r.id])row.append(external(el("a","btn secondary","Apple Music"),appleLinks[r.id]));
+  if(r.appleUrl)row.append(external(el("a","btn secondary","Apple Music"),r.appleUrl));
   return row;
 }
 function releaseCard(r) {
@@ -21,7 +20,7 @@ function releaseCard(r) {
 import {releaseTime,updateUpcoming} from "./eldr-countdown.js?v=1";
 loadCatalogue([id]).then(async releases=>{
   updateUpcoming(releases);
-  const published=releases.filter(r=>releaseTime(r)<=Date.now());
+  const published=await attachAppleLinks(releases.filter(r=>releaseTime(r)<=Date.now()),id);
   if(!published.length)return;
   const r=published[0];
   $("[data-latest-title]").textContent=r.name;

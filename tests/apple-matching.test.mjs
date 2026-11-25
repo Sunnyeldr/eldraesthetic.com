@@ -1,0 +1,13 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import fs from "node:fs";
+const source=fs.readFileSync(new URL("../assets/eldr-apple.js",import.meta.url),"utf8").replace(/^const cataloguePromise=.*$/m,"const cataloguePromise=Promise.resolve({});");
+const {matchApple}=await import("data:text/javascript;base64,"+Buffer.from(source).toString("base64"));
+const release={name:"UNBOUND",date:"2026-10-24",type:"ep",totalTracks:6,artists:[{name:"SUNRIVA"}]};
+const row={kind:"album",name:"UNBOUND - EP",date:"2026-10-24",tracks:6,artist:"SUNRIVA",market:"de",url:"https://music.apple.com/de/album/6826632617"};
+test("direct matching album",()=>assert.equal(matchApple(release,[row]),row.url));
+test("reject unrelated artist, date, tracks and title",()=>{for(const x of [{artist:"OTHER"},{date:"2025-10-24"},{tracks:1},{name:"Different"}])assert.equal(matchApple(release,[{...row,...x}]),null)});
+test("reject ambiguous albums",()=>assert.equal(matchApple(release,[row,{...row,url:"https://music.apple.com/de/album/111"}]),null));
+test("prefer Germany if both markets match",()=>assert.equal(matchApple(release,[{...row,market:"us",url:"https://music.apple.com/us/album/6826632617"},row]),row.url));
+test("no artist-profile fallback",()=>assert.equal(matchApple(release,[{...row,url:"https://music.apple.com/de/artist/sunriva/6785632733"}]),null));
+test("shared release requires both credits",()=>assert.equal(matchApple({...release,artists:[{name:"SUNRIVA"},{name:"Sunny ELDR"}]},[row]),null));

@@ -205,6 +205,7 @@ export function releaseRow(release, leadId) {
     el("span", "release-date", formatDate(release.date)),
   );
   item.append(link);
+  if(release.appleUrl){const apple=el("a","apple-release-link","Apple Music");apple.href=release.appleUrl;apple.target="_blank";apple.rel="noopener noreferrer";apple.setAttribute("aria-label","Listen to "+release.name+" on Apple Music");item.append(apple);}
   return item;
 }
 
