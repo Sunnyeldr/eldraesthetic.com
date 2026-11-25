@@ -5,7 +5,8 @@ const appleArtist="https://music.apple.com/us/artist/sunriva/6785632733";
 const appleLinks={"5jnjFEgF8qZx4dMdC1riys":"https://music.apple.com/us/album/unbound-ep/6826632617","1a2LtG9n4eM7jx8mt2mimq":"https://music.apple.com/us/album/cold-laugh-single/6824188205","5RXHwe6GUE18oZZ5LnPjio":"https://music.apple.com/us/album/shards-ep/6817139865","4ENmUu3syMwsm0IZZly0G3":"https://music.apple.com/us/album/break-the-north-single/6814123106","4xCP7ykfCkz6Lo3gpNbFj3":"https://music.apple.com/us/album/cold-between-us-single/6786009610"};
 function serviceLinks(r,existing){
   const row=existing||el("div","sr-service-row");
-  row.replaceChildren(external(el("a","btn primary","Spotify"),r.url),external(el("a","btn secondary",appleLinks[r.id]?"Apple Music":"Apple Music · Artist"),appleLinks[r.id]||appleArtist));
+  row.replaceChildren(external(el("a","btn primary","Spotify"),r.url));
+  if(appleLinks[r.id])row.append(external(el("a","btn secondary","Apple Music"),appleLinks[r.id]));
   return row;
 }
 function releaseCard(r) {

@@ -5,7 +5,8 @@ const appleArtist="https://music.apple.com/us/artist/rynva/6800234336";
 const appleLinks={};
 function serviceLinks(r,existing){
   const row=existing||el("div","sr-service-row");
-  row.replaceChildren(external(el("a","btn primary","Spotify"),r.url),external(el("a","btn secondary",appleLinks[r.id]?"Apple Music":"Apple Music · Artist"),appleLinks[r.id]||appleArtist));
+  row.replaceChildren(external(el("a","btn primary","Spotify"),r.url));
+  if(appleLinks[r.id])row.append(external(el("a","btn secondary","Apple Music"),appleLinks[r.id]));
   return row;
 }
 function releaseCard(r) {
