@@ -239,7 +239,7 @@ export function releaseRow(release, leadId) {
 
 // Filterable, paged release list. `filters` maps a filter name to a predicate.
 const listControllers=new WeakMap();
-export function setupList(releases, { pageSize = 8, leadId, filters = {} } = {}) {
+export function setupList(releases, { pageSize = 8, leadId, filters = {}, renderItem = (release) => releaseRow(release, leadId) } = {}) {
   const list = $("[data-releases]");
   const more = $("[data-more]");
   if(!list||!more)return;
@@ -256,7 +256,7 @@ export function setupList(releases, { pageSize = 8, leadId, filters = {} } = {})
   let shown = pageSize;
   const render = () => {
     const matching = releases.filter(tests[filter] || tests.all);
-    list.replaceChildren(...matching.slice(0, shown).map((release) => releaseRow(release, leadId)));
+    list.replaceChildren(...matching.slice(0, shown).map((release) => renderItem(release)));
     if (!matching.length) list.append(el("li", "releases-empty", "No releases of this type yet."));
     more.hidden = matching.length <= shown;
   };

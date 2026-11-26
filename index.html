@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0c0a09" />
+    <meta name="theme-color" content="#111213" />
     <title>ELDR ÆSTHETIC — Independent Nordic Music Label</title>
     <meta name="description" content="ELDR ÆSTHETIC is an independent label for Nordic music: Sunny ELDR, SUNRIVA, RYNVA and JARA NOX. New releases, videos and artist profiles." />
     <link rel="canonical" href="https://eldraesthetic.com/" />
@@ -18,182 +18,134 @@
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="assets/brand-mark.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="assets/eldr.css" />
+    <link rel="stylesheet" href="assets/eldr-dashboard.css?v=20261126" />
     <link rel="stylesheet" href="assets/eldr-analytics.css" />
-<link rel="stylesheet" href="assets/eldr-apple.css?v=1"/>
 </head>
-  <body>
-    <a class="skip" href="#main">Skip to content</a>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="brand" href="#top" aria-label="ELDR ÆSTHETIC home">
+      <img src="assets/brand-mark.svg" width="40" height="40" alt="">
+      <span>ELDR <em>ÆSTHETIC</em></span>
+    </a>
+    <nav aria-label="Main">
+      <a href="#artists">Artists</a>
+      <a href="#music">Music</a>
+      <a href="#videos">Videos</a>
+      <a href="#playlist">Playlist</a>
+    </nav>
+    <a class="pill neutral header-merch" href="merch.html">Merch</a>
+  </header>
 
-    <header class="top">
-      <a class="brand" href="#now" aria-label="ELDR ÆSTHETIC home">
-        <img src="assets/brand-mark.svg" width="34" height="34" alt="" />
-        <span>ELDR <em>ÆSTHETIC</em></span>
-      </a>
-      <nav class="nav" aria-label="Main">
-        <a href="#artists">Artists</a>
-        <a href="#music">Music</a>
-        <a href="#videos">Videos</a>
-        <a href="#house">House</a>
-      </nav>
-    </header>
+  <main id="main" class="wrap" tabindex="-1">
+    <div class="opening" id="now">
+      <section class="intro" aria-labelledby="intro-title">
+        <p class="eyebrow">Independent Nordic music label</p>
+        <h1 id="intro-title">ELDR <em>ÆSTHETIC</em></h1>
+        <p class="intro-text">Four artists, each with a world of her own.</p>
+        <div class="actions">
+          <a href="#artists" class="pill filled">Meet the artists</a>
+          <a href="https://open.spotify.com/playlist/7MEN0ae64ZlGDaSAVo0Abd" class="pill spotify" target="_blank" rel="noopener noreferrer"><img alt="" width="18" height="18" src="assets/eldr-dashboard/spotify.svg"> ELDR Playlist</a>
+        </div>
+      </section>
 
-    <main id="main">
-      <!-- 1 · NOW: the newest release takes over the hero. Static fallback below is replaced by the live catalogue. -->
-      <section class="now" id="now" data-artist="sunny" aria-labelledby="now-title">
-        <div class="now-media" data-layout="wide" aria-hidden="true">
-          <img data-now-image src="assets/sunny-hero-v2.webp" alt="" />
+      <section class="roster" id="artists" aria-labelledby="artists-title">
+        <div class="section-heading">
+          <h2 id="artists-title">The artists</h2>
         </div>
-        <div class="now-body">
-          <p class="now-label" data-now-label>Independent Nordic music label</p>
-          <p class="now-artist"><span class="rune" data-now-rune aria-hidden="true">ᚱ</span><span data-now-artist>ELDR ÆSTHETIC</span></p>
-          <h1 id="now-title" data-now-title>Fire in the dark.</h1>
-          <p class="now-meta" data-now-meta>Four artists. One house.</p>
-          <div class="now-actions">
-            <a class="btn btn-solid" data-now-listen href="https://open.spotify.com/playlist/7MEN0ae64ZlGDaSAVo0Abd" target="_blank" rel="noopener noreferrer">Listen on Spotify</a>
-            <a class="btn" data-now-profile href="#artists">Meet the artists</a>
-          </div>
+        <div class="artist-grid">
+          <a class="artist" href="sunny-eldr.html" data-artist="sunny">
+            <img class="artist-photo" src="assets/eldr-dashboard/sunny.webp" alt="" width="660" height="850">
+            <span class="artist-info"><span class="rune" aria-hidden="true">ᛋ</span><strong>Sunny ELDR</strong><small>The Road</small></span>
+          </a>
+          <a class="artist" href="sunriva.html" data-artist="sunriva">
+            <img class="artist-photo" src="assets/eldr-dashboard/sunriva.webp" alt="" width="660" height="850">
+            <span class="artist-info"><span class="rune" aria-hidden="true">ᛚ</span><strong>SUNRIVA</strong><small>The Tide</small></span>
+          </a>
+          <a class="artist" href="rynva.html" data-artist="rynva">
+            <img class="artist-photo" src="assets/eldr-dashboard/rynva.webp" alt="" width="660" height="850">
+            <span class="artist-info"><span class="rune" aria-hidden="true">ᚢ</span><strong>RYNVA</strong><small>The Strength</small></span>
+          </a>
+          <a class="artist" href="jara-nox.html" data-artist="jara">
+            <img class="artist-photo" src="assets/eldr-dashboard/jara.webp" alt="" width="660" height="850">
+            <span class="artist-info"><span class="rune" aria-hidden="true">ᚲ</span><strong>JARA NOX</strong><small>The Torch</small></span>
+          </a>
         </div>
-        <a class="now-cover" data-now-cover-link hidden target="_blank" rel="noopener noreferrer">
-          <img data-now-cover alt="" width="168" height="168" />
+      </section>
+    </div>
+
+    <section id="music" class="section" aria-labelledby="music-title">
+      <div class="section-heading">
+        <h2 id="music-title">Releases</h2>
+        <div class="filters" role="group" aria-label="Filter releases">
+          <button type="button" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-filter="album" aria-pressed="false">Albums &amp; EPs</button>
+          <button type="button" data-filter="single" aria-pressed="false">Singles</button>
+          <button type="button" data-filter="song" aria-pressed="false">Songs</button>
+          <button type="button" data-filter="collab" aria-pressed="false">Collaborations</button>
+        </div>
+      </div>
+      <ul class="release-grid" data-releases>
+        <li class="releases-empty">Browse releases in the <a href="https://open.spotify.com/playlist/7MEN0ae64ZlGDaSAVo0Abd" target="_blank" rel="noopener noreferrer">ELDR playlist</a>.</li>
+      </ul>
+      <button type="button" class="pill neutral more-releases" data-more hidden>Show more releases</button>
+    </section>
+
+    <section id="videos" class="section" aria-labelledby="videos-title">
+      <div class="section-heading"><h2 id="videos-title">Music videos</h2></div>
+      <div class="video-grid" data-videos>
+        <a class="video" href="https://www.youtube.com/watch?v=ScdvX9K1NuE" target="_blank" rel="noopener noreferrer">
+          <div class="video-image"><img src="assets/eldr-dashboard/the-field-turns-north.webp" alt="" width="640" height="360" loading="lazy"><span class="play" aria-hidden="true">▶</span></div>
+          <div class="video-text"><h3>The Field Turns North</h3><p>Sunny ELDR × Rúnvyr</p></div>
         </a>
-      </section>
+        <a class="video" href="https://www.youtube.com/watch?v=FT0faOloSmI" target="_blank" rel="noopener noreferrer">
+          <div class="video-image"><img src="assets/video-was-always-there.jpg" alt="" width="640" height="360" loading="lazy"><span class="play" aria-hidden="true">▶</span></div>
+          <div class="video-text"><h3>Was Always There</h3><p>Sunny ELDR × SUNRIVA</p></div>
+        </a>
+      </div>
+    </section>
 
-      <nav class="index" aria-label="Artists">
-        <a href="sunny-eldr.html" data-artist="sunny"><span class="rune" aria-hidden="true">ᚱ</span><strong>Sunny ELDR</strong><small>The Road</small></a>
-        <a href="sunriva.html" data-artist="sunriva"><span class="rune" aria-hidden="true">ᛚ</span><strong>SUNRIVA</strong><small>The Tide</small></a>
-        <a href="rynva.html" data-artist="rynva"><span class="rune" aria-hidden="true">ᚢ</span><strong>RYNVA</strong><small>The Strength</small></a>
-        <a href="jara-nox.html" data-artist="jara"><span class="rune" aria-hidden="true">ᚲ</span><strong>JARA NOX</strong><small>The Torch</small></a>
-      </nav>
-
-      <!-- 2 · VOICES: the four portraits appear once on the page. -->
-      <section class="voices" id="artists" aria-labelledby="voices-title">
-        <header class="head">
-          <p class="eyebrow">The artists</p>
-          <h2 id="voices-title">Four voices</h2>
-        </header>
-        <div class="voices-row">
-          <a class="voice" href="sunny-eldr.html" data-artist="sunny">
-            <img src="assets/sunny-card-closeup-v3.webp" alt="Sunny ELDR, dark braids, looking into the camera" loading="lazy" />
-            <span class="voice-text">
-              <span class="rune" aria-hidden="true">ᚱ</span>
-              <strong>Sunny<br />ELDR</strong>
-              <small>The Road</small>
-              <span class="voice-latest" data-latest="sunny"></span>
-            </span>
-          </a>
-          <a class="voice" href="sunriva.html" data-artist="sunriva">
-            <img src="assets/sunriva-card-20261124.webp" alt="SUNRIVA, blonde braids, looking into the camera" loading="lazy" />
-            <span class="voice-text">
-              <span class="rune" aria-hidden="true">ᛚ</span>
-              <strong>SUNRIVA</strong>
-              <small>The Tide</small>
-              <span class="voice-latest" data-latest="sunriva"></span>
-            </span>
-          </a>
-          <a class="voice" href="rynva.html" data-artist="rynva">
-            <img src="assets/rynva-artist-closeup.webp" alt="RYNVA, copper hair, looking into the camera" loading="lazy" />
-            <span class="voice-text">
-              <span class="rune" aria-hidden="true">ᚢ</span>
-              <strong>RYNVA</strong>
-              <small>The Strength</small>
-              <span class="voice-latest" data-latest="rynva"></span>
-            </span>
-          </a>
-          <a class="voice" href="jara-nox.html" data-artist="jara">
-            <img src="assets/jara-nox-card-v2.webp" alt="JARA NOX, highlighted hair in a bun, looking into the camera" loading="lazy" />
-            <span class="voice-text">
-              <span class="rune" aria-hidden="true">ᚲ</span>
-              <strong>JARA<br />NOX</strong>
-              <small>The Torch</small>
-              <span class="voice-latest" data-latest="jara"></span>
-            </span>
-          </a>
-        </div>
-      </section>
-
-      <!-- 3 · MUSIC: live catalogue as a quiet list. -->
-      <section class="music" id="music" aria-labelledby="music-title">
-        <header class="head head-split">
-          <div>
-            <p class="eyebrow">Latest releases</p>
-            <h2 id="music-title">New music</h2>
+    <section class="section label-section" id="house" aria-labelledby="label-title">
+      <div class="label-info">
+        <img src="assets/brand-mark.svg" width="54" height="54" alt="">
+        <h2 id="label-title">ELDR ÆSTHETIC</h2>
+        <p>An independent label for Nordic music. Sunny ELDR, SUNRIVA, RYNVA and JARA NOX.</p>
+      </div>
+      <div class="label-pair">
+        <article class="playlist" id="playlist" aria-labelledby="playlist-title" data-playlist="7MEN0ae64ZlGDaSAVo0Abd">
+          <img src="assets/eldr-dashboard/spotify.svg" width="34" height="34" alt="">
+          <h3 id="playlist-title">ELDR Playlist</h3>
+          <p>All four artists in the official ELDR playlist.</p>
+          <div class="actions">
+            <a class="pill spotify" href="https://open.spotify.com/playlist/7MEN0ae64ZlGDaSAVo0Abd" target="_blank" rel="noopener noreferrer">Open on Spotify</a>
+            <button type="button" class="pill neutral" aria-describedby="playlist-privacy" data-playlist-load>Load player</button>
           </div>
-          <div class="filters" role="group" aria-label="Filter releases">
-            <button type="button" data-filter="all" aria-pressed="true">All</button>
-            <button type="button" data-filter="album" aria-pressed="false">Albums &amp; EPs</button>
-            <button type="button" data-filter="single" aria-pressed="false">Singles</button><button type="button" data-filter="song" aria-pressed="false">Songs</button><button type="button" data-filter="collab" aria-pressed="false">Collaborations</button>
-          </div>
-        </header>
-        <ol class="releases" data-releases>
-          <li class="releases-empty">The catalogue loads from Spotify. If it does not appear, open the <a href="https://open.spotify.com/playlist/7MEN0ae64ZlGDaSAVo0Abd" target="_blank" rel="noopener noreferrer">ELDR playlist</a>.</li>
-        </ol>
-        <p class="more"><button type="button" class="btn" data-more hidden>Show more releases</button></p>
-      </section>
+          <small class="playlist-privacy" id="playlist-privacy">Loading the player sends your IP address to Spotify. <a href="datenschutz.html">Privacy policy</a></small>
+          <div class="playlist-frame" data-playlist-frame></div>
+        </article>
+        <a class="merch-card" href="merch.html">
+          <img src="assets/still-here-hoodie.webp" alt="STILL HERE hoodie" width="440" height="500" loading="lazy">
+          <span><span class="eyebrow">Official merch</span><strong>STILL HERE</strong><span class="pill neutral">Shop the collection</span></span>
+        </a>
+      </div>
+    </section>
+  </main>
 
-      <!-- 4 · VIDEOS: newest full videos; an empty slot is hidden, never a placeholder. -->
-      <section class="videos" id="videos" aria-labelledby="videos-title">
-        <header class="head">
-          <p class="eyebrow">Full videos</p>
-          <h2 id="videos-title">Watch</h2>
-        </header>
-        <div class="videos-row" data-videos>
-          <a class="video video-lead" href="https://www.youtube.com/watch?v=FT0faOloSmI" target="_blank" rel="noopener noreferrer">
-            <img src="assets/video-was-always-there.jpg" alt="" loading="lazy" />
-            <span class="video-text"><small>Sunny ELDR × SUNRIVA</small><strong>Was Always There</strong></span>
-          </a>
-        </div>
-      </section>
-
-      <!-- 5 · HOUSE: label, playlist and merch in one place. -->
-      <section class="house" id="house" aria-labelledby="house-title">
-        <div class="house-intro">
-          <p class="eyebrow">The house</p>
-          <h2 id="house-title">Eldr is Old Norse for fire.</h2>
-          <p>ELDR ÆSTHETIC is an independent label for Nordic music. Four artists release under one roof: Sunny ELDR, SUNRIVA, RYNVA and JARA NOX. Each has her own voice, her own rune and her own catalogue.</p>
-        </div>
-        <div class="house-grid">
-          <div class="playlist" data-playlist="7MEN0ae64ZlGDaSAVo0Abd">
-            <p class="eyebrow">One playlist</p>
-            <h3>All four voices</h3>
-            <p>The official ELDR playlist, kept current on Spotify.</p>
-            <div class="playlist-actions">
-              <button type="button" class="btn btn-solid" data-playlist-load>Load Spotify player</button>
-              <a class="btn" href="https://open.spotify.com/playlist/7MEN0ae64ZlGDaSAVo0Abd" target="_blank" rel="noopener noreferrer">Open on Spotify</a>
-            </div>
-            <p class="fine">Loading the player sends your IP address to Spotify. <a href="datenschutz.html">Datenschutz</a></p>
-            <div class="playlist-frame" data-playlist-frame></div>
-          </div>
-          <a class="merch" href="merch.html">
-            <img src="assets/still-here-hoodie.webp" alt="STILL HERE hoodie" loading="lazy" />
-            <span>
-              <small class="eyebrow">Merch</small>
-              <strong>STILL HERE — Hoodie</strong>
-              <small>See the collection</small>
-            </span>
-          </a>
-        </div>
-      </section>
-    </main>
-
-    <footer class="foot">
-      <img class="foot-seal" src="assets/brand-mark.svg" width="96" height="96" alt="" />
-      <p class="foot-name">ELDR <em>ÆSTHETIC</em></p>
-      <nav class="foot-artists" aria-label="Artists">
-        <a href="sunny-eldr.html"><span class="rune" aria-hidden="true">ᚱ</span> Sunny ELDR</a>
-        <a href="sunriva.html"><span class="rune" aria-hidden="true">ᛚ</span> SUNRIVA</a>
-        <a href="rynva.html"><span class="rune" aria-hidden="true">ᚢ</span> RYNVA</a>
-        <a href="jara-nox.html"><span class="rune" aria-hidden="true">ᚲ</span> JARA NOX</a>
-      </nav>
-      <p class="foot-legal">
-        <span>© 2026 ELDR ÆSTHETIC</span>
-        <a href="merch.html">Merch</a>
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
-      </p>
-    </footer>
-
-    <script type="module" src="assets/eldr-home.js?v=union-1"></script>
-    <script defer src="assets/eldr-analytics.js"></script>
+  <footer class="footer wrap">
+    <a class="brand" href="#top"><img src="assets/brand-mark.svg" width="36" height="36" alt=""><span>ELDR <em>ÆSTHETIC</em></span></a>
+    <nav class="foot-legal" aria-label="Footer"><small>© 2026 ELDR ÆSTHETIC</small><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></nav>
+  </footer>
+  <script type="application/json" id="releases">
+  [
+    {"id": "0SouVK132cmUKeOB9FQ3DI", "name": "SVARNETT", "date": "2026-11-20", "type": "album", "cover": "assets/sunny-home/svarnett-cover-final.webp", "spotifyUrl": "https://open.spotify.com/album/0SouVK132cmUKeOB9FQ3DI", "appleUrl": "https://music.apple.com/de/album/6830397516", "artists": [{"name": "Sunny ELDR", "id": "26RwT7kIoTnT8oT65MGS2P"}]},
+    {"id": "5jnjFEgF8qZx4dMdC1riys", "name": "UNBOUND", "date": "2026-10-24", "type": "ep", "cover": "assets/eldr-dashboard/cover-5jnjFEgF8qZx4dMdC1riys.webp", "spotifyUrl": "https://open.spotify.com/album/5jnjFEgF8qZx4dMdC1riys", "appleUrl": "https://music.apple.com/de/album/6826632617", "artists": [{"name": "SUNRIVA", "id": "0EZ3VnaZOkGWYyYMxYdJzZ"}]},
+    {"id": "22cXgthy62wk9Fq0T6FNg0", "name": "The Nine Worlds Remember", "date": "2026-11-13", "type": "album", "cover": "assets/eldr-dashboard/cover-22cXgthy62wk9Fq0T6FNg0.webp", "spotifyUrl": "https://open.spotify.com/album/22cXgthy62wk9Fq0T6FNg0", "appleUrl": "https://music.apple.com/de/album/6823564023", "artists": [{"name": "RYNVA", "id": "0Um7pcFDku2VNShSlfxy1B"}]},
+    {"id": "4Ym0O56EOZ72AXATQ4LHCD", "name": "Echoes of the Ancients", "date": "2026-10-31", "type": "ep", "cover": "assets/eldr-dashboard/cover-4Ym0O56EOZ72AXATQ4LHCD.webp", "spotifyUrl": "https://open.spotify.com/album/4Ym0O56EOZ72AXATQ4LHCD", "appleUrl": "https://music.apple.com/de/album/6826624434", "artists": [{"name": "JARA NOX", "id": "0kLRThHL6uSbmGwEarlsKy"}]},
+    {"id": "0jZFHgSZ7W9m531RAfL4jZ", "name": "Havets Røst (live)", "date": "2026-11-25", "type": "single", "cover": "assets/eldr-dashboard/cover-0jZFHgSZ7W9m531RAfL4jZ.webp", "spotifyUrl": "https://open.spotify.com/album/0jZFHgSZ7W9m531RAfL4jZ", "appleUrl": "https://music.apple.com/de/album/6839350628", "artists": [{"name": "Sunny ELDR", "id": "26RwT7kIoTnT8oT65MGS2P"}]},
+    {"id": "0GTSlcqiZE3hGw1CrbA9DM", "name": "Who Was There For Me", "date": "2026-11-10", "type": "single", "cover": "assets/eldr-dashboard/cover-0GTSlcqiZE3hGw1CrbA9DM.webp", "spotifyUrl": "https://open.spotify.com/album/0GTSlcqiZE3hGw1CrbA9DM", "appleUrl": "https://music.apple.com/de/album/6832967017", "artists": [{"name": "RYNVA", "id": "0Um7pcFDku2VNShSlfxy1B"}, {"name": "JARA NOX", "id": "0kLRThHL6uSbmGwEarlsKy"}]}
+  ]
+  </script>
+  <script type="module" src="assets/eldr-home.js?v=20261126-dashboard"></script>
+  <script defer src="assets/eldr-analytics.js"></script>
 </body>
 </html>
