@@ -1,4 +1,621 @@
 {
+  "6778033473": {
+    "complete": true,
+    "count": 9,
+    "rows": {
+      "0EZ3VnaZOkGWYyYMxYdJzZ": [],
+      "0Um7pcFDku2VNShSlfxy1B": [],
+      "0kLRThHL6uSbmGwEarlsKy": [],
+      "26RwT7kIoTnT8oT65MGS2P": [
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f1/e0/d0/f1e0d0ec-a780-4918-fa0e-0bc767258d0e/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-19",
+          "kind": "track",
+          "market": "de",
+          "name": "Járnkyrrðar Rúnar",
+          "tracks": 9,
+          "url": "https://music.apple.com/de/album/6778033473?i=6778033474"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f1/e0/d0/f1e0d0ec-a780-4918-fa0e-0bc767258d0e/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-19",
+          "kind": "track",
+          "market": "de",
+          "name": "Eldr í nótt",
+          "tracks": 9,
+          "url": "https://music.apple.com/de/album/6778033473?i=6778033475"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f1/e0/d0/f1e0d0ec-a780-4918-fa0e-0bc767258d0e/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-19",
+          "kind": "track",
+          "market": "de",
+          "name": "Ristinn Í Rúnum",
+          "tracks": 9,
+          "url": "https://music.apple.com/de/album/6778033473?i=6778033476"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f1/e0/d0/f1e0d0ec-a780-4918-fa0e-0bc767258d0e/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-19",
+          "kind": "track",
+          "market": "de",
+          "name": "Kallar Vindr Halti",
+          "tracks": 9,
+          "url": "https://music.apple.com/de/album/6778033473?i=6778033477"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f1/e0/d0/f1e0d0ec-a780-4918-fa0e-0bc767258d0e/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-19",
+          "kind": "track",
+          "market": "de",
+          "name": "Rökkur Eltur",
+          "tracks": 9,
+          "url": "https://music.apple.com/de/album/6778033473?i=6778033478"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f1/e0/d0/f1e0d0ec-a780-4918-fa0e-0bc767258d0e/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-19",
+          "kind": "track",
+          "market": "de",
+          "name": "RÍS RÖDDÞÍN",
+          "tracks": 9,
+          "url": "https://music.apple.com/de/album/6778033473?i=6778033479"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f1/e0/d0/f1e0d0ec-a780-4918-fa0e-0bc767258d0e/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-19",
+          "kind": "track",
+          "market": "de",
+          "name": "Hjarta Míns Eldr",
+          "tracks": 9,
+          "url": "https://music.apple.com/de/album/6778033473?i=6778033480"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f1/e0/d0/f1e0d0ec-a780-4918-fa0e-0bc767258d0e/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-19",
+          "kind": "track",
+          "market": "de",
+          "name": "Börn Norðrsins",
+          "tracks": 9,
+          "url": "https://music.apple.com/de/album/6778033473?i=6778033481"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f1/e0/d0/f1e0d0ec-a780-4918-fa0e-0bc767258d0e/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-19",
+          "kind": "track",
+          "market": "de",
+          "name": "Brann Hjarta Mitt",
+          "tracks": 9,
+          "url": "https://music.apple.com/de/album/6778033473?i=6778033482"
+        }
+      ]
+    }
+  },
+  "6786041481": {
+    "complete": true,
+    "count": 6,
+    "rows": {
+      "0EZ3VnaZOkGWYyYMxYdJzZ": [
+        {
+          "artist": "SUNRIVA",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/47/f1/1b/47f11ba9-27ed-3b2e-0003-5027cfe52c77/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-28",
+          "kind": "track",
+          "market": "de",
+          "name": "Don't Love Me Quiet",
+          "tracks": 6,
+          "url": "https://music.apple.com/de/album/6786041481?i=6786041484"
+        },
+        {
+          "artist": "SUNRIVA",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/47/f1/1b/47f11ba9-27ed-3b2e-0003-5027cfe52c77/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-28",
+          "kind": "track",
+          "market": "de",
+          "name": "My Mercy Has Teeth",
+          "tracks": 6,
+          "url": "https://music.apple.com/de/album/6786041481?i=6786041485"
+        },
+        {
+          "artist": "SUNRIVA",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/47/f1/1b/47f11ba9-27ed-3b2e-0003-5027cfe52c77/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-28",
+          "kind": "track",
+          "market": "de",
+          "name": "No Saint Left",
+          "tracks": 6,
+          "url": "https://music.apple.com/de/album/6786041481?i=6786041486"
+        },
+        {
+          "artist": "SUNRIVA & Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/47/f1/1b/47f11ba9-27ed-3b2e-0003-5027cfe52c77/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-28",
+          "kind": "track",
+          "market": "de",
+          "name": "The Weight I Keep",
+          "tracks": 6,
+          "url": "https://music.apple.com/de/album/6786041481?i=6786041487"
+        },
+        {
+          "artist": "SUNRIVA & Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/47/f1/1b/47f11ba9-27ed-3b2e-0003-5027cfe52c77/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-28",
+          "kind": "track",
+          "market": "de",
+          "name": "The Other Gets Loud",
+          "tracks": 6,
+          "url": "https://music.apple.com/de/album/6786041481?i=6786041488"
+        },
+        {
+          "artist": "SUNRIVA",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/47/f1/1b/47f11ba9-27ed-3b2e-0003-5027cfe52c77/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-28",
+          "kind": "track",
+          "market": "de",
+          "name": "When I Walk In",
+          "tracks": 6,
+          "url": "https://music.apple.com/de/album/6786041481?i=6786041489"
+        }
+      ],
+      "0Um7pcFDku2VNShSlfxy1B": [],
+      "0kLRThHL6uSbmGwEarlsKy": [],
+      "26RwT7kIoTnT8oT65MGS2P": [
+        {
+          "artist": "SUNRIVA & Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/47/f1/1b/47f11ba9-27ed-3b2e-0003-5027cfe52c77/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-28",
+          "kind": "track",
+          "market": "de",
+          "name": "The Weight I Keep",
+          "tracks": 6,
+          "url": "https://music.apple.com/de/album/6786041481?i=6786041487"
+        },
+        {
+          "artist": "SUNRIVA & Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/47/f1/1b/47f11ba9-27ed-3b2e-0003-5027cfe52c77/artwork.jpg/100x100bb.jpg",
+          "date": "2026-06-28",
+          "kind": "track",
+          "market": "de",
+          "name": "The Other Gets Loud",
+          "tracks": 6,
+          "url": "https://music.apple.com/de/album/6786041481?i=6786041488"
+        }
+      ]
+    }
+  },
+  "6786402174": {
+    "complete": true,
+    "count": 10,
+    "rows": {
+      "0EZ3VnaZOkGWYyYMxYdJzZ": [
+        {
+          "artist": "Sunny ELDR & SUNRIVA",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8b/01/56/8b0156ee-8008-7cb4-61d5-9bfff1169867/artwork.jpg/100x100bb.jpg",
+          "date": "2026-07-17",
+          "kind": "track",
+          "market": "de",
+          "name": "Leiðin",
+          "tracks": 10,
+          "url": "https://music.apple.com/de/album/6786402174?i=6786402183"
+        }
+      ],
+      "0Um7pcFDku2VNShSlfxy1B": [],
+      "0kLRThHL6uSbmGwEarlsKy": [],
+      "26RwT7kIoTnT8oT65MGS2P": [
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8b/01/56/8b0156ee-8008-7cb4-61d5-9bfff1169867/artwork.jpg/100x100bb.jpg",
+          "date": "2026-07-17",
+          "kind": "track",
+          "market": "de",
+          "name": "Eldr í Mínu Blóði",
+          "tracks": 10,
+          "url": "https://music.apple.com/de/album/6786402174?i=6786402175"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8b/01/56/8b0156ee-8008-7cb4-61d5-9bfff1169867/artwork.jpg/100x100bb.jpg",
+          "date": "2026-07-17",
+          "kind": "track",
+          "market": "de",
+          "name": "Vargr Gangr",
+          "tracks": 10,
+          "url": "https://music.apple.com/de/album/6786402174?i=6786402176"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8b/01/56/8b0156ee-8008-7cb4-61d5-9bfff1169867/artwork.jpg/100x100bb.jpg",
+          "date": "2026-07-17",
+          "kind": "track",
+          "market": "de",
+          "name": "Norðrljós Brennr",
+          "tracks": 10,
+          "url": "https://music.apple.com/de/album/6786402174?i=6786402177"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8b/01/56/8b0156ee-8008-7cb4-61d5-9bfff1169867/artwork.jpg/100x100bb.jpg",
+          "date": "2026-07-17",
+          "kind": "track",
+          "market": "de",
+          "name": "Enginn Heyrði Mik",
+          "tracks": 10,
+          "url": "https://music.apple.com/de/album/6786402174?i=6786402178"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8b/01/56/8b0156ee-8008-7cb4-61d5-9bfff1169867/artwork.jpg/100x100bb.jpg",
+          "date": "2026-07-17",
+          "kind": "track",
+          "market": "de",
+          "name": "Frjáls Nú",
+          "tracks": 10,
+          "url": "https://music.apple.com/de/album/6786402174?i=6786402179"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8b/01/56/8b0156ee-8008-7cb4-61d5-9bfff1169867/artwork.jpg/100x100bb.jpg",
+          "date": "2026-07-17",
+          "kind": "track",
+          "market": "de",
+          "name": "Nú Sjá Mik",
+          "tracks": 10,
+          "url": "https://music.apple.com/de/album/6786402174?i=6786402180"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8b/01/56/8b0156ee-8008-7cb4-61d5-9bfff1169867/artwork.jpg/100x100bb.jpg",
+          "date": "2026-07-17",
+          "kind": "track",
+          "market": "de",
+          "name": "Ek Rís” (I Rise)",
+          "tracks": 10,
+          "url": "https://music.apple.com/de/album/6786402174?i=6786402181"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8b/01/56/8b0156ee-8008-7cb4-61d5-9bfff1169867/artwork.jpg/100x100bb.jpg",
+          "date": "2026-07-17",
+          "kind": "track",
+          "market": "de",
+          "name": "Eldrinn Kallar",
+          "tracks": 10,
+          "url": "https://music.apple.com/de/album/6786402174?i=6786402182"
+        },
+        {
+          "artist": "Sunny ELDR & SUNRIVA",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8b/01/56/8b0156ee-8008-7cb4-61d5-9bfff1169867/artwork.jpg/100x100bb.jpg",
+          "date": "2026-07-17",
+          "kind": "track",
+          "market": "de",
+          "name": "Leiðin",
+          "tracks": 10,
+          "url": "https://music.apple.com/de/album/6786402174?i=6786402183"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8b/01/56/8b0156ee-8008-7cb4-61d5-9bfff1169867/artwork.jpg/100x100bb.jpg",
+          "date": "2026-07-17",
+          "kind": "track",
+          "market": "de",
+          "name": "RÍS MEÐ MÉR",
+          "tracks": 10,
+          "url": "https://music.apple.com/de/album/6786402174?i=6786402184"
+        }
+      ]
+    }
+  },
+  "6796012458": {
+    "complete": true,
+    "count": 11,
+    "rows": {
+      "0EZ3VnaZOkGWYyYMxYdJzZ": [],
+      "0Um7pcFDku2VNShSlfxy1B": [],
+      "0kLRThHL6uSbmGwEarlsKy": [],
+      "26RwT7kIoTnT8oT65MGS2P": [
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d6/ac/1b/d6ac1bfb-7724-5b12-5424-57563f7d3189/artwork.jpg/100x100bb.jpg",
+          "date": "2026-08-14",
+          "kind": "track",
+          "market": "de",
+          "name": "Riv Meg Løs",
+          "tracks": 11,
+          "url": "https://music.apple.com/de/album/6796012458?i=6796012459"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d6/ac/1b/d6ac1bfb-7724-5b12-5424-57563f7d3189/artwork.jpg/100x100bb.jpg",
+          "date": "2026-08-14",
+          "kind": "track",
+          "market": "de",
+          "name": "Úlfr í nótt",
+          "tracks": 11,
+          "url": "https://music.apple.com/de/album/6796012458?i=6796012462"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d6/ac/1b/d6ac1bfb-7724-5b12-5424-57563f7d3189/artwork.jpg/100x100bb.jpg",
+          "date": "2026-08-14",
+          "kind": "track",
+          "market": "de",
+          "name": "Stormen Kender Vores Navne",
+          "tracks": 11,
+          "url": "https://music.apple.com/de/album/6796012458?i=6796012463"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d6/ac/1b/d6ac1bfb-7724-5b12-5424-57563f7d3189/artwork.jpg/100x100bb.jpg",
+          "date": "2026-08-14",
+          "kind": "track",
+          "market": "de",
+          "name": "Nordens Ulve",
+          "tracks": 11,
+          "url": "https://music.apple.com/de/album/6796012458?i=6796012464"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d6/ac/1b/d6ac1bfb-7724-5b12-5424-57563f7d3189/artwork.jpg/100x100bb.jpg",
+          "date": "2026-08-14",
+          "kind": "track",
+          "market": "de",
+          "name": "Hører Nord",
+          "tracks": 11,
+          "url": "https://music.apple.com/de/album/6796012458?i=6796012465"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d6/ac/1b/d6ac1bfb-7724-5b12-5424-57563f7d3189/artwork.jpg/100x100bb.jpg",
+          "date": "2026-08-14",
+          "kind": "track",
+          "market": "de",
+          "name": "Blood of the North",
+          "tracks": 11,
+          "url": "https://music.apple.com/de/album/6796012458?i=6796012466"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d6/ac/1b/d6ac1bfb-7724-5b12-5424-57563f7d3189/artwork.jpg/100x100bb.jpg",
+          "date": "2026-08-14",
+          "kind": "track",
+          "market": "de",
+          "name": "Iron in the Blood",
+          "tracks": 11,
+          "url": "https://music.apple.com/de/album/6796012458?i=6796012467"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d6/ac/1b/d6ac1bfb-7724-5b12-5424-57563f7d3189/artwork.jpg/100x100bb.jpg",
+          "date": "2026-08-14",
+          "kind": "track",
+          "market": "de",
+          "name": "Riftborn",
+          "tracks": 11,
+          "url": "https://music.apple.com/de/album/6796012458?i=6796012468"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d6/ac/1b/d6ac1bfb-7724-5b12-5424-57563f7d3189/artwork.jpg/100x100bb.jpg",
+          "date": "2026-08-14",
+          "kind": "track",
+          "market": "de",
+          "name": "Runerne Vågner",
+          "tracks": 11,
+          "url": "https://music.apple.com/de/album/6796012458?i=6796012469"
+        },
+        {
+          "artist": "Sunny ELDR",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d6/ac/1b/d6ac1bfb-7724-5b12-5424-57563f7d3189/artwork.jpg/100x100bb.jpg",
+          "date": "2026-08-14",
+          "kind": "track",
+          "market": "de",
+          "name": "Ravenfire",
+          "tracks": 11,
+          "url": "https://music.apple.com/de/album/6796012458?i=6796012470"
+        },
+        {
+          "artist": "Sunny ELDR & Eirik Stormborn",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d6/ac/1b/d6ac1bfb-7724-5b12-5424-57563f7d3189/artwork.jpg/100x100bb.jpg",
+          "date": "2026-08-14",
+          "kind": "track",
+          "market": "de",
+          "name": "Stormblood Oath",
+          "tracks": 11,
+          "url": "https://music.apple.com/de/album/6796012458?i=6796012471"
+        }
+      ]
+    }
+  },
+  "6811402883": {
+    "complete": true,
+    "count": 17,
+    "rows": {
+      "0EZ3VnaZOkGWYyYMxYdJzZ": [],
+      "0Um7pcFDku2VNShSlfxy1B": [
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "Intro",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403066"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "Remember my Name",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403068"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-04",
+          "kind": "track",
+          "market": "de",
+          "name": "F... the Prophecy",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403069"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "Give me the Hammer",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403070"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "Let her sleep",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403071"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "No one goes Home (feat. Eirik Stormborn)",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403072"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "Girls support Girls",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403073"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "It only turns",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403075"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "Ragnarök on the Dancefloor",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403076"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "The Vikings are coming (feat. Eirik Stormborn)",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403077"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "Wake thar Fire",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403078"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "Where did Honor go",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403079"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "Wrong Funeral",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403080"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "Feed the Sloplings",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403081"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "Pretending I'm fine",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403083"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "While the Wolves are sleep",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403084"
+        },
+        {
+          "artist": "Rynva",
+          "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/14/f6/d2/14f6d207-d018-03de-6f6d-4cd9bb3b38ef/artwork.jpg/100x100bb.jpg",
+          "date": "2026-09-18",
+          "kind": "track",
+          "market": "de",
+          "name": "Bonus: Everybody dies (Live)",
+          "tracks": 17,
+          "url": "https://music.apple.com/de/album/6811402883?i=6811403085"
+        }
+      ],
+      "0kLRThHL6uSbmGwEarlsKy": [],
+      "26RwT7kIoTnT8oT65MGS2P": []
+    }
+  },
   "6814396833": {
     "complete": true,
     "count": 10,
