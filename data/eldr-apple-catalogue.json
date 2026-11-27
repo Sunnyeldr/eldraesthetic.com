@@ -192,6 +192,16 @@
     },
     {
       "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "album",
+      "market": "us",
+      "name": "Two North",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
       "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/a0/de/38/a0de38b3-7772-b127-056d-b4c16f66c3ca/artwork.jpg/100x100bb.jpg",
       "date": "2026-06-24",
       "kind": "track",
@@ -809,6 +819,206 @@
       "name": "Myrkur",
       "tracks": 11,
       "url": "https://music.apple.com/us/album/6830397516?i=6830397523"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "BREAK THE NORTH",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641718"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "BREAK THE NORTH",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641718"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "Egen Røst",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641720"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "Egen Røst",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641720"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "Father an Mother",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641719"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "Father an Mother",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641719"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "Hold deg fast",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641722"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "Hold deg fast",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641722"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "Jeg er Stormen",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641717"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "Jeg er Stormen",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641717"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "MAMMA",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641716"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "MAMMA",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641716"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "NEVER KNEEL",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641723"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "NEVER KNEEL",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641723"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "SHIELD TO SHIELD",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641725"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "SHIELD TO SHIELD",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641725"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "The North Wind",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641721"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "The North Wind",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641721"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "Vintersol",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641724"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "Vintersol",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641724"
     }
   ],
   "0Um7pcFDku2VNShSlfxy1B": [
@@ -1151,6 +1361,26 @@
       "name": "The Nine Worlds Remember",
       "tracks": 16,
       "url": "https://music.apple.com/us/album/6823564023"
+    },
+    {
+      "artist": "Rynva",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/df/4a/0e/df4a0e96-c01c-af8c-5429-30ec607e9259/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "album",
+      "market": "de",
+      "name": "Gracias, México - EP",
+      "tracks": 6,
+      "url": "https://music.apple.com/de/album/6840169969"
+    },
+    {
+      "artist": "Rynva",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/df/4a/0e/df4a0e96-c01c-af8c-5429-30ec607e9259/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "album",
+      "market": "us",
+      "name": "Gracias, México - EP",
+      "tracks": 6,
+      "url": "https://music.apple.com/us/album/6840169969"
     },
     {
       "artist": "Rynva",
@@ -2231,6 +2461,126 @@
       "name": "Who Created the Wolf (feat. Eirik Stormborn)",
       "tracks": 16,
       "url": "https://music.apple.com/us/album/6823564023?i=6823564026"
+    },
+    {
+      "artist": "Rynva",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/df/4a/0e/df4a0e96-c01c-af8c-5429-30ec607e9259/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "Baila conmigo",
+      "tracks": 6,
+      "url": "https://music.apple.com/de/album/6840169969?i=6840170064"
+    },
+    {
+      "artist": "Rynva",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/df/4a/0e/df4a0e96-c01c-af8c-5429-30ec607e9259/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "Baila conmigo",
+      "tracks": 6,
+      "url": "https://music.apple.com/us/album/6840169969?i=6840170064"
+    },
+    {
+      "artist": "Rynva",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/df/4a/0e/df4a0e96-c01c-af8c-5429-30ec607e9259/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "Donde el hielo encuentra el fuego",
+      "tracks": 6,
+      "url": "https://music.apple.com/de/album/6840169969?i=6840169971"
+    },
+    {
+      "artist": "Rynva",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/df/4a/0e/df4a0e96-c01c-af8c-5429-30ec607e9259/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "Donde el hielo encuentra el fuego",
+      "tracks": 6,
+      "url": "https://music.apple.com/us/album/6840169969?i=6840169971"
+    },
+    {
+      "artist": "Rynva",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/df/4a/0e/df4a0e96-c01c-af8c-5429-30ec607e9259/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "Fuego bajo el hielo",
+      "tracks": 6,
+      "url": "https://music.apple.com/de/album/6840169969?i=6840170063"
+    },
+    {
+      "artist": "Rynva",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/df/4a/0e/df4a0e96-c01c-af8c-5429-30ec607e9259/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "Fuego bajo el hielo",
+      "tracks": 6,
+      "url": "https://music.apple.com/us/album/6840169969?i=6840170063"
+    },
+    {
+      "artist": "Rynva",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/df/4a/0e/df4a0e96-c01c-af8c-5429-30ec607e9259/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "Gracias, México",
+      "tracks": 6,
+      "url": "https://music.apple.com/de/album/6840169969?i=6840169970"
+    },
+    {
+      "artist": "Rynva",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/df/4a/0e/df4a0e96-c01c-af8c-5429-30ec607e9259/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "Gracias, México",
+      "tracks": 6,
+      "url": "https://music.apple.com/us/album/6840169969?i=6840169970"
+    },
+    {
+      "artist": "Rynva",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/df/4a/0e/df4a0e96-c01c-af8c-5429-30ec607e9259/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "Todos están invitados",
+      "tracks": 6,
+      "url": "https://music.apple.com/de/album/6840169969?i=6840170065"
+    },
+    {
+      "artist": "Rynva",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/df/4a/0e/df4a0e96-c01c-af8c-5429-30ec607e9259/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "Todos están invitados",
+      "tracks": 6,
+      "url": "https://music.apple.com/us/album/6840169969?i=6840170065"
+    },
+    {
+      "artist": "Rynva",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/df/4a/0e/df4a0e96-c01c-af8c-5429-30ec607e9259/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "¿Quién estuvo para mí?",
+      "tracks": 6,
+      "url": "https://music.apple.com/de/album/6840169969?i=6840169972"
+    },
+    {
+      "artist": "Rynva",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/df/4a/0e/df4a0e96-c01c-af8c-5429-30ec607e9259/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "¿Quién estuvo para mí?",
+      "tracks": 6,
+      "url": "https://music.apple.com/us/album/6840169969?i=6840169972"
     }
   ],
   "0kLRThHL6uSbmGwEarlsKy": [
@@ -4207,6 +4557,16 @@
       "url": "https://music.apple.com/de/album/6836641715"
     },
     {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "album",
+      "market": "us",
+      "name": "Two North",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715"
+    },
+    {
       "artist": "Sunny ELDR",
       "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c4/16/e8/c416e826-3947-bd66-fbf1-918413d82fa8/artwork.jpg/100x100bb.jpg",
       "date": "2026-04-27",
@@ -5965,6 +6325,206 @@
       "name": "Havets Røst (live)",
       "tracks": 1,
       "url": "https://music.apple.com/us/album/6839350628?i=6839350629"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "BREAK THE NORTH",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641718"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "BREAK THE NORTH",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641718"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "Egen Røst",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641720"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "Egen Røst",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641720"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "Father an Mother",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641719"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "Father an Mother",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641719"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "Hold deg fast",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641722"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "Hold deg fast",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641722"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "Jeg er Stormen",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641717"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "Jeg er Stormen",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641717"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "MAMMA",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641716"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "MAMMA",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641716"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "NEVER KNEEL",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641723"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "NEVER KNEEL",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641723"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "SHIELD TO SHIELD",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641725"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "SHIELD TO SHIELD",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641725"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "The North Wind",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641721"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "The North Wind",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641721"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "de",
+      "name": "Vintersol",
+      "tracks": 10,
+      "url": "https://music.apple.com/de/album/6836641715?i=6836641724"
+    },
+    {
+      "artist": "SUNRIVA & Sunny ELDR",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e2/1a/17/e21a17ec-4596-4d5c-9bae-f7dc64907840/artwork.jpg/100x100bb.jpg",
+      "date": "2026-11-27",
+      "kind": "track",
+      "market": "us",
+      "name": "Vintersol",
+      "tracks": 10,
+      "url": "https://music.apple.com/us/album/6836641715?i=6836641724"
     }
   ]
 }
